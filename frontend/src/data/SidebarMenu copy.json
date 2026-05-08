@@ -1,0 +1,113 @@
+[
+  {
+    "role": "admin",
+    "menu": [
+      { "icon": "home", "title": "Dashboard", "url": "/dashboard" },
+      {
+        "icon": "trips",
+        "title": "Trips",
+        "children": [
+          { "title": "Trips List", "url": "/trips" },
+          { "title": "Create Trip", "url": "/trip/create" },
+          { "title": "Update Trip", "url": "/trip/update" }
+        ]
+      },
+      {
+        "icon": "layers",
+        "title": "Groups",
+        "children": [
+          { "title": "Group List", "url": "/groups" },
+          { "title": "Create Group", "url": "/group/create" },
+          { "title": "Update Group", "url": "/group/update" }
+        ]
+      },
+
+      {
+        "icon": "users",
+        "title": "Leads",
+        "children": [
+          { "title": "Leads List", "url": "/leads" },
+          { "title": "Create Lead", "url": "/lead/create" },
+          { "title": "Update Lead", "url": "/lead/update" }
+        ]
+      },
+      {
+        "icon": "briefcase",
+        "title": "Employees",
+        "children": [
+          { "title": "Employees List", "url": "/employees" },
+          { "title": "Manager List", "url": "/employee/managers" },
+          { "title": "Developer List", "url": "/employee/developers" },
+          { "title": "Create Employee", "url": "/employee/create" },
+          { "title": "Update Employee", "url": "/employee/update" }
+        ]
+      },
+      {
+        "icon": "user",
+        "title": "Customers",
+        "children": [
+          { "title": "Customers List", "url": "/customers" },
+          { "title": "Create Customer", "url": "/customer/create" },
+          { "title": "Update Customer", "url": "/customer/update" }
+        ]
+      },
+      {
+        "icon": "taxes",
+        "title": "Taxes",
+        "children": [
+          { "title": "Taxes List", "url": "/taxes" },
+          { "title": "Create Tax", "url": "/tax/create" },
+          { "title": "Update Tax", "url": "/tax/update" }
+        ]
+      },
+      {
+        "icon": "invoices",
+        "title": "Invoices",
+        "children": [
+          { "title": "Invoices List", "url": "/invoices" },
+          { "title": "Create Customer", "url": "/invoice/create" },
+          { "title": "Update Customer", "url": "/invoice/update" }
+        ]
+      },
+      {
+        "icon": "payments",
+        "title": "Payments",
+        "children": [
+          { "title": "Payments List", "url": "/payments" },
+          { "title": "Create Payment", "url": "/payment/create" },
+          { "title": "Update Payment", "url": "/payment/update" }
+        ]
+      },
+
+      {
+        "icon": "banks",
+        "title": "Banks",
+        "children": [
+          { "title": "Banks List", "url": "/banks" },
+          { "title": "Create Bank", "url": "/bank/create" },
+          { "title": "Update Bank", "url": "/bank/update" }
+        ]
+      },
+      {
+        "icon": "ticket",
+        "title": "Tickets",
+        "children": [
+          { "title": "Ticket List", "url": "/tickets" },
+          { "title": "Create Ticket", "url": "/ticket/create" },
+          { "title": "Followup Ticket", "url": "/ticket/followup" }
+        ]
+      },
+      {
+        "icon": "app-window",
+        "title": "Apps (Beta)",
+        "children": [
+          { "title": "App List", "url": "/apps" },
+          { "title": "Request App", "url": "/app/request" }
+        ]
+      },
+      { "icon": "book", "title": "Release Notes", "url": "/notes" },
+      { "icon": "settings", "title": "Settings", "url": "/settings" },
+      { "icon": "user-circle", "title": "Profile", "url": "/profile" }
+    ]
+  }
+]

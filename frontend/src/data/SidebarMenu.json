@@ -1,0 +1,98 @@
+[
+  {
+    "icon": "home",
+    "title": "Dashboard",
+    "url": "/dashboard",
+    "allow_roles": ["superadmin","sales","intern"]
+  },
+
+  {
+    "icon": "users",
+    "title": "Leads (Beta)",
+    "allow_roles": ["superadmin","sales"],
+    "children": [
+      { "title": "Pipeline List", "url": "/pipelines","allow_roles": ["superadmin"]},
+      {"title": "Create Pipeline","url": "/pipeline/create","allow_roles": [ "superadmin"]},
+      {"title": "Leads List","url": "/leads","allow_roles": ["superadmin","sales"]},
+      {"title": "Create Lead","url": "/lead/create","allow_roles": ["superadmin","sales"]}
+    ]
+  },
+
+  {
+    "icon": "briefcase",
+    "title": "Employees",
+    "allow_roles": ["superadmin"],
+    "children": [
+      {"title": "Employees List","url": "/employees","allow_roles": ["superadmin"]},
+      {"title": "Create Employee","url": "/employee/create","allow_roles": ["superadmin"]}
+    ]
+  },
+
+  {
+    "icon": "user",
+    "title": "Customers",
+    "allow_roles": ["superadmin","sales"],
+    "children": [
+      {"title": "Customers List","url": "/customers","allow_roles": ["superadmin","sales"]},
+      {"title": "Create Customer","url": "/customer/create","allow_roles": ["superadmin","sales"]},
+      {"title": "Update Customer","url": "/customer/update","allow_roles": ["superadmin","sales"]}
+    ]
+  },
+
+  {
+    "icon": "invoices",
+    "title": "Invoices",
+    "allow_roles": ["superadmin","sales"],
+
+    "children": [
+      {"title": "Invoices List","url": "/invoices","allow_roles": ["superadmin","sales"]},
+      {"title": "Create Invoice","url": "/invoice/create","allow_roles": ["superadmin","sales"]}
+    ]
+  },
+
+  {
+    "icon": "transactions",
+    "title": "Transactions",
+    "allow_roles": ["superadmin","sales"],
+
+    "children": [
+      {"title": "Transactions List","url": "/transactions","allow_roles": ["superadmin","sales"]},
+      {"title": "Create Transaction","url": "/transaction/create","allow_roles": ["superadmin","sales"]}
+    ]
+  },
+  {
+    "icon": "taxes",
+    "title": "Taxes",
+    "allow_roles": ["superadmin","sales"],
+    "children": [
+      {"title": "Taxes List","url": "/taxes","allow_roles": ["superadmin","sales"]},
+      {"title": "Create Tax","url": "/tax/create","allow_roles": ["superadmin"]},
+      {"title": "Update Tax","url": "/tax/update","allow_roles": ["superadmin"]}
+    ]
+  },
+
+  {
+    "icon": "banks",
+    "title": "Banks",
+    "allow_roles": ["superadmin","sales"],
+    "children": [
+      {"title": "Banks List","url": "/banks","allow_roles": ["superadmin","sales"]},
+      {"title": "Create Bank","url": "/bank/create","allow_roles": ["superadmin","sales"]},
+      {"title": "Update Bank","url": "/bank/update","allow_roles": ["superadmin","sales"]}
+    ]
+  },
+
+  {
+    "icon": "settings",
+    "title": "Settings",
+    "url": "/settings",
+    "allow_roles": ["superadmin","sales","intern"]
+  },
+
+  {
+    "icon": "user-circle",
+    "title": "Profile",
+    "url": "/profile",
+    "allow_roles": ["superadmin","sales","intern"]
+  }
+]

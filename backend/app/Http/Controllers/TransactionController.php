@@ -1,0 +1,470 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Transaction;
+use App\Models\Bank;
+use App\Models\Invoice;
+use App\Helpers\AccessHelper;
+use App\Helpers\HierarchyHelper;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
+use Exception;
+
+class TransactionController extends Controller
+{
+    /* =====================================================
+     * INDEX
+     * ===================================================== */
+    public function index(Request $request)
+    {
+        $user = $request->user();
+
+        $accessLevel = AccessHelper::getAccessLevel(
+            $user->id,
+            '/api/transactions',
+            'GET'
+        );
+
+        $query = Transaction::with(['bank', 'invoice']);
+
+        // 🔐 Row-level security
+        if ($accessLevel === 'self') {
+            $query->where('created_by', $user->id);
+        } elseif ($accessLevel === 'hierarchy') {
+            $query->whereIn(
+                'created_by',
+                HierarchyHelper::getUserAndDescendants($user->id)
+            );
+        } elseif ($accessLevel !== 'full') {
+            return response()->json([
+                'message' => 'You do not have permission to access transactions',
+                'status_key' => 'no-permission-api-endpoint'
+            ], 403);
+        }
+
+        // Filters
+        if ($type = $request->get('type')) {
+            $query->where('type', $type);
+        }
+
+        if ($bankId = $request->get('bank_id')) {
+            $query->where('bank_id', $bankId);
+        }
+
+        if ($invoiceId = $request->get('invoice_id')) {
+            $query->where('invoice_id', $invoiceId);
+        }
+
+        if ($from = $request->get('from_date')) {
+            $query->whereDate('transaction_date', '>=', $from);
+        }
+
+        if ($to = $request->get('to_date')) {
+            $query->whereDate('transaction_date', '<=', $to);
+        }
+
+        $query->orderByDesc('id');
+
+        return response()->json(
+            $query->paginate((int) $request->get('per_page', 15))
+        );
+    }
+
+    /* =====================================================
+     * STORE
+     * ===================================================== */
+    public function store(Request $request)
+    {
+        $user = $request->user();
+
+        $accessLevel = AccessHelper::getAccessLevel(
+            $user->id,
+            '/api/transactions',
+            'POST'
+        );
+
+        if (!in_array($accessLevel, ['self', 'hierarchy', 'full'], true)) {
+            return response()->json([
+                'message' => 'You do not have permission to create transactions',
+                'status_key' => 'no-permission-api-endpoint'
+            ], 403);
+        }
+
+        $validated = $request->validate([
+            'bank_id' => 'required|exists:banks,id',
+            'invoice_id' => 'nullable|exists:invoices,id',
+            'type' => ['required', Rule::in([
+                'invoice payment',
+                'expense',
+                'manual credit',
+                'manual debit',
+                'refund'
+            ])],
+            'amount' => 'required|numeric|min:0.01',
+            'transaction_date' => 'required|date',
+            'reference_no' => 'nullable|string|max:100',
+            'remarks' => 'nullable|string'
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+
+            /** -----------------------------------------
+             * INVOICE PAYMENT LOGIC
+             * ----------------------------------------*/
+            $invoice = null;
+
+            if ($validated['type'] === 'invoice payment') {
+
+                if (!$validated['invoice_id']) {
+                    return response()->json([
+                        'message' => 'Invoice is required for invoice payment'
+                    ], 422);
+                }
+
+                $invoice = Invoice::lockForUpdate()->findOrFail($validated['invoice_id']);
+
+                $remainingDue = $invoice->total - $invoice->paid_amount;
+
+                // ❌ Overpayment protection
+                if ($validated['amount'] > $remainingDue) {
+                    return response()->json([
+                        'message' => "Payment amount exceeds due amount ".$remainingDue,
+                        'details' => [
+                            'invoice_total' => $invoice->total,
+                            'paid_amount' => $invoice->paid_amount,
+                            'due_amount' => $remainingDue
+                        ]
+                    ], 422);
+                }
+            }
+
+            /** -----------------------------------------
+             * CREATE TRANSACTION
+             * ----------------------------------------*/
+            $transaction = Transaction::create([
+                ...$validated,
+                'direction' => in_array($validated['type'], ['invoice payment', 'manual credit'])
+                    ? 'credit'
+                    : 'debit',
+                'created_by' => $user->id
+            ]);
+
+            /** -----------------------------------------
+             * UPDATE BANK BALANCE
+             * ----------------------------------------*/
+            $this->applyBankBalance($transaction);
+
+            /** -----------------------------------------
+             * UPDATE INVOICE TOTALS
+             * ----------------------------------------*/
+            if ($invoice) {
+
+                $invoice->paid_amount += $transaction->amount;
+                $invoice->due_amount  = max(
+                    $invoice->total - $invoice->paid_amount,
+                    0
+                );
+
+                // 🧠 Status update
+                if ($invoice->paid_amount == 0) {
+                    $invoice->status = 'unpaid';
+                } elseif ($invoice->paid_amount < $invoice->total) {
+                    $invoice->status = 'partially paid';
+                } else {
+                    $invoice->status = 'paid';
+                }
+
+                $invoice->updated_by = $user->id;
+                $invoice->save();
+            }
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Transaction created successfully',
+                'data' => $transaction
+            ], 201);
+        } catch (Exception $ex) {
+            DB::rollBack();
+
+            return response()->json([
+                'message' => 'Failed to create transaction',
+                'error' => $ex->getMessage()
+            ], 500);
+        }
+    }
+
+    /* =====================================================
+     * SHOW
+     * ===================================================== */
+    public function show(Request $request, $id)
+    {
+        $user = $request->user();
+
+        $accessLevel = AccessHelper::getAccessLevel(
+            $user->id,
+            '/api/transactions/{id}',
+            'GET'
+        );
+
+        $query = Transaction::with(['bank', 'invoice'])
+            ->where('id', $id);
+
+        if ($accessLevel === 'self') {
+            $query->where('created_by', $user->id);
+        } elseif ($accessLevel === 'hierarchy') {
+            $query->whereIn(
+                'created_by',
+                HierarchyHelper::getUserAndDescendants($user->id)
+            );
+        } elseif ($accessLevel !== 'full') {
+            return response()->json([
+                'message' => 'You do not have permission',
+                'status_key' => 'no-permission-api-endpoint'
+            ], 403);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $query->firstOrFail()
+        ]);
+    }
+
+    /* =====================================================
+     * UPDATE
+     * ===================================================== */
+    public function update(Request $request, $id)
+    {
+        $user = $request->user();
+
+        $accessLevel = AccessHelper::getAccessLevel(
+            $user->id,
+            '/api/transactions/{id}',
+            'PUT'
+        );
+
+        DB::beginTransaction();
+
+        try {
+
+            $query = Transaction::where('id', $id);
+
+            if ($accessLevel === 'self') {
+                $query->where('created_by', $user->id);
+            } elseif ($accessLevel === 'hierarchy') {
+                $query->whereIn(
+                    'created_by',
+                    HierarchyHelper::getUserAndDescendants($user->id)
+                );
+            } elseif ($accessLevel !== 'full') {
+                return response()->json([
+                    'message' => 'No permission',
+                    'status_key' => 'no-permission-api-endpoint'
+                ], 403);
+            }
+
+            $transaction = $query->lockForUpdate()->firstOrFail();
+
+            $oldAmount = $transaction->amount;
+            $oldType   = $transaction->type;
+
+            $transaction->update(
+                $request->only(['amount', 'remarks', 'reference_no'])
+            );
+
+            $this->reverseBankBalance(
+                $transaction->bank_id,
+                $oldType,
+                $oldAmount
+            );
+
+            $this->applyBankBalance($transaction);
+
+            if ($transaction->invoice_id) {
+                $this->updateInvoiceStatus($transaction->invoice_id);
+            }
+
+            DB::commit();
+
+            return response()->json(['success' => true]);
+        } catch (Exception $ex) {
+            DB::rollBack();
+            return response()->json(['error' => $ex->getMessage()], 500);
+        }
+    }
+
+    /* =====================================================
+     * DESTROY
+     * ===================================================== */
+    public function destroy(Request $request, $id)
+    {
+        $user = $request->user();
+
+        $accessLevel = AccessHelper::getAccessLevel(
+            $user->id,
+            '/api/transactions/{id}',
+            'DELETE'
+        );
+
+        DB::beginTransaction();
+
+        try {
+
+            $query = Transaction::where('id', $id);
+
+            if ($accessLevel === 'self') {
+                $query->where('created_by', $user->id);
+            } elseif ($accessLevel === 'hierarchy') {
+                $query->whereIn(
+                    'created_by',
+                    HierarchyHelper::getUserAndDescendants($user->id)
+                );
+            } elseif ($accessLevel !== 'full') {
+                return response()->json([
+                    'message' => 'No permission',
+                    'status_key' => 'no-permission-api-endpoint'
+                ], 403);
+            }
+
+            $transaction = $query->lockForUpdate()->firstOrFail();
+
+            $this->reverseBankBalance(
+                $transaction->bank_id,
+                $transaction->type,
+                $transaction->amount
+            );
+
+            $transaction->delete();
+
+            if ($transaction->invoice_id) {
+                $this->updateInvoiceStatus($transaction->invoice_id);
+            }
+
+            DB::commit();
+
+            return response()->json(['success' => true]);
+        } catch (Exception $ex) {
+            DB::rollBack();
+            return response()->json(['error' => $ex->getMessage()], 500);
+        }
+    }
+
+    /* =====================================================
+     * BULK DELETE
+     * ===================================================== */
+    public function bulkDelete(Request $request)
+    {
+        $user = $request->user();
+
+        $accessLevel = AccessHelper::getAccessLevel(
+            $user->id,
+            '/api/transactions/bulk-delete',
+            'POST'
+        );
+
+        $ids = $request->input('ids', []);
+
+        if (!$ids) {
+            return response()->json(['message' => 'No IDs'], 400);
+        }
+
+        DB::beginTransaction();
+
+        try {
+
+            $query = Transaction::whereIn('id', $ids);
+
+            if ($accessLevel === 'self') {
+                $query->where('created_by', $user->id);
+            } elseif ($accessLevel === 'hierarchy') {
+                $query->whereIn(
+                    'created_by',
+                    HierarchyHelper::getUserAndDescendants($user->id)
+                );
+            } elseif ($accessLevel !== 'full') {
+                return response()->json([
+                    'message' => 'No permission',
+                    'status_key' => 'no-permission-api-endpoint'
+                ], 403);
+            }
+
+            foreach ($query->lockForUpdate()->get() as $t) {
+                $this->reverseBankBalance(
+                    $t->bank_id,
+                    $t->type,
+                    $t->amount
+                );
+                $t->delete();
+
+                if ($t->invoice_id) {
+                    $this->updateInvoiceStatus($t->invoice_id);
+                }
+            }
+
+            DB::commit();
+
+            return response()->json(['success' => true]);
+        } catch (Exception $ex) {
+            DB::rollBack();
+            return response()->json(['error' => $ex->getMessage()], 500);
+        }
+    }
+
+    /* ==========================
+       🔥 PRIVATE HELPERS
+    ========================== */
+
+    protected function isCredit($type)
+    {
+        return in_array($type, ['invoice payment', 'manual credit']);
+    }
+
+    protected function applyBankBalance(Transaction $transaction)
+    {
+        $bank = Bank::findOrFail($transaction->bank_id);
+
+        if ($this->isCredit($transaction->type)) {
+            $bank->balance += $transaction->amount;
+        } else {
+            $bank->balance -= $transaction->amount;
+        }
+
+        $bank->save();
+    }
+
+    protected function reverseBankBalance($bankId, $type, $amount)
+    {
+        $bank = Bank::findOrFail($bankId);
+
+        if ($this->isCredit($type)) {
+            $bank->balance -= $amount;
+        } else {
+            $bank->balance += $amount;
+        }
+
+        $bank->save();
+    }
+
+    protected function updateInvoiceStatus($invoiceId)
+    {
+        $invoice = Invoice::find($invoiceId);
+        if (!$invoice) return;
+
+        $paid = Transaction::where('invoice_id', $invoiceId)->sum('amount');
+
+        if ($paid <= 0) {
+            $invoice->status = 'unpaid';
+        } elseif ($paid < $invoice->total) {
+            $invoice->status = 'partially paid';
+        } else {
+            $invoice->status = 'paid';
+        }
+
+        $invoice->save();
+    }
+}
