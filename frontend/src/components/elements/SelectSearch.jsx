@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+
 import Token from "../../database/Token";
+
+import { FaChevronDown, FaSearch, FaCheck } from "react-icons/fa";
 
 export default function SelectSearch({
   label,
@@ -26,57 +29,71 @@ export default function SelectSearch({
   isDefault = true,
 }) {
   const [open, setOpen] = useState(false);
+
   const [items, setItems] = useState([]);
+
   const [defaultItem, setDefaultItem] = useState(null);
+
   const [hasValidDefault, setHasValidDefault] = useState(false);
 
   const [search, setSearch] = useState("");
+
   const [debouncedSearch, setDebouncedSearch] = useState("");
+
   const [loading, setLoading] = useState(false);
 
   const wrapperRef = useRef(null);
+
   const searchInputRef = useRef(null);
 
-  /* -------------------------
-     Outside click
-  -------------------------- */
+  /* =========================================
+     OUTSIDE CLICK
+  ========================================= */
+
   useEffect(() => {
     const handler = (e) => {
       if (!wrapperRef.current?.contains(e.target)) {
         setOpen(false);
       }
     };
+
     document.addEventListener("mousedown", handler);
+
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  /* -------------------------
-     Autofocus search
-  -------------------------- */
+  /* =========================================
+     AUTO FOCUS
+  ========================================= */
+
   useEffect(() => {
     if (open && searchInputRef.current) {
       searchInputRef.current.focus();
     }
   }, [open]);
 
-  /* -------------------------
-     Debounce search
-  -------------------------- */
+  /* =========================================
+     DEBOUNCE
+  ========================================= */
+
   useEffect(() => {
     const t = setTimeout(() => {
       setDebouncedSearch(search);
     }, debounceTime);
+
     return () => clearTimeout(t);
   }, [search, debounceTime]);
 
-  /* -------------------------
-     Validate default value
-     (/api/{id})
-  -------------------------- */
+  /* =========================================
+     VALIDATE DEFAULT
+  ========================================= */
+
   useEffect(() => {
     if (!value || !api) {
       setDefaultItem(null);
+
       setHasValidDefault(false);
+
       return;
     }
 
@@ -85,15 +102,19 @@ export default function SelectSearch({
         const res = await Token.get(`${api}/${value}`, {
           params: extraParams,
         });
+
         if (res?.data && res.data[valueKey] != null) {
           setDefaultItem(res.data);
+
           setHasValidDefault(true);
         } else {
           setDefaultItem(null);
+
           setHasValidDefault(false);
         }
       } catch {
         setDefaultItem(null);
+
         setHasValidDefault(false);
       }
     };
@@ -101,9 +122,10 @@ export default function SelectSearch({
     checkDefault();
   }, [value, api, valueKey]);
 
-  /* -------------------------
-     Fetch list (AUTO + SEARCH)
-  -------------------------- */
+  /* =========================================
+     FETCH LIST
+  ========================================= */
+
   useEffect(() => {
     if (!api) return;
 
@@ -114,13 +136,15 @@ export default function SelectSearch({
     fetchList();
   }, [debouncedSearch, hasValidDefault]);
 
-  /* -------------------------
-     Fetch list
-  -------------------------- */
+  /* =========================================
+     FETCH
+  ========================================= */
+
   const fetchList = async () => {
     if (!api) return;
 
     setLoading(true);
+
     try {
       const res = await Token.request({
         url: api,
@@ -152,100 +176,188 @@ export default function SelectSearch({
       setItems(list);
     } catch (err) {
       console.error("SelectSearch fetch error:", err);
+
       setItems(hasValidDefault && defaultItem ? [defaultItem] : []);
     } finally {
       setLoading(false);
     }
   };
 
-  /* -------------------------
-     Selected item
-  -------------------------- */
+  /* =========================================
+     SELECTED ITEM
+  ========================================= */
+
   const selectedItem =
     items.find((i) => String(i[valueKey]) === String(value)) ||
     (hasValidDefault ? defaultItem : null);
 
   return (
     <div className="w-full relative" ref={wrapperRef}>
+      {/* LABEL */}
+
       {label && (
-        <label className="block text-sm text-gray-700 mb-1">
+        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+
+          {required && <span className="text-danger-500 ml-1">*</span>}
         </label>
       )}
 
+      {/* SELECT */}
+
       <div
         onClick={() => setOpen((p) => !p)}
-        className={`h-10 bg-[#f4f6f8] border rounded-sm px-3 flex items-center justify-between cursor-pointer
-          ${error ? "border-red-500" : "border-gray-300"}
-          ${className}`}
+        className={`h-12 rounded-2xl bg-surface-light dark:bg-surface-darkMuted border px-4 flex items-center justify-between cursor-pointer transition-all ${
+          error
+            ? "border-danger-500"
+            : "border-surface-border dark:border-surface-darkBorder hover:border-primary-300 dark:hover:border-primary-700"
+        } ${className}`}
       >
-        <span className="text-sm text-gray-700 truncate font-medium">
-          {selectedItem ? selectedItem[labelKey] : placeholder}
+        {/* TEXT */}
+
+        <div className="flex items-center gap-2 overflow-hidden">
+          <span
+            className={`text-sm truncate font-medium ${
+              selectedItem
+                ? "text-gray-800 dark:text-white"
+                : "text-gray-400 dark:text-gray-500"
+            }`}
+          >
+            {selectedItem ? selectedItem[labelKey] : placeholder}
+          </span>
+
+          {/* DEFAULT */}
+
           {isDefault &&
             hasValidDefault &&
             selectedItem &&
             String(selectedItem[valueKey]) === String(value) && (
-              <span className="ml-2 text-xs text-primary-600">(default)</span>
+              <span className="px-2 py-0.5 rounded-lg bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 text-[10px] font-semibold shrink-0">
+                Default
+              </span>
             )}
-        </span>
-        <span className="text-gray-400 text-xs">▼</span>
+        </div>
+
+        {/* ICON */}
+
+        <FaChevronDown
+          size={11}
+          className={`transition-all ${
+            open ? "rotate-180 text-primary-500" : "text-gray-400"
+          }`}
+        />
       </div>
 
-      {open && (
-        <div className="absolute z-50 w-full bg-white border rounded-sm shadow mt-1">
-          <input
-            ref={searchInputRef}
-            type="text"
-            placeholder="Type to search..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full px-3 py-2 text-sm border-b outline-none"
-          />
+      {/* DROPDOWN */}
 
-          <div className="max-h-60 overflow-auto">
+      {open && (
+        <div className="absolute z-50 mt-2 w-full overflow-hidden rounded-[24px] border border-surface-border dark:border-surface-darkBorder bg-white dark:bg-surface-darkCard shadow-2xl">
+          {/* SEARCH */}
+
+          <div className="p-3 border-b border-surface-border dark:border-surface-darkBorder">
+            <div className="relative">
+              <FaSearch
+                size={12}
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+              />
+
+              <input
+                ref={searchInputRef}
+                type="text"
+                placeholder="Search..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full h-11 rounded-2xl bg-surface-light dark:bg-surface-darkMuted border border-surface-border dark:border-surface-darkBorder pl-10 pr-4 outline-none text-sm text-gray-800 dark:text-white placeholder:text-gray-400 focus:border-primary-500 transition-all"
+              />
+            </div>
+          </div>
+
+          {/* LIST */}
+
+          <div className="max-h-64 overflow-y-auto scroll-bar p-2">
+            {/* LOADING */}
+
             {loading && (
-              <div className="p-3 text-sm text-gray-400">Loading...</div>
+              <div className="py-8 text-center text-sm text-gray-400 dark:text-gray-500">
+                Loading...
+              </div>
             )}
+
+            {/* EMPTY */}
 
             {!loading && items.length === 0 && (
-              <div className="p-3 text-sm text-gray-400">No results found</div>
+              <div className="py-8 text-center text-sm text-gray-400 dark:text-gray-500">
+                No results found
+              </div>
             )}
 
-            {items.map((item) => {
-              const isDefaultItem =
-                hasValidDefault &&
-                defaultItem &&
-                String(item[valueKey]) === String(defaultItem[valueKey]);
+            {/* ITEMS */}
 
-              return (
-                <div
-                  key={item[valueKey]}
-                  onClick={() => {
-                    onChange(item[valueKey]);
-                    setOpen(false);
-                  }}
-                  className={`px-3 py-2 text-sm cursor-pointer hover:bg-primary-50
-                    ${
-                      String(item[valueKey]) === String(value)
-                        ? "bg-primary-100 font-semibold"
-                        : ""
+            {!loading &&
+              items.map((item) => {
+                const active = String(item[valueKey]) === String(value);
+
+                const isDefaultItem =
+                  hasValidDefault &&
+                  defaultItem &&
+                  String(item[valueKey]) === String(defaultItem[valueKey]);
+
+                return (
+                  <button
+                    key={item[valueKey]}
+                    type="button"
+                    onClick={() => {
+                      onChange(item[valueKey]);
+
+                      setOpen(false);
+                    }}
+                    className={`w-full px-4 py-3 rounded-2xl text-left transition-all flex items-center justify-between gap-3 ${
+                      active
+                        ? "bg-primary-50 dark:bg-primary-900/10"
+                        : "hover:bg-primary-50 dark:hover:bg-surface-darkMuted"
                     }`}
-                >
-                  {item[labelKey]}
-                  {isDefault && isDefaultItem && (
-                    <span className="ml-2 text-xs text-primary-600">
-                      (default)
-                    </span>
-                  )}
-                </div>
-              );
-            })}
+                  >
+                    {/* LEFT */}
+
+                    <div className="min-w-0">
+                      <p
+                        className={`text-sm truncate font-medium ${
+                          active
+                            ? "text-primary-600 dark:text-primary-400"
+                            : "text-gray-800 dark:text-white"
+                        }`}
+                      >
+                        {item[labelKey]}
+                      </p>
+
+                      {/* DEFAULT */}
+
+                      {isDefault && isDefaultItem && (
+                        <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1">
+                          Default item
+                        </p>
+                      )}
+                    </div>
+
+                    {/* CHECK */}
+
+                    {active && (
+                      <div className="w-7 h-7 rounded-xl bg-primary-500 text-white flex items-center justify-center shrink-0">
+                        <FaCheck size={10} />
+                      </div>
+                    )}
+                  </button>
+                );
+              })}
           </div>
         </div>
       )}
 
-      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+      {/* ERROR */}
+
+      {error && (
+        <p className="text-xs text-danger-500 mt-2 font-medium">{error}</p>
+      )}
     </div>
   );
 }

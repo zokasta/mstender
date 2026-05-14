@@ -3,9 +3,11 @@ import TimeWidget from "../../components/widgets/TimeWidget";
 import NotificationMenu from "../../components/widgets/NotificationWidgets";
 import ProfileMenu from "../../components/widgets/ProfileWidgets";
 import { useSettings } from "../../context/SettingsContext";
+import ThemeWidget from "../widgets/ThemeWidget";
 
 export default function Topbar() {
   const { settings } = useSettings();
+
   const handleFullscreen = () => {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen();
@@ -15,24 +17,51 @@ export default function Topbar() {
   };
 
   return (
-    <div className="flex items-center justify-end bg-white shadow px-6 py-3 border-b">
-      <div className="flex items-center gap-6 text-gray-600">
-        {settings.widgets.time.enabled && <TimeWidget />}
+    <div className="sticky top-0 z-40 h-16 px-6 bg-surface-soft dark:bg-surface-dark border-b border-surface-border dark:border-surface-darkBorder flex items-center justify-between">
+      {/* LEFT */}
 
-        {/* Fullscreen */}
+      <div>
+        {/* <h1 className="text-lg font-bold text-gray-800 dark:text-white">
+          Dashboard
+        </h1>
+
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+          Welcome back to your ERP system
+        </p> */}
+      </div>
+
+      {/* RIGHT */}
+
+      <div className="flex items-center gap-3">
+        {/* TIME */}
+
+        {settings.widgets.time.enabled && (
+          <div className="h-10 px-4 rounded-2xl border border-surface-border dark:border-surface-darkBorder bg-white dark:bg-surface-darkCard flex items-center text-sm font-medium text-gray-700 dark:text-gray-300 shadow-sm">
+            <TimeWidget />
+          </div>
+        )}
+
+        {/* FULLSCREEN */}
+
         {settings.widgets.screen.enabled && (
           <button
             onClick={handleFullscreen}
-            className="hover:text-primary-500 transition-colors"
+            className="w-10 h-10 rounded-2xl border border-surface-border dark:border-surface-darkBorder bg-white dark:bg-surface-darkCard hover:bg-primary-50 dark:hover:bg-surface-darkMuted text-gray-600 dark:text-gray-300 hover:text-primary-500 transition-all flex items-center justify-center shadow-sm"
           >
-            <FaExpand size={18} />
+            <FaExpand size={14} />
           </button>
         )}
 
-        {/* Notifications */}
+        {/* THEME */}
+
+        <ThemeWidget />
+
+        {/* NOTIFICATION */}
+
         {settings.widgets.notification.enabled && <NotificationMenu />}
 
-        {/* Profile */}
+        {/* PROFILE */}
+
         <ProfileMenu />
       </div>
     </div>

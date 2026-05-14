@@ -6,13 +6,19 @@ import { toast, ToastContainer } from "react-toastify";
 import Input from "../../components/elements/Input";
 import Switch from "../../components/elements/Switch";
 import Select from "../../components/elements/Select";
+
 import { toastCfg } from "../../data/toastCfg";
 import { ACCOUNT_TYPES } from "./data";
+
 import Token from "../../database/Token";
+
+import { FaArrowLeft, FaUniversity, FaSave } from "react-icons/fa";
 
 export default function CreateBank() {
   const navigate = useNavigate();
+
   const [loading, setLoading] = useState(false);
+
   const [errors, setErrors] = useState({});
 
   const [form, setForm] = useState({
@@ -26,19 +32,33 @@ export default function CreateBank() {
   });
 
   const handleChange = (field, value) => {
-    setForm((prev) => ({ ...prev, [field]: value }));
-    setErrors((prev) => ({ ...prev, [field]: "" })); // clear field error
+    setForm((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [field]: "",
+    }));
   };
 
   const validateForm = () => {
     const newErrors = {};
-    if (!form.name.trim()) newErrors.name = "Bank name is required.";
-    if (!form.account_type.trim() || form.account_type === "-- Select Type --")
+
+    if (!form.name.trim()) {
+      newErrors.name = "Bank name is required.";
+    }
+
+    if (
+      !form.account_type.trim() ||
+      form.account_type === "-- Select Type --"
+    ) {
       newErrors.account_type = "Account type is required.";
+    }
 
     setErrors(newErrors);
 
-    // show toast notifications
     Object.values(newErrors).forEach((msg) => toast.error(msg, toastCfg));
 
     return Object.keys(newErrors).length === 0;
@@ -46,15 +66,18 @@ export default function CreateBank() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return; // stop if invalid
+
+    if (!validateForm()) return;
 
     setLoading(true);
+
     try {
       await Token.post("/banks", form);
+
       toast.success("Bank created successfully", toastCfg);
+
       setTimeout(() => navigate("/banks"), 800);
     } catch (err) {
-      errors(err,toastCfg)
       console.error("Error creating bank:", err);
 
       if (err.response?.data?.errors) {
@@ -73,14 +96,48 @@ export default function CreateBank() {
     <div className="space-y-6">
       <ToastContainer {...toastCfg} />
 
-      <h1 className="text-2xl font-bold">Create Bank</h1>
+      {/* HEADER */}
+
+      <div className="flex items-center justify-between gap-4">
+        {/* LEFT */}
+
+        <div className="flex items-center gap-4">
+          <div className="w-14 h-14 rounded-2xl bg-primary-100 dark:bg-primary-900/20 text-primary-500 flex items-center justify-center">
+            <FaUniversity size={18} />
+          </div>
+
+          <div>
+            <h1 className="text-3xl font-black tracking-tight text-gray-800 dark:text-white">
+              Create Bank
+            </h1>
+
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              Add new bank account details
+            </p>
+          </div>
+        </div>
+
+        {/* BACK BUTTON */}
+
+        <button
+          type="button"
+          onClick={() => navigate("/banks")}
+          className="h-11 px-5 rounded-2xl border border-surface-border dark:border-surface-darkBorder bg-white dark:bg-surface-darkCard hover:bg-primary-50 dark:hover:bg-surface-darkMuted text-gray-700 dark:text-gray-300 hover:text-primary-500 font-semibold transition-all flex items-center gap-3 shadow-sm"
+        >
+          <FaArrowLeft size={12} />
+          Back
+        </button>
+      </div>
+
+      {/* FORM */}
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-sm border space-y-6"
+        className="bg-white dark:bg-surface-darkCard border border-surface-border dark:border-surface-darkBorder p-6 rounded-[28px] shadow-sm space-y-6"
       >
-        {/* Bank Info */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* BANK INFO */}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <Input
             label="Bank Name"
             placeholder="Enter bank name"
@@ -89,6 +146,7 @@ export default function CreateBank() {
             error={errors.name}
             required
           />
+
           <Input
             label="Branch"
             placeholder="Enter branch name"
@@ -97,69 +155,86 @@ export default function CreateBank() {
           />
         </div>
 
-        {/* Account Details */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* ACCOUNT DETAILS */}
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           <Input
             label="Account Number"
             placeholder="Enter account number"
             value={form.account_number}
             onChange={(v) => handleChange("account_number", v)}
           />
+
           <Input
             label="IFSC Code"
             placeholder="Enter IFSC code"
             value={form.ifsc_code}
             onChange={(v) => handleChange("ifsc_code", v)}
           />
-          <div>
-            <label className="block text-sm text-gray-700 mb-1">
-              Account Type<span className="text-red-500 ml-1">*</span>
-            </label>
-            <Select
-              value={form.account_type}
-              onChange={(v) => handleChange("account_type", v)}
-              className={`w-full h-10 bg-[#f4f6f8] border rounded-sm outline-none px-3 ${
-                errors.account_type
-                  ? "border-red-500 focus:border-red-500"
-                  : "border-gray-300 focus:border-primary-500"
-              }`}
-            >
-              {ACCOUNT_TYPES.map((type) => (
-                <option key={type} value={type}>
-                  {type.charAt(0).toUpperCase() + type.slice(1)}
-                </option>
-              ))}
-            </Select>
-            {errors.account_type && (
-              <p className="text-xs text-red-500 mt-1">{errors.account_type}</p>
-            )}
-          </div>
+
+          <Select
+            label="Account Type"
+            value={form.account_type}
+            required
+            error={errors.account_type}
+            onChange={(v) => handleChange("account_type", v)}
+          >
+            <option value="">Select account type</option>
+
+            {ACCOUNT_TYPES.map((type) => (
+              <option key={type} value={type}>
+                {type.charAt(0).toUpperCase() + type.slice(1)}
+              </option>
+            ))}
+          </Select>
         </div>
 
-        {/* Active Toggle */}
-        <div className="flex items-center gap-3">
-          <span className="text-gray-700 text-sm">Active</span>
+        {/* ACTIVE */}
+
+        <div className="flex items-center justify-between p-5 rounded-2xl bg-surface-light dark:bg-surface-darkMuted border border-surface-border dark:border-surface-darkBorder">
+          <div>
+            <h4 className="font-semibold text-gray-800 dark:text-white">
+              Active Status
+            </h4>
+
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              Enable this bank account
+            </p>
+          </div>
+
           <Switch
             checked={form.is_active}
             onChange={(val) => handleChange("is_active", val)}
           />
         </div>
 
-        {/* Actions */}
-        <div className="flex justify-end gap-3">
+        {/* ACTIONS */}
+
+        <div className="flex items-center justify-end gap-3 pt-2">
+          {/* CANCEL */}
+
           <button
             type="button"
             onClick={() => navigate("/banks")}
-            className="px-4 py-2 border rounded hover:bg-gray-50"
             disabled={loading}
+            className="h-11 px-5 rounded-2xl border border-surface-border dark:border-surface-darkBorder bg-white dark:bg-surface-dark hover:bg-surface-light dark:hover:bg-surface-darkMuted text-gray-700 dark:text-gray-300 font-semibold transition-all"
           >
             Cancel
           </button>
+
+          {/* SAVE */}
+
           <button
             type="submit"
             disabled={loading}
-            className="px-4 py-2 bg-primary-500 text-white rounded hover:bg-primary-600 disabled:opacity-50"
+            className={`h-11 px-5 rounded-2xl text-white font-semibold flex items-center gap-3 transition-all shadow-lg ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-primary-500 hover:bg-primary-600 shadow-primary-500/20"
+            }`}
           >
+            <FaSave size={13} />
+
             {loading ? "Saving..." : "Save Bank"}
           </button>
         </div>

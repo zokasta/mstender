@@ -21,7 +21,7 @@ export default function Maintenance() {
       {/* CARD */}
       {/* ================================================= */}
 
-      <div className="relative bg-white/80 backdrop-blur-xl border border-white shadow-2xl rounded-[40px] max-w-3xl w-full overflow-hidden">
+      <div className="relative bg-white dark:bg-surface-darkCard/80 backdrop-blur-xl border border-white shadow-2xl rounded-[40px] max-w-3xl w-full overflow-hidden">
         {/* TOP BAR */}
 
         <div className="h-3 bg-gradient-to-r from-primary-500 to-primary-300" />
@@ -46,7 +46,7 @@ export default function Maintenance() {
               We’re improving the system
             </h2>
 
-            <p className="mt-6 text-gray-500 leading-relaxed max-w-xl mx-auto">
+            <p className="mt-6 text-gray-500 dark:text-gray-400 leading-relaxed max-w-xl mx-auto">
               Our ERP platform is currently under scheduled maintenance to
               improve performance, security, and stability. Please wait a little
               while and try again.
@@ -65,7 +65,7 @@ export default function Maintenance() {
                 <div>
                   <h3 className="font-bold text-primary-500">System Upgrade</h3>
 
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
                     Improving infrastructure
                   </p>
                 </div>
@@ -81,7 +81,7 @@ export default function Maintenance() {
                 <div>
                   <h3 className="font-bold text-primary-500">New Features</h3>
 
-                  <p className="text-sm text-gray-500">Updating modules</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Updating modules</p>
                 </div>
               </div>
             </div>
@@ -95,7 +95,7 @@ export default function Maintenance() {
                 <div>
                   <h3 className="font-bold text-primary-500">Back Soon</h3>
 
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
                     Service will resume shortly
                   </p>
                 </div>

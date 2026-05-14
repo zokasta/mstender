@@ -8,7 +8,7 @@ export default function IconButton({
     <button
       title={title}
       onClick={onClick}
-      className={`inline-flex items-center justify-center p-2 rounded border bg-white hover:bg-gray-50 ${colorClass}`}
+      className={`inline-flex items-center justify-center p-2 rounded border bg-white dark:bg-surface-darkCard hover:bg-gray-50 ${colorClass}`}
     >
       {children}
     </button>

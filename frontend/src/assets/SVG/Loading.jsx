@@ -2,7 +2,7 @@ export default function Loading() {
     return (
       <svg
         aria-hidden="true"
-        className="w-7 h-7 text-orange-300 animate-spin fill-orange-500"
+        className="w-7 h-7 text-primary-300 animate-spin fill-primary-500"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

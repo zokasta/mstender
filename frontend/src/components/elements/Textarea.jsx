@@ -8,28 +8,37 @@ export default function Textarea({
   placeholder = "Write here...",
   className = "",
   label,
-  error = "", // 🔴 new prop for error
+  error = "",
   required = false,
   minRows = 3,
   maxRows = 10,
+  disabled = false,
 }) {
   const [internalValue, setInternalValue] = useState(defaultValue);
+
   const textareaRef = useRef(null);
 
   const handleChange = (e) => {
     const val = e.target.value;
+
     setInternalValue(val);
+
     if (onChange) onChange(val);
+
     autoResize();
   };
 
   const autoResize = () => {
     const textarea = textareaRef.current;
+
     if (!textarea) return;
 
-    textarea.style.height = "auto"; // reset
-    const lineHeight = 24; // px
+    textarea.style.height = "auto";
+
+    const lineHeight = 24;
+
     const minHeight = minRows * lineHeight;
+
     const maxHeight = maxRows * lineHeight;
 
     textarea.style.height = `${Math.min(
@@ -44,29 +53,96 @@ export default function Textarea({
 
   return (
     <div className="w-full">
+      {/* LABEL */}
+
       {label && (
-        <label
-          htmlFor={id}
-          className="block text-sm text-gray-700 mb-1"
-        >
-          {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+        <label htmlFor={id} className="block mb-2">
+          <div className="flex items-center gap-1">
+            <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">
+              {label}
+            </span>
+
+            {required && <span className="text-red-500 text-sm">*</span>}
+          </div>
         </label>
       )}
-      <textarea
-        id={id}
-        ref={textareaRef}
-        value={value !== undefined ? value : internalValue}
-        onChange={handleChange}
-        placeholder={placeholder}
-        className={`block w-full text-sm text-gray-900 
-          bg-[#f4f6f8] rounded-sm 
-          px-3 py-2 resize-y max-h-40 min-h-10 outline-none
-          focus:border-primary-500 border-[0.75px]  focus:ring-1 focus:ring-primary-500
-          ${error ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "border-gray-300"}
-          ${className}`}
-      />
-      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+
+      {/* TEXTAREA */}
+
+      <div className="relative">
+        <textarea
+          id={id}
+          ref={textareaRef}
+          disabled={disabled}
+          value={value !== undefined ? value : internalValue}
+          onChange={handleChange}
+          placeholder={placeholder}
+          className={`
+            block
+            w-full
+            text-sm
+            bg-surface-light dark:bg-surface-darkMuted
+            text-gray-800
+            dark:text-gray-100
+            placeholder:text-gray-400
+            dark:placeholder:text-gray-500
+            
+            border
+            rounded-2xl
+            
+            px-4
+            py-3
+            
+            resize-none
+            overflow-y-auto
+            
+            outline-none
+            
+            transition-all
+            duration-200
+            
+            scroll-bar
+            
+            ${
+              error
+                ? `
+                  border-red-400
+                  dark:border-red-500
+                  focus:border-red-500
+                  focus:ring-4
+                  focus:ring-red-100
+                  dark:focus:ring-red-900/20
+                `
+                : `
+                  border-surface-border dark:border-surface-darkBorder focus:border-primary-500 dark:focus:border-primary-500 
+                `
+            }
+
+            ${
+              disabled
+                ? `
+                  opacity-60
+                  cursor-not-allowed
+                `
+                : ""
+            }
+
+            ${className}
+          `}
+        />
+
+        {/* CHARACTER GLOW */}
+
+        {!error && !disabled && (
+          <div className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 focus-within:opacity-100 transition-opacity bg-gradient-to-r from-primary-500/5 to-transparent" />
+        )}
+      </div>
+
+      {/* ERROR */}
+
+      {error && (
+        <p className="mt-2 text-xs font-medium text-red-500">{error}</p>
+      )}
     </div>
   );
 }

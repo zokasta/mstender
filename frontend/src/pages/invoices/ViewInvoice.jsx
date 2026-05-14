@@ -76,7 +76,7 @@ export default function ViewInvoice() {
   if (loading)
     return (
       <div className="h-screen flex items-center justify-center">
-        <div className="p-6 text-gray-500">Loading invoice...</div>
+        <div className="p-6 text-gray-500 dark:text-gray-400">Loading invoice...</div>
       </div>
     );
 
@@ -89,7 +89,7 @@ export default function ViewInvoice() {
   const roundOff = invoice.round_off || 0;
 
   return (
-    <div className="bg-[#f1f1f1] min-h-screen py-6">
+    <div className="bg-surface-muted dark:bg-surface-darkMuted min-h-screen py-6">
       <ToastContainer {...toastCfg} />
 
       {/* ACTION BAR */}
@@ -103,7 +103,7 @@ export default function ViewInvoice() {
         <div className="max-w-4xl mx-auto mb-4 flex justify-between items-center print:hidden">
           {/* LEFT SIDE BUTTON (Only if token exists) */}
           <Link to={`/customers?group_id=${invoice.group_id}`}>
-            <button className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600">
+            <button className="px-4 py-2 bg-primary-500 text-white rounded hover:bg-primary-600">
               View Customers
             </button>
           </Link>
@@ -112,14 +112,14 @@ export default function ViewInvoice() {
           <div className="flex gap-3">
             <button
               onClick={handlePrint}
-              className="px-4 py-2 border rounded bg-white"
+              className="px-4 py-2 border rounded bg-white dark:bg-surface-darkCard"
             >
               Print
             </button>
 
             <button
               onClick={handleDownloadPdf}
-              className="px-4 py-2 bg-orange-500 text-white rounded"
+              className="px-4 py-2 bg-primary-500 text-white rounded"
             >
               Download PDF
             </button>
@@ -130,13 +130,13 @@ export default function ViewInvoice() {
         <div className="max-w-4xl mx-auto mb-4 flex justify-end gap-3 print:hidden">
           <button
             //   onClick={handlePrint}
-            className="px-4 py-2 border rounded bg-white"
+            className="px-4 py-2 border rounded bg-white dark:bg-surface-darkCard"
           >
             Print
           </button>
           <button
             onClick={handleDownloadPdf}
-            className="px-4 py-2 bg-orange-500 text-white rounded"
+            className="px-4 py-2 bg-primary-500 text-white rounded"
           >
             Download PDF
           </button>
@@ -146,7 +146,7 @@ export default function ViewInvoice() {
       {/* INVOICE */}
       <div
         ref={invoiceRef}
-        className="max-w-4xl mx-auto bg-white p-8 shadow print:shadow-none"
+        className="max-w-4xl mx-auto bg-white dark:bg-surface-darkCard p-8 shadow print:shadow-none"
       >
         {/* HEADER */}
         <div className="flex justify-between mb-8">
@@ -267,8 +267,8 @@ export default function ViewInvoice() {
         {/* SIGNATURE */}
         <div className="mt-12 flex justify-between items-end">
           <div>
-            <p className="text-xs text-gray-500">Digitally signed invoice</p>
-            <p className="text-xs text-gray-500">Verify using secure link</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">Digitally signed invoice</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">Verify using secure link</p>
           </div>
 
           <div className="text-right">
@@ -278,13 +278,13 @@ export default function ViewInvoice() {
         </div>
 
         {/* FOOTER */}
-        <div className="mt-6 text-center text-xs text-gray-500">
+        <div className="mt-6 text-center text-xs text-gray-500 dark:text-gray-400">
           Terms & Conditions apply • This is a system generated invoice
         </div>
       </div>
-      <CardUI className="max-w-4xl mx-auto mt-4 p-6 border border-gray-200 bg-white rounded-lg shadow-sm">
+      <CardUI className="max-w-4xl mx-auto mt-4 p-6 border border-gray-200 dark:border-surface-darkBorder bg-white dark:bg-surface-darkCard rounded-lg shadow-sm">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-semibold text-gray-800">
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
             Payment Summary
           </h3>
 
@@ -306,13 +306,13 @@ export default function ViewInvoice() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
           {/* Total */}
           <div>
-            <p className="text-gray-500">Total Amount</p>
-            <p className="font-semibold text-gray-800">₹{invoice.total}</p>
+            <p className="text-gray-500 dark:text-gray-400">Total Amount</p>
+            <p className="font-semibold text-gray-800 dark:text-white">₹{invoice.total}</p>
           </div>
 
           {/* Paid */}
           <div>
-            <p className="text-gray-500">Paid Amount</p>
+            <p className="text-gray-500 dark:text-gray-400">Paid Amount</p>
             <p className="font-semibold text-green-600">
               ₹{invoice.paid_amount}
             </p>
@@ -320,7 +320,7 @@ export default function ViewInvoice() {
 
           {/* Due */}
           <div>
-            <p className="text-gray-500">Due Amount</p>
+            <p className="text-gray-500 dark:text-gray-400">Due Amount</p>
             <p
               className={`font-semibold ${
                 invoice.due_amount > 0 ? "text-red-600" : "text-gray-700"
@@ -332,13 +332,13 @@ export default function ViewInvoice() {
 
           {/* Due Date */}
           <div>
-            <p className="text-gray-500">Due Date</p>
+            <p className="text-gray-500 dark:text-gray-400">Due Date</p>
             <p
               className={`font-semibold ${
                 invoice.due_amount > 0 &&
                 new Date(invoice.due_date) < new Date()
                   ? "text-red-600"
-                  : "text-gray-800"
+                  : "text-gray-800 dark:text-white"
               }`}
             >
               {invoice.due_date ? (

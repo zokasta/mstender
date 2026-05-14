@@ -132,12 +132,16 @@ export default function UpdateTransaction() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-surface-light dark:bg-surface-dark min-h-screen p-1">
       <ToastContainer {...toastCfg} />
-      <h1 className="text-2xl font-bold text-gray-800">Update Transaction</h1>
 
-      {/* 🔹 Transaction Selector */}
-      <div className="bg-white p-6 rounded-lg shadow border">
+      <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
+        Update Transaction
+      </h1>
+
+      {/* Transaction Selector */}
+
+      <div className="bg-surface-soft dark:bg-surface-darkCard p-6 rounded-xl shadow-sm border border-surface-border dark:border-surface-darkBorder">
         <SelectSearch
           api="/transactions"
           method="get"
@@ -149,16 +153,19 @@ export default function UpdateTransaction() {
         />
       </div>
 
-      {/* 🔹 Update Form */}
-      {id && (
-        <div className="bg-white p-6 rounded-lg shadow border">
-          <h2 className="text-lg font-semibold mb-4">Transaction Details</h2>
+      {/* Update Form */}
+
+        <div className="bg-surface-soft dark:bg-surface-darkCard p-6 rounded-xl shadow-sm border border-surface-border dark:border-surface-darkBorder">
+          <h2 className="text-lg font-semibold mb-4 text-slate-800 dark:text-slate-100">
+            Transaction Details
+          </h2>
 
           {loading ? (
-            <div>Loading...</div>
+            <div className="text-slate-500 dark:text-slate-400">Loading...</div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Bank */}
+
               <SelectSearch
                 api="/banks"
                 label="Select Bank"
@@ -171,15 +178,16 @@ export default function UpdateTransaction() {
               />
 
               {/* Type */}
+
               <div>
-                <label className="block text-sm text-gray-700 mb-1">
+                <label className="block text-sm text-slate-700 dark:text-slate-300 mb-1">
                   Type <span className="text-red-500">*</span>
                 </label>
 
                 <Select
                   value={form.type}
                   onChange={(v) => handleChange("type", v)}
-                  className="w-full h-10 bg-[#f4f6f8] border border-gray-300 rounded-sm px-3 focus:border-orange-500"
+                  className="w-full h-10 bg-surface-soft dark:bg-surface-darkMuted border border-surface-border dark:border-surface-darkBorder rounded-md px-3 text-slate-700 dark:text-slate-200 focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10 transition-all"
                 >
                   {TRANSACTION_TYPES.map((type) => (
                     <option key={type} value={type}>
@@ -190,6 +198,7 @@ export default function UpdateTransaction() {
               </div>
 
               {/* Invoice */}
+
               {form.type === "invoice payment" && (
                 <SelectSearch
                   api="/invoices"
@@ -203,6 +212,7 @@ export default function UpdateTransaction() {
               )}
 
               {/* Amount + Date */}
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Input
                   label="Amount"
@@ -234,11 +244,12 @@ export default function UpdateTransaction() {
               />
 
               {/* Buttons */}
-              <div className="flex justify-end gap-3">
+
+              <div className="flex justify-end gap-3 pt-2">
                 <button
                   type="button"
                   onClick={() => navigate("/transactions")}
-                  className="px-4 py-2 border rounded hover:bg-gray-50"
+                  className="px-5 py-2.5 border border-surface-border dark:border-surface-darkBorder rounded-xl bg-surface-soft dark:bg-surface-darkCard hover:bg-surface-muted dark:hover:bg-surface-darkMuted text-slate-700 dark:text-slate-200 transition-all duration-200"
                   disabled={loading}
                 >
                   Cancel
@@ -246,7 +257,7 @@ export default function UpdateTransaction() {
 
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 disabled:opacity-50"
+                  className="px-5 py-2.5 bg-primary-500 hover:bg-primary-600 text-white rounded-xl shadow-lg shadow-primary-500/20 transition-all duration-200 disabled:opacity-50"
                   disabled={loading}
                 >
                   {loading ? "Saving..." : "Save Changes"}
@@ -255,7 +266,6 @@ export default function UpdateTransaction() {
             </form>
           )}
         </div>
-      )}
     </div>
   );
 }

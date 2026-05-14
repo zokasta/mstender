@@ -18,6 +18,11 @@ export default function Login() {
     const remember_me = localStorage.getItem('remember_me')
     const token = localStorage.getItem('token')
     if(remember_me && token){
+      const user = JSON.parse(localStorage.getItem('user'))
+
+      if (user.type == 'intern'){
+        navigate('/leads')
+      }
       navigate("/dashboard")
     }
   },[])
@@ -77,11 +82,11 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-[#f0f0f0] select-none">
       <ToastContainer position="top-right" autoClose={2500} />
 
-      <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md border border-gray-200">
+      <div className="bg-white dark:bg-surface-darkCard shadow-lg rounded-xl p-8 w-full max-w-md border border-gray-200 dark:border-surface-darkBorder">
         {/* Logo / Title */}
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-800">Welcome Back 👋</h1>
-          <p className="text-gray-500 mt-1">Login to your account</p>
+          <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Welcome Back 👋</h1>
+          <p className="text-gray-500 dark:text-gray-400 mt-1">Login to your account</p>
         </div>
 
         {/* Form */}
@@ -90,7 +95,7 @@ export default function Login() {
             <label className="text-sm font-medium text-gray-600">
               Email Address
             </label>
-            <div className="flex items-center border border-gray-300 rounded-md bg-[#f4f6f8] focus-within:border-primary-500 focus-within:border-2">
+            <div className="flex items-center border border-gray-300 rounded-md bg-surface-light dark:bg-surface-dark focus-within:border-primary-500 focus-within:border-2">
               <FaEnvelope className="mx-3 text-gray-400" />
               <input
                 type="email"
@@ -98,7 +103,7 @@ export default function Login() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Enter your email"
-                className="w-full bg-transparent outline-none h-10 px-2 text-gray-800"
+                className="w-full bg-transparent outline-none h-10 px-2 text-gray-800 dark:text-white"
               />
             </div>
           </div>
@@ -107,7 +112,7 @@ export default function Login() {
             <label className="text-sm font-medium text-gray-600">
               Password
             </label>
-            <div className="flex items-center border border-gray-300 rounded-md bg-[#f4f6f8] focus-within:border-primary-500 focus-within:border-2">
+            <div className="flex items-center border border-gray-300 rounded-md bg-surface-light dark:bg-surface-dark focus-within:border-primary-500 focus-within:border-2">
               <FaLock className="mx-3 text-gray-400" />
               <input
                 type="password"
@@ -115,7 +120,7 @@ export default function Login() {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Enter your password"
-                className="w-full bg-transparent outline-none h-10 px-2 text-gray-800"
+                className="w-full bg-transparent outline-none h-10 px-2 text-gray-800 dark:text-white"
               />
             </div>
           </div>

@@ -3,7 +3,7 @@
     "icon": "home",
     "title": "Dashboard",
     "url": "/dashboard",
-    "allow_roles": ["superadmin","sales","intern"]
+    "allow_roles": ["superadmin","sales"]
   },
 
   {
@@ -11,10 +11,10 @@
     "title": "Leads (Beta)",
     "allow_roles": ["superadmin","sales"],
     "children": [
-      { "title": "Pipeline List", "url": "/pipelines","allow_roles": ["superadmin"]},
-      {"title": "Create Pipeline","url": "/pipeline/create","allow_roles": [ "superadmin"]},
-      {"title": "Leads List","url": "/leads","allow_roles": ["superadmin","sales"]},
-      {"title": "Create Lead","url": "/lead/create","allow_roles": ["superadmin","sales"]}
+      {"title": "Leads List","url": "/leads","allow_roles": ["superadmin","sales","sales","intern"]},
+      {"title": "Pipeline List", "url": "/pipelines","allow_roles": ["superadmin","sales","intern"]},
+      {"title": "Create Pipeline","url": "/pipeline/create","allow_roles": [ "superadmin","sales","intern"]},
+      {"title": "Update Pipeline","url": "/pipeline/update","allow_roles": [ "superadmin","sales","intern"]}
     ]
   },
 
@@ -24,7 +24,8 @@
     "allow_roles": ["superadmin"],
     "children": [
       {"title": "Employees List","url": "/employees","allow_roles": ["superadmin"]},
-      {"title": "Create Employee","url": "/employee/create","allow_roles": ["superadmin"]}
+      {"title": "Create Employee","url": "/employee/create","allow_roles": ["superadmin"]},
+      {"title": "Update Employee","url": "/employee/update","allow_roles": ["superadmin"]}
     ]
   },
 
@@ -57,7 +58,8 @@
 
     "children": [
       {"title": "Transactions List","url": "/transactions","allow_roles": ["superadmin","sales"]},
-      {"title": "Create Transaction","url": "/transaction/create","allow_roles": ["superadmin","sales"]}
+      {"title": "Create Transaction","url": "/transaction/create","allow_roles": ["superadmin","sales"]},
+      {"title": "Update Transaction","url": "/transaction/update","allow_roles": ["superadmin","sales"]}
     ]
   },
   {

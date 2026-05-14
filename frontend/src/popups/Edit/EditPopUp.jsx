@@ -53,12 +53,12 @@ export default function EditPopup({
         } bg-black/50`}
       >
         <div
-          className={`bg-white max-w[400px] w-[400px] rounded-md shadow-2xl transition-all p-3 ${
+          className={`bg-white dark:bg-surface-darkCard max-w[400px] w-[400px] rounded-md shadow-2xl transition-all p-3 ${
             active ? "scale-100 opacity-100" : "scale-75 opacity-0"
           }`}
           onClick={(e) => e.stopPropagation()}
         >
-          <h1 className="text-5xl font-bold text-orange-500 text-center ">
+          <h1 className="text-5xl font-bold text-primary-500 text-center ">
             {title}
           </h1>
           {format.map((list, index) => (
@@ -66,7 +66,7 @@ export default function EditPopup({
               <p className="font-bold">{list.title}</p>
               <input
                 type="text"
-                className="w-full h-10 bg-[#f4f6f8] border-[2px] border-gray-300 rounded-sm outline-none focus:border-orange-500 px-2 focus:border-[2px] mb-2"
+                className="w-full h-10 bg-surface-light dark:bg-surface-dark border-[2px] border-gray-300 rounded-sm outline-none focus:border-primary-500 px-2 focus:border-[2px] mb-2"
                 value={formValue[list.target]}
                 onChange={(e) =>
                   setFormValue((prev) => ({
@@ -79,13 +79,13 @@ export default function EditPopup({
           ))}
 
           <button
-            className="outline-none my-[3px] w-full h-10 bg-orange-500 hover:bg-orange-600 focus-visible:ring-2 ring-offset-2 ring-red-500 text-white text-xl rounded-md shadow-md"
+            className="outline-none my-[3px] w-full h-10 bg-primary-500 hover:bg-primary-600 focus-visible:ring-2 ring-offset-2 ring-red-500 text-white text-xl rounded-md shadow-md"
             onClick={EditFunction}
           >
             Edit
           </button>
           <button
-            className="w-full h-10 rounded-sm my-2 text-lg bg-white border-[1.5px] border-dashed border-gray-400 text-gray-500 shadow-md outline-none hover:bg-orange-50 focus:bg-orange-50"
+            className="w-full h-10 rounded-sm my-2 text-lg bg-white dark:bg-surface-darkCard border-[1.5px] border-dashed border-gray-400 text-gray-500 dark:text-gray-400 shadow-md outline-none hover:bg-primary-50 focus:bg-primary-50"
             onClick={() => setActive(false)}
           >
             Cancel

@@ -56,16 +56,13 @@ const icons = {
 };
 
 export default function Sidebar() {
-
   const [menu, setMenu] = useState([]);
 
   const [openMenus, setOpenMenus] = useState({});
 
   const location = useLocation();
 
-  const user = JSON.parse(
-    localStorage.getItem("user")
-  );
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const role = user?.type || "intern";
 
@@ -75,7 +72,6 @@ export default function Sidebar() {
    * ===================================================
    */
   const hasAccess = (roles = []) => {
-
     return roles.includes(role);
   };
 
@@ -85,19 +81,13 @@ export default function Sidebar() {
    * ===================================================
    */
   useEffect(() => {
-
     const filteredMenu = menuData
       .filter((item) => {
-
         return hasAccess(item.allow_roles);
       })
       .map((item) => {
-
-        // Parent menu
         if (item.children) {
-
           return {
-
             ...item,
 
             children: item.children.filter((child) =>
@@ -109,10 +99,7 @@ export default function Sidebar() {
         return item;
       })
       .filter((item) => {
-
-        // Hide empty parents
         if (item.children) {
-
           return item.children.length > 0;
         }
 
@@ -120,7 +107,6 @@ export default function Sidebar() {
       });
 
     setMenu(filteredMenu);
-
   }, []);
 
   /**
@@ -129,17 +115,14 @@ export default function Sidebar() {
    * ===================================================
    */
   useEffect(() => {
-
     const newOpenMenus = {};
 
     menu.forEach((item, index) => {
-
       if (
         item.children?.some((child) =>
           location.pathname.startsWith(child.url)
         )
       ) {
-
         newOpenMenus[index] = true;
       }
     });
@@ -148,7 +131,6 @@ export default function Sidebar() {
       ...prev,
       ...newOpenMenus,
     }));
-
   }, [location.pathname, menu]);
 
   /**
@@ -157,7 +139,6 @@ export default function Sidebar() {
    * ===================================================
    */
   const toggleMenu = (index) => {
-
     setOpenMenus((prev) => ({
       ...prev,
       [index]: !prev[index],
@@ -170,104 +151,115 @@ export default function Sidebar() {
    * ===================================================
    */
   const renderChild = (child, i) => {
-
-    const isActive = location.pathname.startsWith(
-      child.url
-    );
+    const isActive = location.pathname.startsWith(child.url);
 
     return (
       <NavLink
         key={i}
         to={child.url}
-        className={`block px-2 py-1 rounded text-sm transition-all duration-200 ${
+        className={`group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
           isActive
-            ? "bg-primary-500 text-white"
-            : "text-gray-600 hover:bg-primary-50 hover:text-primary-500"
+            ? "bg-primary-500 text-white shadow-lg shadow-primary-500/20"
+            : "text-gray-500 dark:text-gray-400 hover:bg-primary-50 dark:hover:bg-surface-darkMuted hover:text-primary-600 dark:hover:text-primary-400"
         }`}
       >
-        {child.title}
+        <div
+          className={`w-1.5 h-1.5 rounded-full ${
+            isActive
+              ? "bg-white"
+              : "bg-gray-300 dark:bg-gray-600 group-hover:bg-primary-500"
+          }`}
+        />
+
+        <span>{child.title}</span>
       </NavLink>
     );
   };
 
   return (
-    <div className="min-w-56 bg-white shadow-lg h-screen flex flex-col select-none">
-
+    <div className="min-w-64 max-w-64 bg-surface-soft dark:bg-surface-dark border-r border-surface-border dark:border-surface-darkBorder h-screen flex flex-col select-none">
       {/* =================================================== */}
       {/* LOGO */}
       {/* =================================================== */}
 
-      <div className="p-4 border-b">
+      <div className="h-16 px-5 border-b border-surface-border dark:border-surface-darkBorder flex items-center justify-between shrink-0">
+        <div>
+          <h2 className="text-xl font-black tracking-wide text-primary-600 dark:text-primary-400">
+            ERP
+          </h2>
 
-        <h2 className="text-lg font-bold text-primary-500">
-          ERP
-        </h2>
+          <p className="text-[11px] text-gray-400 dark:text-gray-500">
+            Enterprise Platform
+          </p>
+        </div>
 
+        {/* <div className="w-10 h-10 rounded-2xl bg-primary-500 text-white flex items-center justify-center shadow-lg shadow-primary-500/20 font-bold">
+          E
+        </div> */}
       </div>
 
       {/* =================================================== */}
       {/* MENU */}
       {/* =================================================== */}
 
-      <nav className="flex-1 overflow-y-auto scroll-bar p-2">
-
+      <nav className="flex-1 overflow-y-auto scroll-bar p-3 space-y-1">
         {menu.map((item, index) => {
-
           /**
            * ===============================================
            * PARENT MENU
            * ===============================================
            */
           if (item.children) {
+            const isParentActive = item.children.some((child) =>
+              location.pathname.startsWith(child.url)
+            );
 
             return (
-              <div
-                key={index}
-                className="mb-2"
-              >
-
+              <div key={index}>
                 <button
                   onClick={() => toggleMenu(index)}
-                  className={`flex items-center justify-between w-full px-3 py-2 rounded transition-all duration-200 ${
-                    item.children.some((child) =>
-                      location.pathname.startsWith(child.url)
-                    )
-                      ? "bg-primary-500 text-white"
-                      : "text-gray-700 hover:bg-primary-50 hover:text-primary-500"
+                  className={`group flex items-center justify-between w-full px-4 py-3 rounded-2xl transition-all duration-200 ${
+                    isParentActive
+                      ? "bg-primary-500 text-white shadow-xl shadow-primary-500/20"
+                      : "text-gray-600 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-surface-darkMuted hover:text-primary-600 dark:hover:text-primary-400"
                   }`}
                 >
-
-                  <div className="flex items-center gap-2">
-
-                    <span>
+                  <div className="flex items-center gap-3">
+                    <div
+                      className={`text-lg ${
+                        isParentActive
+                          ? "text-white"
+                          : "text-gray-400 group-hover:text-primary-500"
+                      }`}
+                    >
                       {icons[item.icon]}
-                    </span>
+                    </div>
 
-                    <span>
+                    <span className="font-semibold text-sm">
                       {item.title}
                     </span>
-
                   </div>
 
-                  {openMenus[index]
-                    ? <FaChevronDown />
-                    : <FaChevronRight />
-                  }
-
+                  <div
+                    className={`transition-transform duration-300 ${
+                      openMenus[index] ? "rotate-180" : ""
+                    }`}
+                  >
+                    <FaChevronDown size={12} />
+                  </div>
                 </button>
 
                 <div
-                  className={`ml-8 mt-1 space-y-1 overflow-hidden transition-all duration-300 ${
+                  className={`overflow-hidden transition-all duration-300 ${
                     openMenus[index]
-                      ? "max-h-[500px] opacity-100"
+                      ? "max-h-[500px] opacity-100 mt-2"
                       : "max-h-0 opacity-0"
                   }`}
                 >
-
-                  {item.children.map(renderChild)}
-
+                  <div className="ml-5 pl-4 border-l border-surface-border dark:border-surface-darkBorder space-y-1">
+                    {item.children.map(renderChild)}
+                  </div>
                 </div>
-
               </div>
             );
           }
@@ -282,27 +274,52 @@ export default function Sidebar() {
               key={index}
               to={item.url}
               className={({ isActive }) =>
-                `flex items-center gap-2 px-3 py-2 rounded font-medium transition-all duration-200 ${
+                `group flex items-center gap-3 px-4 py-3 rounded-2xl font-medium transition-all duration-200 ${
                   isActive
-                    ? "bg-primary-500 text-white"
-                    : "text-gray-700 hover:bg-primary-50 hover:text-primary-500"
+                    ? "bg-primary-500 text-white shadow-xl shadow-primary-500/20"
+                    : "text-gray-600 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-surface-darkMuted hover:text-primary-600 dark:hover:text-primary-400"
                 }`
               }
             >
+              {({ isActive }) => (
+                <>
+                  <div
+                    className={`text-lg transition-all ${
+                      isActive
+                        ? "text-white"
+                        : "text-gray-400 group-hover:text-primary-500"
+                    }`}
+                  >
+                    {icons[item.icon]}
+                  </div>
 
-              <span>
-                {icons[item.icon]}
-              </span>
-
-              <span>
-                {item.title}
-              </span>
-
+                  <span className="font-semibold text-sm">
+                    {item.title}
+                  </span>
+                </>
+              )}
             </NavLink>
           );
         })}
-
       </nav>
+
+      {/* =================================================== */}
+      {/* FOOTER */}
+      {/* =================================================== */}
+
+      {/* <div className="p-3 border-t border-surface-border dark:border-surface-darkBorder shrink-0">
+        <div className="bg-primary-500 rounded-2xl p-4 text-white shadow-xl shadow-primary-500/20">
+          <h4 className="font-semibold text-sm">ERP Dashboard</h4>
+
+          <p className="text-xs text-primary-100 mt-1 leading-5">
+            Manage your business smarter with modern enterprise tools.
+          </p>
+
+          <button className="mt-4 h-9 px-4 rounded-xl bg-white/20 hover:bg-white/30 transition-all text-sm font-medium">
+            Explore
+          </button>
+        </div>
+      </div> */}
     </div>
   );
 }

@@ -148,7 +148,7 @@ class InvoiceController extends Controller
 
                 'sub_total' => $data['sub_total'],
                 'discount_amount' => $data['discount_amount'] ?? 0,
-                'discount_title' => $data['discount_title'] ?? 0,
+                'discount_title' => $data['discount_title'] ?? $data['discount_amount'],
                 'before_tax' => $data['before_tax'],
                 'tax_total' => $data['tax_total'] ?? 0,
                 'round_off' => $data['round_off']['value'] ?? 0,
@@ -491,8 +491,7 @@ class InvoiceController extends Controller
 
             'ids' => 'required|array|min:1',
             'ids.*' => 'exists:invoices,id',
-
-            'status' => 'required|in:draft,cancelled,overdue,uncollectible'
+            'status' => 'required|in:draft,paid,unpaid,cancelled,overdue,uncollectible'
         ]);
 
         DB::beginTransaction();

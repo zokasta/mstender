@@ -2,34 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PipelineStage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\PipelineStage;
+use App\Http\Controllers\Controller;
 
 class PipelineStageController extends Controller
 {
-    public function index($pipeline_id)
-    {
-        return response()->json(
-            PipelineStage::where('pipeline_id', $pipeline_id)
-                ->orderBy('position')
-                ->get()
-        );
-    }
-
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'pipeline_id' => 'required|exists:pipelines,id',
-            'name' => 'required|string|max:100',
-            'color' => 'nullable|string'
+        $stage = PipelineStage::create([
+            'pipeline_id' => $request->pipeline_id,
+            'name' => $request->name,
+            'color' => $request->color,
+            'position' => $request->position ?? 0,
         ]);
 
-        $data['position'] = PipelineStage::where('pipeline_id', $data['pipeline_id'])->count() + 1;
-
         return response()->json([
-            'message' => 'Stage created',
-            'data' => PipelineStage::create($data)
+            'success' => true,
+            'data' => $stage,
         ]);
     }
 
@@ -37,36 +27,20 @@ class PipelineStageController extends Controller
     {
         $stage = PipelineStage::findOrFail($id);
 
-        $stage->update($request->only(['name', 'color']));
+        $stage->update($request->all());
 
-        return response()->json(['message' => 'Updated']);
+        return response()->json([
+            'success' => true,
+            'data' => $stage,
+        ]);
     }
 
     public function destroy($id)
     {
         PipelineStage::findOrFail($id)->delete();
 
-        return response()->json(['message' => 'Deleted']);
-    }
-
-    public function reorder(Request $request)
-    {
-        $data = $request->validate([
-            'stages' => 'required|array'
+        return response()->json([
+            'success' => true,
         ]);
-
-        DB::beginTransaction();
-        try {
-            foreach ($data['stages'] as $index => $stageId) {
-                PipelineStage::where('id', $stageId)
-                    ->update(['position' => $index + 1]);
-            }
-
-            DB::commit();
-            return response()->json(['message' => 'Reordered']);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json(['message' => $e->getMessage()], 500);
-        }
     }
 }

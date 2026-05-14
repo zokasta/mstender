@@ -100,12 +100,24 @@ export default function UpdateCustomer() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-surface-light dark:bg-surface-dark min-h-screen p-1">
       <ToastContainer {...toastCfg} />
-      <h1 className="text-2xl font-bold">Update Customer</h1>
 
-      {/* Customer selector */}
-      <div className="bg-white p-6 rounded-lg shadow border">
+      {/* HEADER */}
+
+      <div>
+        <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
+          Update Customer
+        </h1>
+
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+          Update and manage customer information
+        </p>
+      </div>
+
+      {/* CUSTOMER SELECTOR */}
+
+      <div className="bg-surface-soft dark:bg-surface-darkCard p-6 rounded-xl shadow-sm border border-surface-border dark:border-surface-darkBorder">
         <SelectSearch
           api="/customers"
           method="get"
@@ -118,15 +130,19 @@ export default function UpdateCustomer() {
         />
       </div>
 
-      {/* Update form */}
-      <div className="bg-white p-6 rounded-lg shadow border">
-        <h2 className="text-lg font-semibold mb-4">Customer Details</h2>
+      {/* FORM */}
+
+      <div className="bg-surface-soft dark:bg-surface-darkCard p-6 rounded-xl shadow-sm border border-surface-border dark:border-surface-darkBorder">
+        <h2 className="text-lg font-semibold mb-4 text-slate-800 dark:text-slate-100">
+          Customer Details
+        </h2>
 
         {loading ? (
-          <div>Loading...</div>
+          <div className="text-slate-500 dark:text-slate-400">Loading...</div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Basic Info */}
+            {/* BASIC INFO */}
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input
                 label="Name"
@@ -147,6 +163,8 @@ export default function UpdateCustomer() {
               />
             </div>
 
+            {/* EMAIL + DOB */}
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input
                 label="Email"
@@ -154,6 +172,7 @@ export default function UpdateCustomer() {
                 value={form.email}
                 onChange={(v) => handleChange("email", v)}
               />
+
               <Input
                 label="Dob"
                 placeholder="Dob"
@@ -161,31 +180,43 @@ export default function UpdateCustomer() {
                 type="date"
                 onChange={(v) => handleChange("dob", v)}
               />
+            </div>
+
+            {/* GENDER + HOMETOWN */}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Select
-                label="select gender"
+                label="Select Gender"
                 value={form.gender}
                 onChange={(v) => handleChange("gender", v)}
                 required
                 error={errors.gender}
               >
-                <option value="--- select gender ----">
-                  ----- select gender ------
-                </option>
-                <option value="male">male</option>
-                <option value="female">female</option>
+                <option value="">----- Select Gender -----</option>
+
+                <option value="male">Male</option>
+
+                <option value="female">Female</option>
               </Select>
+
               <Input
                 label="Hometown"
                 placeholder="Hometown"
                 value={form.hometown}
                 onChange={(v) => handleChange("hometown", v)}
               />
+            </div>
+
+            {/* COMPANY */}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input
                 label="Company Name"
                 placeholder="Company Name"
                 value={form.company_name}
                 onChange={(v) => handleChange("company_name", v)}
               />
+
               <Input
                 label="Company GST Number"
                 placeholder="Company GST Number"
@@ -194,7 +225,8 @@ export default function UpdateCustomer() {
               />
             </div>
 
-            {/* Address */}
+            {/* ADDRESS */}
+
             <Textarea
               label="Address"
               placeholder="Address"
@@ -202,26 +234,30 @@ export default function UpdateCustomer() {
               onChange={(v) => handleChange("address", v)}
             />
 
-            {/* Remark */}
+            {/* REMARK */}
+
             <Textarea
               label="Remark"
               placeholder="Notes (optional)"
               value={form.remark}
               onChange={(v) => handleChange("remark", v)}
-            /> 
+            />
 
-            <div className="flex justify-end gap-3">
+            {/* BUTTONS */}
+
+            <div className="flex justify-end gap-3 pt-2">
               <button
                 type="button"
                 onClick={() => navigate("/customers")}
-                className="px-4 py-2 border rounded"
+                className="px-5 py-2.5 border border-surface-border dark:border-surface-darkBorder rounded-xl bg-surface-soft dark:bg-surface-darkCard hover:bg-surface-muted dark:hover:bg-surface-darkMuted text-slate-700 dark:text-slate-200 transition-all duration-200"
               >
                 Cancel
               </button>
+
               <button
                 type="submit"
                 disabled={loading}
-                className="px-4 py-2 bg-primary-500 text-white rounded"
+                className="px-5 py-2.5 bg-primary-500 hover:bg-primary-600 text-white rounded-xl shadow-lg shadow-primary-500/20 transition-all duration-200 disabled:opacity-50"
               >
                 {loading ? "Saving..." : "Save Changes"}
               </button>

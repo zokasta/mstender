@@ -66,7 +66,7 @@ export default function Switch({
         </span>
       ) : (
         <span
-          className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow-md transform transition-transform duration-300 ease-out
+          className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white dark:bg-surface-darkCard shadow-md transform transition-transform duration-300 ease-out
             ${isOn ? "translate-x-5" : "translate-x-0"}
             ${isPressed ? "scale-95" : "scale-100"}
           `}

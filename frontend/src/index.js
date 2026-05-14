@@ -11,6 +11,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ReactNotifications } from "react-notifications-component";
 import { AppProvider } from "./database/Context";
 import { SettingsProvider } from "./context/SettingsContext";
+import DeviceWrapper from "./components/wrappers/DeviceWrapper";
 
 document.addEventListener("wheel", function (event) {
   const activeElement = document.activeElement;
@@ -27,7 +28,9 @@ root.render(
     <BrowserRouter>
       <SettingsProvider>
         <AppProvider>
-          <App />
+          <DeviceWrapper>
+            <App />
+          </DeviceWrapper>
         </AppProvider>
       </SettingsProvider>
     </BrowserRouter>

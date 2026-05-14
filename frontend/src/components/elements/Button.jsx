@@ -1,14 +1,14 @@
 import React from "react";
 
 const THEME_STYLES = {
-  orange: {
-    base: "bg-orange-500 hover:bg-orange-600 text-white",
-    disabled: "bg-orange-300 text-white",
-    ring: "focus-visible:ring-orange-500",
+  primary: {
+    base: "bg-primary-500 hover:bg-primary-600 text-white",
+    disabled: "bg-primary-300 text-white",
+    ring: "focus-visible:ring-primary-500",
   },
   gray: {
     base: "bg-gray-200 hover:bg-gray-300 text-gray-700",
-    disabled: "bg-gray-200 text-gray-500",
+    disabled: "bg-gray-200 text-gray-500 dark:text-gray-400",
     ring: "focus-visible:ring-gray-400",
   },
 };
@@ -19,7 +19,7 @@ export default function Button({
   loadingTitle = "Processing...",
   isLoading = false,
   onClick,
-  theme = "orange", // "orange" | "gray"
+  theme = "primary", // "primary" | "gray"
   className = "",
   disabled = false,
   fullWidth = false,
@@ -28,7 +28,7 @@ export default function Button({
   ariaLabel,
   ...rest
 }) {
-  const styles = THEME_STYLES[theme] || THEME_STYLES.orange;
+  const styles = THEME_STYLES[theme] || THEME_STYLES.primary;
   const isDisabled = disabled || isLoading;
 
   return (

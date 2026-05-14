@@ -29,7 +29,10 @@ return new class extends Migration {
 
             // Addressing
             $table->text('address')->nullable();
-            $table->string('hometown')->nullable();
+            $table->string('country')->nullable();
+            $table->string('state')->nullable();
+            $table->string('city')->nullable();
+            $table->string('digipin')->nullable();
 
             // audit fields
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();

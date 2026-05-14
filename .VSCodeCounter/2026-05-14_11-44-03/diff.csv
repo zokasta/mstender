@@ -1,0 +1,61 @@
+"filename", "language", "PHP", "JavaScript", "JavaScript JSX", "comment", "blank", "total"
+"z:\Projects\mstender\backend\app\Helpers\LeadAccess.php", "PHP", 17, 0, 0, 0, 4, 21
+"z:\Projects\mstender\backend\app\Http\Controllers\DashboardController.php", "PHP", -67, 0, 0, 15, 5, -47
+"z:\Projects\mstender\backend\app\Http\Controllers\InvoiceController.php", "PHP", 0, 0, 0, 0, -1, -1
+"z:\Projects\mstender\backend\app\Http\Controllers\LeadActivityController.php", "PHP", 10, 0, 0, -20, -2, -12
+"z:\Projects\mstender\backend\app\Http\Controllers\LeadController.php", "PHP", 94, 0, 0, 155, 112, 361
+"z:\Projects\mstender\backend\app\Http\Controllers\LeadNoteCommentController.php", "PHP", 38, 0, 0, 15, 12, 65
+"z:\Projects\mstender\backend\app\Http\Controllers\LeadNoteController.php", "PHP", 54, 0, 0, 20, 15, 89
+"z:\Projects\mstender\backend\app\Http\Controllers\PipelineController.php", "PHP", 68, 0, 0, 25, 21, 114
+"z:\Projects\mstender\backend\app\Http\Controllers\PipelineStageController.php", "PHP", -21, 0, 0, 0, -5, -26
+"z:\Projects\mstender\backend\app\Models\Lead.php", "PHP", 16, 0, 0, 0, 3, 19
+"z:\Projects\mstender\backend\app\Models\Pipeline.php", "PHP", 8, 0, 0, 0, 3, 11
+"z:\Projects\mstender\backend\app\Models\User.php", "PHP", 12, 0, 0, 0, 3, 15
+"z:\Projects\mstender\backend\database\factories\CustomerFactory.php", "PHP", -1, 0, 0, 1, 0, 0
+"z:\Projects\mstender\backend\database\migrations\2026_05_04_053545_create_pipelines_table.php", "PHP", 2, 0, 0, 0, 0, 2
+"z:\Projects\mstender\backend\database\migrations\2026_05_04_136114_create_leads_table.php", "PHP", -1, 0, 0, 0, 0, -1
+"z:\Projects\mstender\backend\routes\api.php", "PHP", -6, 0, 0, 15, 8, 17
+"z:\Projects\mstender\frontend\src\App.js", "JavaScript", 0, -104, 0, -18, -31, -153
+"z:\Projects\mstender\frontend\src\App.jsx", "JavaScript JSX", 0, 0, 92, 32, 31, 155
+"z:\Projects\mstender\frontend\src\components\elements\Select.jsx", "JavaScript JSX", 0, 0, 35, 5, 13, 53
+"z:\Projects\mstender\frontend\src\components\elements\SelectSearch.jsx", "JavaScript JSX", 0, 0, 49, 14, 49, 112
+"z:\Projects\mstender\frontend\src\components\elements\Textarea.jsx", "JavaScript JSX", 0, 0, 56, 4, 17, 77
+"z:\Projects\mstender\frontend\src\components\layout\Sidebar.jsx", "JavaScript JSX", 0, 0, -3, 3, 0, 0
+"z:\Projects\mstender\frontend\src\components\layout\Topbar.jsx", "JavaScript JSX", 0, 0, -6, 7, -1, 0
+"z:\Projects\mstender\frontend\src\components\tables\AddButton.jsx", "JavaScript JSX", 0, 0, 3, 0, 1, 4
+"z:\Projects\mstender\frontend\src\components\tables\BadgeButton.jsx", "JavaScript JSX", 0, 0, 56, 15, 44, 115
+"z:\Projects\mstender\frontend\src\components\tables\BulkAction.jsx", "JavaScript JSX", 0, 0, 65, -2, 20, 83
+"z:\Projects\mstender\frontend\src\components\tables\ConfirmDialog.jsx", "JavaScript JSX", 0, 0, 53, 15, 27, 95
+"z:\Projects\mstender\frontend\src\components\tables\FilterButton.jsx", "JavaScript JSX", 0, 0, 3, 2, 3, 8
+"z:\Projects\mstender\frontend\src\components\tables\Pagination.jsx", "JavaScript JSX", 0, 0, 38, 10, 17, 65
+"z:\Projects\mstender\frontend\src\components\wrappers\DeviceWrapper.jsx", "JavaScript JSX", 0, 0, 43, 19, 10, 72
+"z:\Projects\mstender\frontend\src\index.js", "JavaScript", 0, 3, 0, 0, 0, 3
+"z:\Projects\mstender\frontend\src\pages\auth\Login.jsx", "JavaScript JSX", 0, 0, 4, 0, 1, 5
+"z:\Projects\mstender\frontend\src\pages\banks\BanksList.jsx", "JavaScript JSX", 0, 0, 109, 27, 131, 267
+"z:\Projects\mstender\frontend\src\pages\banks\CreateBank.jsx", "JavaScript JSX", 0, 0, 37, 5, 33, 75
+"z:\Projects\mstender\frontend\src\pages\banks\UpdateBank.jsx", "JavaScript JSX", 0, 0, 40, 13, 57, 110
+"z:\Projects\mstender\frontend\src\pages\customers\CreateCustomer.jsx", "JavaScript JSX", 0, 0, 75, 23, 49, 147
+"z:\Projects\mstender\frontend\src\pages\customers\CustomersList.jsx", "JavaScript JSX", 0, 0, 113, 21, 149, 283
+"z:\Projects\mstender\frontend\src\pages\customers\UpdateCustomer.jsx", "JavaScript JSX", 0, 0, 11, 5, 20, 36
+"z:\Projects\mstender\frontend\src\pages\dashboard\Dashboard.jsx", "JavaScript JSX", 0, 0, 208, 37, 71, 316
+"z:\Projects\mstender\frontend\src\pages\employees\CreateEmployee.jsx", "JavaScript JSX", 0, 0, 31, -23, 74, 82
+"z:\Projects\mstender\frontend\src\pages\employees\EmployeeList.jsx", "JavaScript JSX", 0, 0, 126, 31, 167, 324
+"z:\Projects\mstender\frontend\src\pages\employees\UpdateEmployee.jsx", "JavaScript JSX", 0, 0, 51, 15, 50, 116
+"z:\Projects\mstender\frontend\src\pages\invoices\CreateInvoice.jsx", "JavaScript JSX", 0, 0, 2, 0, 0, 2
+"z:\Projects\mstender\frontend\src\pages\invoices\InvoicesList.jsx", "JavaScript JSX", 0, 0, 96, 28, 112, 236
+"z:\Projects\mstender\frontend\src\pages\leads\LeadCard.jsx", "JavaScript JSX", 0, 0, 113, 4, 23, 140
+"z:\Projects\mstender\frontend\src\pages\leads\LeadDummyData.jsx", "JavaScript JSX", 0, 0, 97, 0, 18, 115
+"z:\Projects\mstender\frontend\src\pages\leads\LeadList.jsx", "JavaScript JSX", 0, 0, -143, 61, 3, -79
+"z:\Projects\mstender\frontend\src\pages\leads\PipelineCreate.jsx", "JavaScript JSX", 0, 0, 18, 2, 14, 34
+"z:\Projects\mstender\frontend\src\pages\leads\PipelineList.jsx", "JavaScript JSX", 0, 0, 466, 49, 154, 669
+"z:\Projects\mstender\frontend\src\pages\leads\PipelineUpdate.jsx", "JavaScript JSX", 0, 0, 192, 28, 70, 290
+"z:\Projects\mstender\frontend\src\pages\leads\StageCard.jsx", "JavaScript JSX", 0, 0, 6, 0, 1, 7
+"z:\Projects\mstender\frontend\src\pages\leads\ViewMode.jsx", "JavaScript JSX", 0, 0, 27, 0, 3, 30
+"z:\Projects\mstender\frontend\src\pages\leads\tempPipeline.jsx", "JavaScript JSX", 0, 0, 352, 16, 82, 450
+"z:\Projects\mstender\frontend\src\pages\taxes\CreateTax.jsx", "JavaScript JSX", 0, 0, 29, 9, 29, 67
+"z:\Projects\mstender\frontend\src\pages\taxes\TaxesList.jsx", "JavaScript JSX", 0, 0, 97, 23, 123, 243
+"z:\Projects\mstender\frontend\src\pages\taxes\UpdateTax.jsx", "JavaScript JSX", 0, 0, 55, 20, 55, 130
+"z:\Projects\mstender\frontend\src\pages\transactions\CreateTransaction.jsx", "JavaScript JSX", 0, 0, 66, 12, 37, 115
+"z:\Projects\mstender\frontend\src\pages\transactions\TransactionsList.jsx", "JavaScript JSX", 0, 0, 118, 25, 99, 242
+"z:\Projects\mstender\frontend\src\pages\transactions\UpdateTransaction.jsx", "JavaScript JSX", 0, 0, 2, 0, 8, 10
+"Total", "-", 223, -101, 2882, 763, 2011, 5778

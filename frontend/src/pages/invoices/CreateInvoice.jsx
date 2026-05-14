@@ -291,9 +291,11 @@ export default function CreateInvoice() {
 
     // DISCOUNT
     if (form.discount) {
+    if(form.discount.value >0){
       if (!form.discount.title?.trim()) {
         newErrors.discount_title = "Discount title is required";
       }
+    }
 
       if (!form.discount.type) {
         newErrors.discount_type = "Discount type is required";
@@ -358,7 +360,7 @@ export default function CreateInvoice() {
       <h1 className="text-2xl font-bold">Create Invoice</h1>
 
       {/* INVOICE INFO */}
-      <div className="bg-white p-6 rounded border space-y-4">
+      <div className="bg-white dark:bg-surface-darkCard p-6 rounded border space-y-4">
         <h2 className="font-semibold">Invoice Info</h2>
 
         <div className="grid grid-cols-3 gap-4">
@@ -387,7 +389,7 @@ export default function CreateInvoice() {
       </div>
 
       {/* CUSTOMER SECTION */}
-      <div className="bg-white p-6 rounded border space-y-4">
+      <div className="bg-white dark:bg-surface-darkCard p-6 rounded border space-y-4">
         <h2 className="font-semibold">Customer</h2>
 
         <div className="grid grid-cols-2 gap-4">
@@ -432,7 +434,7 @@ export default function CreateInvoice() {
       </div>
 
       {/* ITEMS */}
-      <div className="bg-white p-6 rounded border space-y-4">
+      <div className="bg-white dark:bg-surface-darkCard p-6 rounded border space-y-4">
         <h2 className="font-semibold">Items</h2>
 
         {form.items.map((item, i) => (
@@ -476,7 +478,7 @@ export default function CreateInvoice() {
       </div>
 
       {/* DISCOUNT */}
-      <div className="bg-white p-6 rounded border">
+      <div className="bg-white dark:bg-surface-darkCard p-6 rounded border">
         <h2 className="font-semibold mb-4">Discounts</h2>
         {!form.discount ? (
           <button
@@ -545,7 +547,7 @@ export default function CreateInvoice() {
       </div>
 
       {/* TAXES */}
-      <div className="bg-white p-6 rounded border space-y-3">
+      <div className="bg-white dark:bg-surface-darkCard p-6 rounded border space-y-3">
         <h2 className="font-semibold">Taxes</h2>
 
         {form.taxes.map((t, i) => (
@@ -608,7 +610,7 @@ export default function CreateInvoice() {
         </button>
       </div>
 
-      <div className="bg-white p-6 rounded border space-y-4">
+      <div className="bg-white dark:bg-surface-darkCard p-6 rounded border space-y-4">
         <h2 className="font-semibold">Payments</h2>
 
         {form.payments.map((pay, i) => (
@@ -707,7 +709,7 @@ export default function CreateInvoice() {
                   className={`px-3 py-1 border rounded ${
                     form.round_off.type === "floor"
                       ? "bg-primary-500 text-white"
-                      : "bg-white"
+                      : "bg-white dark:bg-surface-darkCard"
                   }`}
                   onClick={() =>
                     setForm((p) => ({
@@ -723,7 +725,7 @@ export default function CreateInvoice() {
                   className={`px-3 py-1 border rounded ${
                     form.round_off.type === "ceil"
                       ? "bg-primary-500 text-white"
-                      : "bg-white"
+                      : "bg-white dark:bg-surface-darkCard"
                   }`}
                   onClick={() =>
                     setForm((p) => ({
@@ -764,7 +766,7 @@ export default function CreateInvoice() {
           onClick={() =>
             setForm({ ...form, items: [{ title: "", qty: 1, price: 0 }] })
           }
-          className="border px-4 py-2 rounded bg-white"
+          className="border px-4 py-2 rounded bg-white dark:bg-surface-darkCard"
         >
           Clear
         </button>

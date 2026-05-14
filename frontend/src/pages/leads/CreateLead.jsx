@@ -116,7 +116,7 @@ export default function CreateLead() {
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-sm border space-y-6"
+        className="bg-white dark:bg-surface-darkCard p-6 rounded-lg shadow-sm border space-y-6"
       >
         {/* BASIC INFO */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -195,7 +195,7 @@ export default function CreateLead() {
           <button
             type="submit"
             disabled={loading}
-            className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 disabled:opacity-50"
+            className="px-4 py-2 bg-primary-500 text-white rounded hover:bg-primary-600 disabled:opacity-50"
           >
             {loading ? "Saving..." : "Save Lead"}
           </button>

@@ -25,7 +25,7 @@ class CustomerFactory extends Factory
             'status' => $this->faker->randomElement(['pending', 'confirmed', 'cancelled']),
             'remark' => $this->faker->optional()->sentence(),
             'address' => $this->faker->address(),
-            'hometown' => $this->faker->city(),
+            // 'hometown' => $this->faker->city(),
             'company_name' => "",
             'gstin' => "",
             'created_by' => null,

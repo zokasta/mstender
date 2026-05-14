@@ -133,10 +133,10 @@ export default function UpdateLead() {
     <div className="space-y-6">
       <ToastContainer {...toastCfg} />
 
-      <h1 className="text-2xl font-bold text-gray-800">Update Lead</h1>
+      <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Update Lead</h1>
 
       {/* Lead selector */}
-      <div className="bg-white shadow rounded-lg p-6 border">
+      <div className="bg-white dark:bg-surface-darkCard shadow rounded-lg p-6 border">
         <SelectSearch
           api="/leads"
           method="get"
@@ -150,7 +150,7 @@ export default function UpdateLead() {
       </div>
 
       {/* Update Form */}
-      <div className="bg-white shadow rounded-lg p-6 border">
+      <div className="bg-white dark:bg-surface-darkCard shadow rounded-lg p-6 border">
         <h2 className="text-lg font-semibold mb-4">Lead Details</h2>
 
         {loading ? (
@@ -260,7 +260,7 @@ export default function UpdateLead() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 disabled:opacity-50"
+                className="px-4 py-2 bg-primary-500 text-white rounded hover:bg-primary-600 disabled:opacity-50"
               >
                 {loading ? "Saving..." : "Save Changes"}
               </button>

@@ -76,7 +76,7 @@ export default function SelectSearchJson({
       {/* Selected box */}
       <div
         onClick={() => setOpen((p) => !p)}
-        className={`h-10 bg-[#f4f6f8] border rounded-sm px-3 flex items-center justify-between cursor-pointer
+        className={`h-10 bg-surface-light dark:bg-surface-dark border rounded-sm px-3 flex items-center justify-between cursor-pointer
           ${error ? "border-red-500" : "border-gray-300"}
           ${className}`}
       >
@@ -88,7 +88,7 @@ export default function SelectSearchJson({
 
       {/* Dropdown */}
       {open && (
-        <div className="absolute z-50 w-full bg-white border rounded-sm shadow mt-1">
+        <div className="absolute z-50 w-full bg-white dark:bg-surface-darkCard border rounded-sm shadow mt-1">
           <input
             ref={searchInputRef}
             type="text"

@@ -51,20 +51,20 @@ export default function Notifications() {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-800">
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
           Notifications
         </h1>
 
         <button
           onClick={markAllRead}
-          className="text-sm bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition"
+          className="text-sm bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition"
         >
           Mark All as Read
         </button>
       </div>
 
       {/* Content */}
-      <div className="bg-white rounded-xl shadow-md border border-gray-100">
+      <div className="bg-white dark:bg-surface-darkCard rounded-xl shadow-md border border-gray-100">
         {loading ? (
           <div className="p-6 text-gray-400">Loading...</div>
         ) : notifications.length === 0 ? (
@@ -77,7 +77,7 @@ export default function Notifications() {
               <li
                 key={n.id}
                 className={`flex justify-between items-start p-5 hover:bg-gray-50 transition ${
-                  !n.is_read ? "bg-orange-50" : ""
+                  !n.is_read ? "bg-primary-50" : ""
                 }`}
               >
                 <div
@@ -87,7 +87,7 @@ export default function Notifications() {
                   }}
                 >
                   <Link to={n.link || "#"}>
-                    <p className="font-semibold text-gray-800">
+                    <p className="font-semibold text-gray-800 dark:text-white">
                       {n.title}
                     </p>
                     <p className="text-sm text-gray-600 mt-1">

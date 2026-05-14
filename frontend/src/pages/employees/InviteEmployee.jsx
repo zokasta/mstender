@@ -92,8 +92,8 @@ export default function EmployeeInvite() {
     <div className="min-h-screen flex items-center justify-center bg-[#e4e3e3] px-4">
       <ToastContainer {...toastCfg} />
 
-      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-xl">
-        <h1 className="text-2xl font-bold text-gray-800 mb-2">
+      <div className="bg-white dark:bg-surface-darkCard shadow-lg rounded-lg p-6 w-full max-w-xl">
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
           Complete Your Profile
         </h1>
         <p className="text-sm text-gray-600 mb-6">
@@ -159,7 +159,7 @@ export default function EmployeeInvite() {
 
           <Button
             type="submit"
-            theme="orange"
+            theme="primary"
             title={loading ? "Activating..." : "Activate Account"}
             disabled={loading}
             className="w-full py-2"

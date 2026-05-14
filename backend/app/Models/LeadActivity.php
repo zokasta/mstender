@@ -11,7 +11,7 @@ class LeadActivity extends Model
 
     protected $fillable = [
         'lead_id',
-        'activity_type_id',
+        'activity_type',
         'description',
         'outcome',
         'next_action',

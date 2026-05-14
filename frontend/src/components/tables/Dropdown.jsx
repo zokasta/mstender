@@ -25,7 +25,7 @@ export default function Dropdown({ children, button, align = "right" }) {
         <button onClick={() => setOpen((s) => !s)}>{button}</button>
         {open && (
           <div
-            className={`absolute mt-2 w-48 bg-white border rounded shadow-md z-40 ${
+            className={`absolute mt-2 w-48 bg-white dark:bg-surface-darkCard border rounded shadow-md z-40 ${
               align === "right" ? "right-0" : "left-0"
             }`}
           >

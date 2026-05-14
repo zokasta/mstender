@@ -1,0 +1,244 @@
+"filename", "language", "PHP", "Markdown", "JavaScript", "JSON", "CSS", "JavaScript JSX", "XML", "YAML", "Django HTML", "comment", "blank", "total"
+"z:\Projects\mstender\README.md", "Markdown", 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3
+"z:\Projects\mstender\backend\.github\workflows\issues.yml", "YAML", 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 4, 13
+"z:\Projects\mstender\backend\.github\workflows\pull-requests.yml", "YAML", 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 4, 13
+"z:\Projects\mstender\backend\.github\workflows\tests.yml", "YAML", 0, 0, 0, 0, 0, 0, 0, 36, 0, 0, 12, 48
+"z:\Projects\mstender\backend\.github\workflows\update-changelog.yml", "YAML", 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 4, 14
+"z:\Projects\mstender\backend\.styleci.yml", "YAML", 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 1, 10
+"z:\Projects\mstender\backend\CHANGELOG.md", "Markdown", 0, 96, 0, 0, 0, 0, 0, 0, 0, 0, 64, 160
+"z:\Projects\mstender\backend\README.md", "Markdown", 0, 39, 0, 0, 0, 0, 0, 0, 0, 0, 21, 60
+"z:\Projects\mstender\backend\app\Exports\InvoicesBulkExport.php", "PHP", 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 40
+"z:\Projects\mstender\backend\app\Http\Controllers\AuthController.php", "PHP", 95, 0, 0, 0, 0, 0, 0, 0, 0, 23, 28, 146
+"z:\Projects\mstender\backend\app\Http\Controllers\BankController.php", "PHP", 254, 0, 0, 0, 0, 0, 0, 0, 0, 41, 87, 382
+"z:\Projects\mstender\backend\app\Http\Controllers\Controller.php", "PHP", 5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 9
+"z:\Projects\mstender\backend\app\Http\Controllers\CustomerController.php", "PHP", 273, 0, 0, 0, 0, 0, 0, 0, 0, 26, 101, 400
+"z:\Projects\mstender\backend\app\Http\Controllers\DashboardController.php", "PHP", 242, 0, 0, 0, 0, 0, 0, 0, 0, 30, 58, 330
+"z:\Projects\mstender\backend\app\Http\Controllers\EmployeeController.php", "PHP", 721, 0, 0, 0, 0, 0, 0, 0, 0, 58, 268, 1047
+"z:\Projects\mstender\backend\app\Http\Controllers\InvoiceController.php", "PHP", 486, 0, 0, 0, 0, 0, 0, 0, 0, 63, 181, 730
+"z:\Projects\mstender\backend\app\Http\Controllers\InvoiceItemController.php", "PHP", 7, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 12
+"z:\Projects\mstender\backend\app\Http\Controllers\LeadActivityController.php", "PHP", 22, 0, 0, 0, 0, 0, 0, 0, 0, 20, 8, 50
+"z:\Projects\mstender\backend\app\Http\Controllers\LeadController.php", "PHP", 136, 0, 0, 0, 0, 0, 0, 0, 0, 0, 38, 174
+"z:\Projects\mstender\backend\app\Http\Controllers\LeadCustomValueController.php", "PHP", 22, 0, 0, 0, 0, 0, 0, 0, 0, 20, 8, 50
+"z:\Projects\mstender\backend\app\Http\Controllers\NotificationController.php", "PHP", 43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 60
+"z:\Projects\mstender\backend\app\Http\Controllers\PipelineController.php", "PHP", 44, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 56
+"z:\Projects\mstender\backend\app\Http\Controllers\PipelineStageController.php", "PHP", 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 72
+"z:\Projects\mstender\backend\app\Http\Controllers\TaxController.php", "PHP", 208, 0, 0, 0, 0, 0, 0, 0, 0, 31, 61, 300
+"z:\Projects\mstender\backend\app\Http\Controllers\TransactionController.php", "PHP", 518, 0, 0, 0, 0, 0, 0, 0, 0, 54, 194, 766
+"z:\Projects\mstender\backend\app\Http\Middlewares\CheckIfUserIsBanned.php", "PHP", 22, 0, 0, 0, 0, 0, 0, 0, 0, 6, 7, 35
+"z:\Projects\mstender\backend\app\Models\Bank.php", "PHP", 38, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 47
+"z:\Projects\mstender\backend\app\Models\Customer.php", "PHP", 66, 0, 0, 0, 0, 0, 0, 0, 0, 23, 18, 107
+"z:\Projects\mstender\backend\app\Models\Invoice.php", "PHP", 46, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 56
+"z:\Projects\mstender\backend\app\Models\InvoiceItem.php", "PHP", 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 28
+"z:\Projects\mstender\backend\app\Models\InvoiceTax.php", "PHP", 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 27
+"z:\Projects\mstender\backend\app\Models\Lead.php", "PHP", 49, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 59
+"z:\Projects\mstender\backend\app\Models\LeadActivity.php", "PHP", 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 22
+"z:\Projects\mstender\backend\app\Models\LeadNote.php", "PHP", 8, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 13
+"z:\Projects\mstender\backend\app\Models\LeadNoteComment.php", "PHP", 8, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 13
+"z:\Projects\mstender\backend\app\Models\Notification.php", "PHP", 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 49
+"z:\Projects\mstender\backend\app\Models\Pipeline.php", "PHP", 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 24
+"z:\Projects\mstender\backend\app\Models\PipelineStage.php", "PHP", 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 19
+"z:\Projects\mstender\backend\app\Models\Setting.php", "PHP", 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 45
+"z:\Projects\mstender\backend\app\Models\Tax.php", "PHP", 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 44
+"z:\Projects\mstender\backend\app\Models\Transaction.php", "PHP", 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 43
+"z:\Projects\mstender\backend\app\Models\User.php", "PHP", 73, 0, 0, 0, 0, 0, 0, 0, 0, 2, 14, 89
+"z:\Projects\mstender\backend\app\Providers\AppServiceProvider.php", "PHP", 12, 0, 0, 0, 0, 0, 0, 0, 0, 8, 5, 25
+"z:\Projects\mstender\backend\bootstrap\app.php", "PHP", 19, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 23
+"z:\Projects\mstender\backend\bootstrap\providers.php", "PHP", 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 8
+"z:\Projects\mstender\backend\composer.json", "JSON", 0, 0, 0, 89, 0, 0, 0, 0, 0, 0, 1, 90
+"z:\Projects\mstender\backend\composer.lock", "JSON", 0, 0, 0, 9583, 0, 0, 0, 0, 0, 0, 1, 9584
+"z:\Projects\mstender\backend\config\app.php", "PHP", 22, 0, 0, 0, 0, 0, 0, 0, 0, 82, 23, 127
+"z:\Projects\mstender\backend\config\auth.php", "PHP", 29, 0, 0, 0, 0, 0, 0, 0, 0, 74, 15, 118
+"z:\Projects\mstender\backend\config\cache.php", "PHP", 64, 0, 0, 0, 0, 0, 0, 0, 0, 35, 19, 118
+"z:\Projects\mstender\backend\config\cors.php", "PHP", 13, 0, 0, 0, 0, 0, 0, 0, 0, 12, 12, 37
+"z:\Projects\mstender\backend\config\database.php", "PHP", 119, 0, 0, 0, 0, 0, 0, 0, 0, 43, 23, 185
+"z:\Projects\mstender\backend\config\filesystems.php", "PHP", 36, 0, 0, 0, 0, 0, 0, 0, 0, 32, 13, 81
+"z:\Projects\mstender\backend\config\logging.php", "PHP", 79, 0, 0, 0, 0, 0, 0, 0, 0, 33, 21, 133
+"z:\Projects\mstender\backend\config\mail.php", "PHP", 57, 0, 0, 0, 0, 0, 0, 0, 0, 43, 19, 119
+"z:\Projects\mstender\backend\config\queue.php", "PHP", 65, 0, 0, 0, 0, 0, 0, 0, 0, 45, 20, 130
+"z:\Projects\mstender\backend\config\sanctum.php", "PHP", 20, 0, 0, 0, 0, 0, 0, 0, 0, 54, 14, 88
+"z:\Projects\mstender\backend\config\services.php", "PHP", 20, 0, 0, 0, 0, 0, 0, 0, 0, 11, 8, 39
+"z:\Projects\mstender\backend\config\session.php", "PHP", 23, 0, 0, 0, 0, 0, 0, 0, 0, 160, 35, 218
+"z:\Projects\mstender\backend\database\factories\BankFactory copy 2.php", "PHP", 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 30
+"z:\Projects\mstender\backend\database\factories\BankFactory copy.php", "PHP", 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 30
+"z:\Projects\mstender\backend\database\factories\BankFactory.php", "PHP", 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 30
+"z:\Projects\mstender\backend\database\factories\CustomerFactory.php", "PHP", 28, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7, 36
+"z:\Projects\mstender\backend\database\factories\InvoiceFactory.php", "PHP", 25, 0, 0, 0, 0, 0, 0, 0, 0, 3, 5, 33
+"z:\Projects\mstender\backend\database\factories\InvoiceItemFactory copy.php", "PHP", 11, 0, 0, 0, 0, 0, 0, 0, 0, 9, 4, 24
+"z:\Projects\mstender\backend\database\factories\InvoiceItemFactory.php", "PHP", 11, 0, 0, 0, 0, 0, 0, 0, 0, 9, 4, 24
+"z:\Projects\mstender\backend\database\factories\LeadActivityFactory.php", "PHP", 16, 0, 0, 0, 0, 0, 0, 0, 0, 8, 4, 28
+"z:\Projects\mstender\backend\database\factories\LeadFactory.php", "PHP", 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 25
+"z:\Projects\mstender\backend\database\factories\LeadNoteCommentFactory.php", "PHP", 12, 0, 0, 0, 0, 0, 0, 0, 0, 9, 4, 25
+"z:\Projects\mstender\backend\database\factories\LeadNoteFactory.php", "PHP", 12, 0, 0, 0, 0, 0, 0, 0, 0, 9, 4, 25
+"z:\Projects\mstender\backend\database\factories\PipelineFactory.php", "PHP", 15, 0, 0, 0, 0, 0, 0, 0, 0, 8, 4, 27
+"z:\Projects\mstender\backend\database\factories\PipelineStageFactory.php", "PHP", 16, 0, 0, 0, 0, 0, 0, 0, 0, 8, 4, 28
+"z:\Projects\mstender\backend\database\factories\SettingFactory copy.php", "PHP", 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 28
+"z:\Projects\mstender\backend\database\factories\SettingFactory.php", "PHP", 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 28
+"z:\Projects\mstender\backend\database\factories\TaxFactory copy.php", "PHP", 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 27
+"z:\Projects\mstender\backend\database\factories\TaxFactory.php", "PHP", 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 27
+"z:\Projects\mstender\backend\database\factories\TransactionFactory.php", "PHP", 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 33
+"z:\Projects\mstender\backend\database\factories\UserFactory.php", "PHP", 37, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, 47
+"z:\Projects\mstender\backend\database\migrations\0001_01_01_000000_create_users_table.php", "PHP", 58, 0, 0, 0, 0, 0, 0, 0, 0, 7, 17, 82
+"z:\Projects\mstender\backend\database\migrations\0001_01_01_000001_create_cache_table.php", "PHP", 25, 0, 0, 0, 0, 0, 0, 0, 0, 6, 5, 36
+"z:\Projects\mstender\backend\database\migrations\0001_01_01_000002_create_jobs_table.php", "PHP", 46, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 58
+"z:\Projects\mstender\backend\database\migrations\2025_10_07_045950_create_settings_table.php", "PHP", 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 31
+"z:\Projects\mstender\backend\database\migrations\2025_10_07_050743_create_notifications_table.php", "PHP", 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 35
+"z:\Projects\mstender\backend\database\migrations\2025_10_07_052156_create_taxes_table.php", "PHP", 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 32
+"z:\Projects\mstender\backend\database\migrations\2025_10_07_072930_create_banks_table.php", "PHP", 31, 0, 0, 0, 0, 0, 0, 0, 0, 5, 8, 44
+"z:\Projects\mstender\backend\database\migrations\2025_11_30_070221_create_customers_table.php", "PHP", 40, 0, 0, 0, 0, 0, 0, 0, 0, 5, 10, 55
+"z:\Projects\mstender\backend\database\migrations\2025_12_05_063158_create_invoices_table.php", "PHP", 54, 0, 0, 0, 0, 0, 0, 0, 0, 7, 12, 73
+"z:\Projects\mstender\backend\database\migrations\2025_12_05_063744_create_invoice_items_table.php", "PHP", 26, 0, 0, 0, 0, 0, 0, 0, 0, 3, 8, 37
+"z:\Projects\mstender\backend\database\migrations\2026_01_29_070235_create_invoice_taxes_table.php", "PHP", 28, 0, 0, 0, 0, 0, 0, 0, 0, 6, 11, 45
+"z:\Projects\mstender\backend\database\migrations\2026_02_11_082657_create_transactions_table.php", "PHP", 38, 0, 0, 0, 0, 0, 0, 0, 0, 7, 13, 58
+"z:\Projects\mstender\backend\database\migrations\2026_05_04_053545_create_pipelines_table.php", "PHP", 23, 0, 0, 0, 0, 0, 0, 0, 0, 6, 7, 36
+"z:\Projects\mstender\backend\database\migrations\2026_05_04_053547_create_pipeline_stages_table.php", "PHP", 23, 0, 0, 0, 0, 0, 0, 0, 0, 6, 7, 36
+"z:\Projects\mstender\backend\database\migrations\2026_05_04_136114_create_leads_table.php", "PHP", 42, 0, 0, 0, 0, 0, 0, 0, 0, 13, 11, 66
+"z:\Projects\mstender\backend\database\migrations\2026_05_04_153552_create_lead_activities_table.php", "PHP", 26, 0, 0, 0, 0, 0, 0, 0, 0, 6, 9, 41
+"z:\Projects\mstender\backend\database\migrations\2026_05_08_144823_create_personal_access_tokens_table.php", "PHP", 24, 0, 0, 0, 0, 0, 0, 0, 0, 6, 4, 34
+"z:\Projects\mstender\backend\database\migrations\2026_05_12_055529_create_lead_notes_table.php", "PHP", 27, 0, 0, 0, 0, 0, 0, 0, 0, 6, 9, 42
+"z:\Projects\mstender\backend\database\migrations\2026_05_12_055535_create_lead_note_comments_table.php", "PHP", 26, 0, 0, 0, 0, 0, 0, 0, 0, 6, 8, 40
+"z:\Projects\mstender\backend\database\seeders\DatabaseSeeder.php", "PHP", 52, 0, 0, 0, 0, 0, 0, 0, 0, 6, 12, 70
+"z:\Projects\mstender\backend\package.json", "JSON", 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 1, 18
+"z:\Projects\mstender\backend\phpunit.xml", "XML", 0, 0, 0, 0, 0, 0, 36, 0, 0, 0, 1, 37
+"z:\Projects\mstender\backend\public\index.php", "PHP", 10, 0, 0, 0, 0, 0, 0, 0, 0, 4, 7, 21
+"z:\Projects\mstender\backend\resources\css\app.css", "CSS", 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 3, 12
+"z:\Projects\mstender\backend\resources\js\app.js", "JavaScript", 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2
+"z:\Projects\mstender\backend\resources\js\bootstrap.js", "JavaScript", 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 2, 5
+"z:\Projects\mstender\backend\resources\views\welcome.blade.php", "PHP", 270, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 278
+"z:\Projects\mstender\backend\routes\api.php", "PHP", 171, 0, 0, 0, 0, 0, 0, 0, 0, 85, 43, 299
+"z:\Projects\mstender\backend\routes\console.php", "PHP", 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 9
+"z:\Projects\mstender\backend\routes\web.php", "PHP", 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 8
+"z:\Projects\mstender\backend\tests\Feature\ExampleTest.php", "PHP", 11, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 20
+"z:\Projects\mstender\backend\tests\TestCase.php", "PHP", 6, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 11
+"z:\Projects\mstender\backend\tests\Unit\ExampleTest.php", "PHP", 10, 0, 0, 0, 0, 0, 0, 0, 0, 3, 4, 17
+"z:\Projects\mstender\backend\vendor\brick\math\tools\ecs\composer.json", "JSON", 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 1, 11
+"z:\Projects\mstender\backend\vendor\brick\math\tools\ecs\ecs.php", "PHP", 24, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8, 34
+"z:\Projects\mstender\backend\vite.config.js", "JavaScript", 0, 0, 17, 0, 0, 0, 0, 0, 0, 0, 2, 19
+"z:\Projects\mstender\frontend\README.md", "Markdown", 0, 38, 0, 0, 0, 0, 0, 0, 0, 0, 33, 71
+"z:\Projects\mstender\frontend\package-lock.json", "JSON", 0, 0, 0, 18919, 0, 0, 0, 0, 0, 0, 1, 18920
+"z:\Projects\mstender\frontend\package.json", "JSON", 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 1, 64
+"z:\Projects\mstender\frontend\public\index.html", "Django HTML", 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 4, 44
+"z:\Projects\mstender\frontend\public\manifest.json", "JSON", 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 1, 26
+"z:\Projects\mstender\frontend\src\App.css", "CSS", 0, 0, 0, 0, 33, 0, 0, 0, 0, 0, 6, 39
+"z:\Projects\mstender\frontend\src\App.js", "JavaScript", 0, 0, 104, 0, 0, 0, 0, 0, 0, 18, 31, 153
+"z:\Projects\mstender\frontend\src\App.test.js", "JavaScript", 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 2, 9
+"z:\Projects\mstender\frontend\src\assets\SVG\Delete.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 1, 15
+"z:\Projects\mstender\frontend\src\assets\SVG\DragIcon.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 1, 19
+"z:\Projects\mstender\frontend\src\assets\SVG\Edit.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 1, 15
+"z:\Projects\mstender\frontend\src\assets\SVG\Eye.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 1, 15
+"z:\Projects\mstender\frontend\src\assets\SVG\EyeSlash.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 1, 16
+"z:\Projects\mstender\frontend\src\assets\SVG\Loading.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 1, 21
+"z:\Projects\mstender\frontend\src\common\NotificationToast.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 22, 0, 0, 0, 2, 3, 27
+"z:\Projects\mstender\frontend\src\common\UI\CardUI.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 1, 6
+"z:\Projects\mstender\frontend\src\components\elements\Button.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 91, 0, 0, 0, 4, 7, 102
+"z:\Projects\mstender\frontend\src\components\elements\Input.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 49, 0, 0, 0, 0, 7, 56
+"z:\Projects\mstender\frontend\src\components\elements\Select.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 41, 0, 0, 0, 0, 5, 46
+"z:\Projects\mstender\frontend\src\components\elements\SelectSearch.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 197, 0, 0, 0, 22, 33, 252
+"z:\Projects\mstender\frontend\src\components\elements\SelectSearchJson.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 102, 0, 0, 0, 14, 17, 133
+"z:\Projects\mstender\frontend\src\components\elements\Switch.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 72, 0, 0, 0, 0, 6, 78
+"z:\Projects\mstender\frontend\src\components\elements\Textarea.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 7, 72
+"z:\Projects\mstender\frontend\src\components\elements\index.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 2, 12
+"z:\Projects\mstender\frontend\src\components\layout\AdminLayout.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 3, 23
+"z:\Projects\mstender\frontend\src\components\layout\Header.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"z:\Projects\mstender\frontend\src\components\layout\Sidebar.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 225, 0, 0, 0, 57, 43, 325
+"z:\Projects\mstender\frontend\src\components\layout\Topbar.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 46, 0, 0, 0, 7, 17, 70
+"z:\Projects\mstender\frontend\src\components\notifications\Notification.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 16, 0, 0, 0, 1, 3, 20
+"z:\Projects\mstender\frontend\src\components\tables\AddButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 3, 15
+"z:\Projects\mstender\frontend\src\components\tables\AddPaymentButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 3, 17
+"z:\Projects\mstender\frontend\src\components\tables\BadgeButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 60, 0, 0, 0, 9, 11, 80
+"z:\Projects\mstender\frontend\src\components\tables\BulkAction.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 49, 0, 0, 0, 12, 5, 66
+"z:\Projects\mstender\frontend\src\components\tables\CallButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 1, 15
+"z:\Projects\mstender\frontend\src\components\tables\CloseButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 2, 14
+"z:\Projects\mstender\frontend\src\components\tables\ConfirmDialog.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 70, 0, 0, 0, 6, 10, 86
+"z:\Projects\mstender\frontend\src\components\tables\CopyButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 14, 0, 0, 0, 1, 3, 18
+"z:\Projects\mstender\frontend\src\components\tables\CopyLinkButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 28, 0, 0, 0, 2, 5, 35
+"z:\Projects\mstender\frontend\src\components\tables\CreateGroup.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 2, 16
+"z:\Projects\mstender\frontend\src\components\tables\CreateInvoiceButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 2, 16
+"z:\Projects\mstender\frontend\src\components\tables\CustomersButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 2, 16
+"z:\Projects\mstender\frontend\src\components\tables\CustomersList.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 2, 16
+"z:\Projects\mstender\frontend\src\components\tables\DeleteButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 2, 14
+"z:\Projects\mstender\frontend\src\components\tables\DetailsButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 3, 17
+"z:\Projects\mstender\frontend\src\components\tables\Dropdown.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 34, 0, 0, 0, 0, 4, 38
+"z:\Projects\mstender\frontend\src\components\tables\EditButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 2, 16
+"z:\Projects\mstender\frontend\src\components\tables\EmailButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 2, 16
+"z:\Projects\mstender\frontend\src\components\tables\Export.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 35, 0, 0, 0, 0, 2, 37
+"z:\Projects\mstender\frontend\src\components\tables\ExportDropdown.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 74, 0, 0, 0, 2, 10, 86
+"z:\Projects\mstender\frontend\src\components\tables\FilterButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 2, 13
+"z:\Projects\mstender\frontend\src\components\tables\IconButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 1, 17
+"z:\Projects\mstender\frontend\src\components\tables\ImagePreviewButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 60, 0, 0, 0, 4, 9, 73
+"z:\Projects\mstender\frontend\src\components\tables\Pagination.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 61, 0, 0, 0, 0, 4, 65
+"z:\Projects\mstender\frontend\src\components\tables\SeeInvoiceButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 14, 0, 0, 0, 1, 2, 17
+"z:\Projects\mstender\frontend\src\components\tables\SeePaymentButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 2, 16
+"z:\Projects\mstender\frontend\src\components\tables\SelectOption.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 26, 0, 0, 0, 0, 3, 29
+"z:\Projects\mstender\frontend\src\components\tables\WhatsappButton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 1, 15
+"z:\Projects\mstender\frontend\src\components\widgets\NotificationWidgets.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 227, 0, 0, 0, 12, 67, 306
+"z:\Projects\mstender\frontend\src\components\widgets\ProfileWidgets.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 115, 0, 0, 0, 0, 13, 128
+"z:\Projects\mstender\frontend\src\components\widgets\ThemeWidget.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 114, 0, 0, 0, 0, 24, 138
+"z:\Projects\mstender\frontend\src\components\widgets\TimeWidget.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 25, 0, 0, 0, 1, 7, 33
+"z:\Projects\mstender\frontend\src\context\SettingsContext.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 81, 0, 0, 0, 0, 12, 93
+"z:\Projects\mstender\frontend\src\data\SidebarMenu copy.json", "JSON", 0, 0, 0, 111, 0, 0, 0, 0, 0, 0, 3, 114
+"z:\Projects\mstender\frontend\src\data\SidebarMenu.json", "JSON", 0, 0, 0, 90, 0, 0, 0, 0, 0, 0, 10, 100
+"z:\Projects\mstender\frontend\src\data\env.js", "JavaScript", 0, 0, 17, 0, 0, 0, 0, 0, 0, 7, 9, 33
+"z:\Projects\mstender\frontend\src\data\toastCfg.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 2, 13
+"z:\Projects\mstender\frontend\src\database\Axios.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 12, 0, 0, 0, 1, 2, 15
+"z:\Projects\mstender\frontend\src\database\Context.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 6, 37
+"z:\Projects\mstender\frontend\src\database\Token.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 34, 0, 0, 0, 2, 10, 46
+"z:\Projects\mstender\frontend\src\index.css", "CSS", 0, 0, 0, 0, 65, 0, 0, 0, 0, 7, 14, 86
+"z:\Projects\mstender\frontend\src\index.js", "JavaScript", 0, 0, 30, 0, 0, 0, 0, 0, 0, 3, 8, 41
+"z:\Projects\mstender\frontend\src\logo.svg", "XML", 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1
+"z:\Projects\mstender\frontend\src\middleware\ProtectedRoute.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 8, 0, 0, 0, 4, 4, 16
+"z:\Projects\mstender\frontend\src\pages\auth\ForgotPassword.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 54, 0, 0, 0, 0, 9, 63
+"z:\Projects\mstender\frontend\src\pages\auth\Login.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 150, 0, 0, 0, 4, 16, 170
+"z:\Projects\mstender\frontend\src\pages\auth\OTP.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 1, 8
+"z:\Projects\mstender\frontend\src\pages\auth\ResetPassword.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 12, 77
+"z:\Projects\mstender\frontend\src\pages\auth\Signup.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 2, 9
+"z:\Projects\mstender\frontend\src\pages\banks\BanksList.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 418, 0, 0, 0, 30, 30, 478
+"z:\Projects\mstender\frontend\src\pages\banks\CreateBank.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 146, 0, 0, 0, 6, 18, 170
+"z:\Projects\mstender\frontend\src\pages\banks\UpdateBank.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 199, 0, 0, 0, 15, 22, 236
+"z:\Projects\mstender\frontend\src\pages\banks\data.js", "JavaScript", 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 5, 14
+"z:\Projects\mstender\frontend\src\pages\customers\CreateCustomer.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 188, 0, 0, 0, 25, 27, 240
+"z:\Projects\mstender\frontend\src\pages\customers\CustomersList.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 498, 0, 0, 0, 42, 47, 587
+"z:\Projects\mstender\frontend\src\pages\customers\UpdateCustomer.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 200, 0, 0, 0, 11, 24, 235
+"z:\Projects\mstender\frontend\src\pages\dashboard\Dashboard.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 78, 0, 0, 0, 5, 7, 90
+"z:\Projects\mstender\frontend\src\pages\dashboard\DashboardCard.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 35, 0, 0, 0, 0, 4, 39
+"z:\Projects\mstender\frontend\src\pages\dashboard\DashboardChart.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 63, 0, 0, 0, 0, 6, 69
+"z:\Projects\mstender\frontend\src\pages\employees\CreateEmployee copy.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 349, 0, 0, 0, 31, 30, 410
+"z:\Projects\mstender\frontend\src\pages\employees\CreateEmployee.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 333, 0, 0, 0, 39, 35, 407
+"z:\Projects\mstender\frontend\src\pages\employees\EmployeeList.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 595, 0, 0, 0, 35, 50, 680
+"z:\Projects\mstender\frontend\src\pages\employees\InviteEmployee.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 148, 0, 0, 0, 2, 22, 172
+"z:\Projects\mstender\frontend\src\pages\employees\UpdateEmployee.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 215, 0, 0, 0, 11, 27, 253
+"z:\Projects\mstender\frontend\src\pages\forms\Form1.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 447, 0, 0, 0, 37, 41, 525
+"z:\Projects\mstender\frontend\src\pages\invoices\CreateInvoice.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 644, 0, 0, 0, 41, 98, 783
+"z:\Projects\mstender\frontend\src\pages\invoices\InvoicesList.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 421, 0, 0, 0, 28, 43, 492
+"z:\Projects\mstender\frontend\src\pages\invoices\UpdateInvoice.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 2, 9
+"z:\Projects\mstender\frontend\src\pages\invoices\ViewInvoice.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 299, 0, 0, 0, 29, 39, 367
+"z:\Projects\mstender\frontend\src\pages\leads\CreateLead.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 168, 0, 0, 0, 10, 28, 206
+"z:\Projects\mstender\frontend\src\pages\leads\LeadDetails.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 792, 0, 0, 0, 15, 176, 983
+"z:\Projects\mstender\frontend\src\pages\leads\LeadList.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 1164, 0, 0, 0, 21, 242, 1427
+"z:\Projects\mstender\frontend\src\pages\leads\PipelineCreate.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 96, 0, 0, 0, 8, 21, 125
+"z:\Projects\mstender\frontend\src\pages\leads\PipelineList.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 216, 0, 0, 0, 12, 29, 257
+"z:\Projects\mstender\frontend\src\pages\leads\UpdateLead.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 223, 0, 0, 0, 22, 29, 274
+"z:\Projects\mstender\frontend\src\pages\notifications\Notifications.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 103, 0, 0, 0, 2, 10, 115
+"z:\Projects\mstender\frontend\src\pages\others\Maintance.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 95, 0, 0, 0, 12, 31, 138
+"z:\Projects\mstender\frontend\src\pages\others\NotFound.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 3, 33
+"z:\Projects\mstender\frontend\src\pages\others\Profile.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 242, 0, 0, 0, 9, 77, 328
+"z:\Projects\mstender\frontend\src\pages\others\Setting.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 389, 0, 0, 0, 34, 85, 508
+"z:\Projects\mstender\frontend\src\pages\taxes\CreateTax.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 123, 0, 0, 0, 1, 13, 137
+"z:\Projects\mstender\frontend\src\pages\taxes\TaxesList.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 429, 0, 0, 0, 42, 31, 502
+"z:\Projects\mstender\frontend\src\pages\taxes\UpdateTax.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 173, 0, 0, 0, 7, 20, 200
+"z:\Projects\mstender\frontend\src\pages\transactions\CreateTransaction.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 194, 0, 0, 0, 17, 31, 242
+"z:\Projects\mstender\frontend\src\pages\transactions\TransactionsList.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 320, 0, 0, 0, 23, 35, 378
+"z:\Projects\mstender\frontend\src\pages\transactions\UpdateTransaction.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 218, 0, 0, 0, 9, 35, 262
+"z:\Projects\mstender\frontend\src\popups\Delete\DeletePopUp.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 72, 0, 0, 0, 2, 7, 81
+"z:\Projects\mstender\frontend\src\popups\Edit\EditPopUp.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 91, 0, 0, 0, 0, 7, 98
+"z:\Projects\mstender\frontend\src\popups\GlobalSearchPopup.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 316, 0, 0, 0, 41, 104, 461
+"z:\Projects\mstender\frontend\src\reportWebVitals.js", "JavaScript", 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 2, 14
+"z:\Projects\mstender\frontend\src\setupTests.js", "JavaScript", 0, 0, 1, 0, 0, 0, 0, 0, 0, 4, 1, 6
+"z:\Projects\mstender\frontend\src\utils\BanManager.js", "JavaScript", 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 2, 9
+"z:\Projects\mstender\frontend\src\utils\Permission.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 9, 0, 0, 0, 5, 5, 19
+"z:\Projects\mstender\frontend\src\utils\currencyFormatter.js", "JavaScript", 0, 0, 17, 0, 0, 0, 0, 0, 0, 1, 2, 20
+"z:\Projects\mstender\frontend\src\utils\errors.js", "JavaScript", 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 3, 17
+"z:\Projects\mstender\frontend\src\utils\hasPermission.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 23, 0, 0, 0, 7, 15, 45
+"z:\Projects\mstender\frontend\src\utils\money.js", "JavaScript", 0, 0, 13, 0, 0, 0, 0, 0, 0, 1, 9, 23
+"z:\Projects\mstender\frontend\src\utils\numberFormatter.js", "JavaScript", 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 2, 9
+"z:\Projects\mstender\frontend\tailwind.config.js", "JavaScript", 0, 0, 95, 0, 0, 0, 0, 0, 0, 1, 10, 106
+"Total", "-", 5863, 175, 354, 28907, 107, 13508, 37, 73, 40, 2203, 4163, 55430

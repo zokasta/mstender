@@ -24,7 +24,7 @@ export default function ImagePreviewButton({ imageUrl }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="w-8 h-8 bg-orange-500 text-white rounded flex items-center justify-center hover:bg-orange-600 transition"
+        className="w-8 h-8 bg-primary-500 text-white rounded flex items-center justify-center hover:bg-primary-600 transition"
       >
         <FaImage className="scale-110" />
       </button>
@@ -45,7 +45,7 @@ export default function ImagePreviewButton({ imageUrl }) {
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative bg-white rounded-xl shadow-lg p-4 max-w-3xl w-full mx-4"
+              className="relative bg-white dark:bg-surface-darkCard rounded-xl shadow-lg p-4 max-w-3xl w-full mx-4"
             >
               {/* Close button */}
               <button

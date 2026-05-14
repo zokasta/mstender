@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
 
-import { FaPlus } from "react-icons/fa";
+import { Plus } from "lucide-react";
 
-export default function AddButton({ path, title }) {
+export default function AddButton({ path="", title="", onClick = () => {} }) {
   return (
     <Link to={path}>
-      <button className="inline-flex items-center gap-2 px-4 py-2 bg-primary-500 text-white rounded-md shadow-sm hover:bg-primary-600 transition">
-        <FaPlus />
-        {title}
+      <button
+        onClick={() => onClick(true)}
+        className="h-12 px-5 rounded-2xl bg-primary-500 hover:bg-primary-600 text-white shadow-lg shadow-primary-500/20 transition-all flex items-center gap-3 font-semibold"
+      >
+        <Plus size={17} />
+
+        <span className="text-sm">{title}</span>
       </button>
     </Link>
   );

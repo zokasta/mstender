@@ -17,8 +17,18 @@ class Pipeline extends Model
         'is_active'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function stages()
     {
         return $this->hasMany(PipelineStage::class);
+    }
+
+    public function leads()
+    {
+        return $this->hasMany(Lead::class);
     }
 }

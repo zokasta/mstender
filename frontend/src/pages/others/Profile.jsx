@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
+
 import Input from "../../components/elements/Input";
+
 import { FaCamera, FaSave, FaKey } from "react-icons/fa";
+
 import { toast, ToastContainer } from "react-toastify";
+
 import Token from "../../database/Token";
+
 import env from "../../data/env";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
+
   const [imageFile, setImageFile] = useState(null);
+
   const [imgPreview, setImgPreview] = useState(null);
 
   const [loading, setLoading] = useState(false);
+
   const [passwordLoading, setPasswordLoading] = useState(false);
 
   const [passwords, setPasswords] = useState({
@@ -19,11 +27,9 @@ export default function Profile() {
     new_password_confirmation: "",
   });
 
-  /* ================================
-     Load User
-  ================================= */
   useEffect(() => {
     const raw = localStorage.getItem("user");
+
     if (!raw) return;
 
     try {
@@ -33,11 +39,9 @@ export default function Profile() {
     }
   }, []);
 
-  /* ================================
-     Get Image URL
-  ================================= */
   const getProfileImage = () => {
     if (imgPreview) return imgPreview;
+
     if (!user?.profile_image) return env.DEFAULT_PROFILE;
 
     if (user.profile_image.startsWith("http")) {
@@ -47,33 +51,34 @@ export default function Profile() {
     return `${env.IMAGE_PATH}${user.profile_image.replace(/^\/+/, "")}`;
   };
 
-  /* ================================
-     Handle Image Change
-  ================================= */
   const handleProfilePicChange = (e) => {
     const file = e.target.files?.[0];
+
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-      toast.error("Please select valid image file");
+      toast.error("Please select valid image");
+
       return;
     }
 
     setImageFile(file);
+
     setImgPreview(URL.createObjectURL(file));
   };
 
-  /* ================================
-     Save Profile
-  ================================= */
   const handleSaveProfile = async () => {
     try {
       setLoading(true);
 
       const formData = new FormData();
+
       formData.append("name", user.name);
+
       formData.append("username", user.username);
+
       formData.append("email", user.email);
+
       formData.append("phone", user.phone || "");
 
       if (imageFile) {
@@ -83,26 +88,25 @@ export default function Profile() {
       const res = await Token.post("/user/profile", formData);
 
       localStorage.setItem("user", JSON.stringify(res.data.user));
+
       setUser(res.data.user);
 
       setImageFile(null);
+
       setImgPreview(null);
 
-      toast.success("Profile updated successfully 🎉");
+      toast.success("Profile updated successfully");
     } catch (err) {
-      console.log(err.response?.data);
       toast.error(err.response?.data?.message || "Update failed");
     } finally {
       setLoading(false);
     }
   };
 
-  /* ================================
-     Change Password
-  ================================= */
   const handleChangePassword = async () => {
     if (passwords.new_password !== passwords.new_password_confirmation) {
       toast.error("Passwords do not match");
+
       return;
     }
 
@@ -111,7 +115,7 @@ export default function Profile() {
 
       await Token.post("/user/change-password", passwords);
 
-      toast.success("Password changed successfully ✅");
+      toast.success("Password updated");
 
       setPasswords({
         current_password: "",
@@ -126,106 +130,171 @@ export default function Profile() {
   };
 
   if (!user) {
-    return <div className="text-center py-20">Loading...</div>;
+    return (
+      <div className="py-32 flex items-center justify-center text-gray-500 dark:text-gray-400">
+        Loading profile...
+      </div>
+    );
   }
 
   return (
     <div className="space-y-6">
       <ToastContainer position="top-right" autoClose={2500} />
-      <h1 className="text-2xl font-bold">Profile</h1>
 
-      {/* ================= Account Info ================= */}
-      <div className="bg-white shadow-md rounded-lg p-6 border space-y-4">
-        <div className="flex items-center gap-6">
-          {/* Profile Image */}
-          <div className="relative">
+      {/* HEADER */}
+
+      <div>
+        <h1 className="text-3xl font-black text-gray-800 dark:text-white">
+          My Profile
+        </h1>
+
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          Manage your personal information and security settings
+        </p>
+      </div>
+
+      {/* PROFILE CARD */}
+
+      <div className="bg-white dark:bg-surface-darkCard border border-surface-border dark:border-surface-darkBorder rounded-[28px] shadow-sm overflow-hidden">
+        
+        {/* TOP */}
+
+        <div className="h-32 bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700 relative" />
+
+        {/* CONTENT */}
+
+        <div className="px-8 pb-8">
+          {/* IMAGE */}
+
+          <div className="relative -mt-14 w-fit">
             <img
               src={getProfileImage()}
               alt="Profile"
-              className="w-24 h-24 rounded-full object-cover border"
+              className="w-28 h-28 rounded-[28px] object-cover border-4 border-white dark:border-surface-darkCard shadow-xl"
               onError={(e) => {
                 e.currentTarget.src = env.DEFAULT_PROFILE;
               }}
             />
 
-            <label className="absolute bottom-0 right-0 bg-primary-500 p-2 rounded-full cursor-pointer text-white hover:bg-primary-600">
+            <label className="absolute bottom-2 right-2 w-10 h-10 rounded-2xl bg-primary-500 hover:bg-primary-600 text-white flex items-center justify-center cursor-pointer shadow-lg transition-all">
               <input
                 type="file"
                 accept="image/*"
                 className="hidden"
                 onChange={handleProfilePicChange}
               />
-              <FaCamera />
+
+              <FaCamera size={14} />
             </label>
           </div>
 
-          {/* User Info */}
-          <div className="flex-1 grid grid-cols-2 gap-4">
+          {/* INFO */}
+
+          <div className="mt-6">
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
+              {user.name}
+            </h2>
+
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              {user.email}
+            </p>
+          </div>
+
+          {/* FORM */}
+
+          <div className="grid grid-cols-2 gap-5 mt-8">
             <Input
-              label="Name"
+              label="Full Name"
               value={user.name || ""}
               onChange={(v) => setUser({ ...user, name: v })}
             />
+
             <Input
               label="Username"
               value={user.username || ""}
               onChange={(v) => setUser({ ...user, username: v })}
             />
+
             <Input
-              label="Email"
+              label="Email Address"
               value={user.email || ""}
               onChange={(v) => setUser({ ...user, email: v })}
             />
+
             <Input
-              label="Phone"
+              label="Phone Number"
               value={user.phone || ""}
               onChange={(v) => setUser({ ...user, phone: v })}
             />
           </div>
-        </div>
 
-        {/* Save Button */}
-        <button
-          disabled={loading}
-          onClick={handleSaveProfile}
-          className={`px-4 py-2 rounded flex items-center gap-2 text-white ${
-            loading
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-primary-500 hover:bg-primary-600"
-          }`}
-        >
-          {loading ? (
-            "Saving..."
-          ) : (
-            <>
-              <FaSave /> Save Profile
-            </>
-          )}
-        </button>
+          {/* BUTTON */}
+
+          <div className="mt-8">
+            <button
+              disabled={loading}
+              onClick={handleSaveProfile}
+              className={`h-12 px-6 rounded-2xl text-white font-semibold flex items-center gap-3 transition-all shadow-lg ${
+                loading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-primary-500 hover:bg-primary-600 shadow-primary-500/20"
+              }`}
+            >
+              <FaSave />
+
+              {loading ? "Saving..." : "Save Profile"}
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* ================= Change Password ================= */}
-      <div className="bg-white shadow-md rounded-lg p-6 border space-y-4">
-        <h2 className="font-semibold">Change Password</h2>
+      {/* PASSWORD */}
 
-        <div className="grid grid-cols-3 gap-4">
+      <div className="bg-white dark:bg-surface-darkCard border border-surface-border dark:border-surface-darkBorder rounded-[28px] shadow-sm p-8">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-12 h-12 rounded-2xl bg-primary-50 dark:bg-surface-darkMuted text-primary-500 flex items-center justify-center">
+            <FaKey />
+          </div>
+
+          <div>
+            <h2 className="text-xl font-bold text-gray-800 dark:text-white">
+              Change Password
+            </h2>
+
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              Update your account password securely
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-3 gap-5">
           <Input
             type="password"
-            placeholder="Current Password"
+            label="Current Password"
             value={passwords.current_password}
             onChange={(v) =>
-              setPasswords({ ...passwords, current_password: v })
+              setPasswords({
+                ...passwords,
+                current_password: v,
+              })
             }
           />
+
           <Input
             type="password"
-            placeholder="New Password"
+            label="New Password"
             value={passwords.new_password}
-            onChange={(v) => setPasswords({ ...passwords, new_password: v })}
+            onChange={(v) =>
+              setPasswords({
+                ...passwords,
+                new_password: v,
+              })
+            }
           />
+
           <Input
             type="password"
-            placeholder="Confirm Password"
+            label="Confirm Password"
             value={passwords.new_password_confirmation}
             onChange={(v) =>
               setPasswords({
@@ -236,23 +305,23 @@ export default function Profile() {
           />
         </div>
 
-        <button
-          disabled={passwordLoading}
-          onClick={handleChangePassword}
-          className={`px-4 py-2 rounded flex items-center gap-2 text-white ${
-            passwordLoading
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-primary-500 hover:bg-primary-600"
-          }`}
-        >
-          {passwordLoading ? (
-            "Updating..."
-          ) : (
-            <>
-              <FaKey /> Update Password
-            </>
-          )}
-        </button>
+        <div className="mt-8">
+          <button
+            disabled={passwordLoading}
+            onClick={handleChangePassword}
+            className={`h-12 px-6 rounded-2xl text-white font-semibold flex items-center gap-3 transition-all shadow-lg ${
+              passwordLoading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-primary-500 hover:bg-primary-600 shadow-primary-500/20"
+            }`}
+          >
+            <FaKey />
+
+            {passwordLoading
+              ? "Updating..."
+              : "Update Password"}
+          </button>
+        </div>
       </div>
     </div>
   );

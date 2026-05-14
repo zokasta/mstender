@@ -87,7 +87,7 @@ export default function ProfileWidgets() {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-3 w-56 bg-white border border-gray-200 shadow-lg rounded-lg z-50">
+        <div className="absolute right-0 mt-3 w-56 bg-white dark:bg-surface-darkCard border border-gray-200 dark:border-surface-darkBorder shadow-lg rounded-lg z-50">
           <div className="flex items-center gap-3 p-3 border-b">
             <img
               src={`${env.IMAGE_PATH}${user.profile_image}` || Image1}
@@ -97,7 +97,7 @@ export default function ProfileWidgets() {
             />
             <div>
               <p className="font-semibold text-gray-700">{user.name}</p>
-              <p className="text-xs text-gray-500">{user.email}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{user.email}</p>
             </div>
           </div>
           <ul className="text-sm text-gray-700">

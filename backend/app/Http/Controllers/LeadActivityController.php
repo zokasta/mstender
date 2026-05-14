@@ -2,48 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\LeadActivity;
+use App\Http\Controllers\Controller;
 
 class LeadActivityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $activity = LeadActivity::create([
+            'lead_id' => $request->lead_id,
+            'description' => $request->description,
+            'activity_type' => $request->activity_type,
+            'outcome' => $request->outcome,
+            'next_action' => $request->next_action,
+            'activity_time' => now(),
+            'next_followup_at' => $request->next_followup_at,
+            'created_by' => $request->user()->id,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'data' => $activity,
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function destroy($id)
     {
-        //
-    }
+        LeadActivity::findOrFail($id)->delete();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json([
+            'success' => true,
+        ]);
     }
 }

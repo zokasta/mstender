@@ -1,14 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  darkMode: "class",
+
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
 
   theme: {
     extend: {
       colors: {
         primary: {
-          50:  "#e8eefc",
+          50: "#e8eefc",
           100: "#c7d6f7",
           200: "#a2bbed",
           300: "#7a9fe3",
@@ -16,18 +16,18 @@ module.exports = {
           500: "#2f69ca",
           600: "#1d4fa8",
           700: "#10377f",
-          800: "#081c4e", // main
+          800: "#081c4e",
           900: "#051230",
         },
 
         secondary: {
-          50:  "#f5f8e8",
+          50: "#f5f8e8",
           100: "#e7efc4",
           200: "#d6e398",
           300: "#c2d56a",
           400: "#aec742",
           500: "#97b126",
-          600: "#7f9814", // main
+          600: "#7f9814",
           700: "#64780f",
           800: "#4a590b",
           900: "#313c07",
@@ -84,9 +84,23 @@ module.exports = {
           800: "#93370d",
           900: "#7a2e0e",
         },
+
+        surface: {
+          light: "#f6f8fb",
+          soft: "#ffffff",
+          muted: "#eef2f7",
+          border: "#e2e8f0",
+          gray: "#94a3b8",
+        
+          dark: "#0b1120",
+          darkSoft: "#111827",
+          darkMuted: "#1e293b",
+          darkBorder: "#243041",
+          darkCard: "#172033",
+        },
       },
     },
   },
 
   plugins: [],
-}
+};

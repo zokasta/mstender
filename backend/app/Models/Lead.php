@@ -17,6 +17,12 @@ class Lead extends Model
         'email',
         'phone',
         'details',
+        'status',
+        'source',
+        'website',
+        'address',
+        'description',
+        'image',
         'assigned_to',
         'assigned_by',
         'assigned_at',
@@ -43,5 +49,29 @@ class Lead extends Model
     public function deleter()
     {
         return $this->belongsTo(User::class, 'deleted_by');
+    }
+
+    public function notes()
+    {
+        return $this->hasMany(LeadNote::class);
+    }
+    public function pipeline()
+    {
+        return $this->belongsTo(Pipeline::class);
+    }
+
+    public function stage()
+    {
+        return $this->belongsTo(PipelineStage::class, 'stage_id');
+    }
+
+    public function activities()
+    {
+        return $this->hasMany(LeadActivity::class);
+    }
+
+    public function assignedUser()
+    {
+        return $this->belongsTo(User::class, 'assigned_to');
     }
 }

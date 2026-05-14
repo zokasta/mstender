@@ -20,27 +20,52 @@ input::-ms-reveal,
 input::-ms-clear {
   display: none;
 }
+/* =========================================
+   CUSTOM SCROLLBAR
+========================================= */
 
-.scroll-bar::-webkit-scrollbar {
-  height: 7px;
-  width: 7px;
+.scroll-bar::-webkit-scrollbar,
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }
 
-.scroll-bar::-webkit-scrollbar-track {
-  background: #fff;
-  border-radius: 20px;
-}
-.scroll-bar::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 20px;
+.scroll-bar::-webkit-scrollbar-track,
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.scroll-bar::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: all 0.2s ease;
 }
 
+.scroll-bar::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* DARK MODE */
+
+.dark .scroll-bar::-webkit-scrollbar-thumb,
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.dark .scroll-bar::-webkit-scrollbar-thumb:hover,
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;

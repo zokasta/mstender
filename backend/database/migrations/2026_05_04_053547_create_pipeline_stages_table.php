@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('color')->nullable();
             $table->integer('position')->default(0);
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('deleted_by')->nullable()->constrained('users')->nullOnDelete();
         
             $table->boolean('is_default')->default(false);
         

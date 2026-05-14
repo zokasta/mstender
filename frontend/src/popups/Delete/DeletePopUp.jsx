@@ -48,7 +48,7 @@ export default function DeletePopup({
       >
         {/* Modal */}
         <div
-          className={`bg-white max-w-[400px] w-full rounded-md shadow-2xl p-5 transform transition-transform duration-200 ${
+          className={`bg-white dark:bg-surface-darkCard max-w-[400px] w-full rounded-md shadow-2xl p-5 transform transition-transform duration-200 ${
             open ? "scale-100 opacity-100" : "scale-90 opacity-0"
           }`}
           onClick={(e) => e.stopPropagation()}

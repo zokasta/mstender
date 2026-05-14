@@ -268,6 +268,7 @@ class CustomerController extends Controller
 
                 'dob' => [
                     'sometimes',
+                    'nullable',
                     'date'
                 ],
 
@@ -287,6 +288,12 @@ class CustomerController extends Controller
                     'sometimes'
                 ],
 
+                'gstin' => [
+                    'sometimes'
+                ],
+                'company_name' => [
+                    'sometimes'
+                ],
                 'hometown' => [
                     'sometimes'
                 ],

@@ -228,9 +228,9 @@ export default function CreateCustomer() {
     if (!group) {
       // If server returned that token invalid / group not accessible
       return (
-        <div className="flex items-center justify-center h-screen p-4 bg-[#f1f1f1]">
-          <div className="bg-white p-8 rounded shadow-md max-w-xl text-center">
-            <h2 className="text-2xl font-bold text-orange-500">
+        <div className="flex items-center justify-center h-screen p-4 bg-surface-muted dark:bg-surface-darkMuted">
+          <div className="bg-white dark:bg-surface-darkCard p-8 rounded shadow-md max-w-xl text-center">
+            <h2 className="text-2xl font-bold text-primary-500">
               Invalid or expired link
             </h2>
             <p className="mt-3 text-gray-700">
@@ -240,7 +240,7 @@ export default function CreateCustomer() {
             <div className="mt-6">
               <Button
                 title="Go back"
-                theme="orange"
+                theme="primary"
                 onClick={() => navigate("/")}
               />
             </div>
@@ -251,9 +251,9 @@ export default function CreateCustomer() {
 
   if (loadingMain === "error") {
     return (
-      <div className="flex items-center justify-center h-screen p-4 bg-[#f1f1f1]">
-        <div className="bg-white p-8 rounded shadow-md max-w-xl text-center">
-          <h2 className="text-2xl font-bold text-orange-500">
+      <div className="flex items-center justify-center h-screen p-4 bg-surface-muted dark:bg-surface-darkMuted">
+        <div className="bg-white dark:bg-surface-darkCard p-8 rounded shadow-md max-w-xl text-center">
+          <h2 className="text-2xl font-bold text-primary-500">
             Registration Not Available
           </h2>
 
@@ -265,7 +265,7 @@ export default function CreateCustomer() {
           <div className="mt-6">
             <Button
               title="Go back"
-              theme="orange"
+              theme="primary"
               onClick={() => navigate("/")}
             />
           </div>
@@ -279,10 +279,10 @@ export default function CreateCustomer() {
     const out = submittedResponse;
     return (
       <div className="flex items-center justify-center bg-[#e4e3e3] h-screen">
-        <div className="bg-white p-6 rounded-md shadow-md max-w-2xl mx-auto">
+        <div className="bg-white dark:bg-surface-darkCard p-6 rounded-md shadow-md max-w-2xl mx-auto">
           <h1 className="text-3xl font-bold">
             Thank you{" "}
-            <span className="text-orange-500">{out.data?.name ?? ""}</span>
+            <span className="text-primary-500">{out.data?.name ?? ""}</span>
           </h1>
           <p className="mt-3">
             Your application has been received. We will contact you with
@@ -292,18 +292,18 @@ export default function CreateCustomer() {
           <div className="mt-4">
             <p>
               <strong>Customer ID:</strong>{" "}
-              <span className="text-orange-500">{out.data?.id ?? "—"}</span>
+              <span className="text-primary-500">{out.data?.id ?? "—"}</span>
             </p>
             <p>
               <strong>Contact:</strong>{" "}
-              <span className="text-orange-500">{out.data?.phone ?? "—"}</span>
+              <span className="text-primary-500">{out.data?.phone ?? "—"}</span>
             </p>
           </div>
 
           <div className="mt-6">
             <Button
               title="Add more person details"
-              theme="orange"
+              theme="primary"
               onClick={() => {
                 localStorage.removeItem("group_token");
                 setSubmittedResponse(true);
@@ -330,7 +330,7 @@ export default function CreateCustomer() {
     <div className="bg-[#e4e3e3] min-h-screen flex justify-center px-4 py-10">
       <ToastContainer {...toastCfg} />
       <div className="max-w-3xl w-full">
-        <div className="bg-orange-500 text-white rounded-t-lg px-6 py-4 shadow">
+        <div className="bg-primary-500 text-white rounded-t-lg px-6 py-4 shadow">
           <h1 className="text-2xl font-bold">
             {group?.trip_name ?? "Join Group"}
           </h1>
@@ -351,7 +351,7 @@ export default function CreateCustomer() {
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-b-lg shadow p-6 border border-t-0 space-y-6"
+          className="bg-white dark:bg-surface-darkCard rounded-b-lg shadow p-6 border border-t-0 space-y-6"
           encType="multipart/form-data"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -388,10 +388,10 @@ export default function CreateCustomer() {
               <select
                 value={form.gender}
                 onChange={(e) => handleFieldChange("gender", e.target.value)}
-                className={`w-full h-10 bg-[#f4f6f8] border rounded-sm outline-none px-3 ${
+                className={`w-full h-10 bg-surface-light dark:bg-surface-dark border rounded-sm outline-none px-3 ${
                   errors.gender
                     ? "border-red-500"
-                    : "border-gray-300 focus:border-orange-500"
+                    : "border-gray-300 focus:border-primary-500"
                 }`}
               >
                 <option value="none">---- Select Gender ----</option>
@@ -438,10 +438,10 @@ export default function CreateCustomer() {
               <select
                 value={form.pickup_id}
                 onChange={(e) => handleFieldChange("pickup_id", e.target.value)}
-                className={`w-full h-10 bg-[#f4f6f8] border rounded-sm outline-none px-3 ${
+                className={`w-full h-10 f4f6f8] border rounded-sm outline-none px-3 ${
                   errors.pickup_id
                     ? "border-red-500"
-                    : "border-gray-300 focus:border-orange-500"
+                    : "border-gray-300 focus:border-primary-500"
                 }`}
               >
                 <option value="">-- Select Pickup --</option>
@@ -465,7 +465,7 @@ export default function CreateCustomer() {
               type="file"
               accept=".jpg,.jpeg,.png,.pdf"
               onChange={handleFile}
-              className="block w-full text-sm text-gray-700 bg-[#f4f6f8] border rounded-sm px-3 py-2"
+              className="block w-full text-sm text-gray-700 bg-surface-light dark:bg-surface-dark border rounded-sm px-3 py-2"
             />
             {errors.identity_image && (
               <p className="text-xs text-red-500 mt-1">
@@ -513,7 +513,7 @@ export default function CreateCustomer() {
             <Button
               title={loadingSubmit ? "Submitting..." : "Submit"}
               isLoading={loadingSubmit}
-              theme="orange"
+              theme="primary"
               onClick={handleSubmit}
             />
           </div>

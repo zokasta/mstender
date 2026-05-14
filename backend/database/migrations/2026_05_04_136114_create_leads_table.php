@@ -21,22 +21,24 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('company')->nullable();
             $table->string('gstin')->nullable();
+            $table->string('website')->nullable();
+            $table->string('source')->nullable();
+            $table->string('image')->nullable();
+            $table->text('address')->nullable();
+            $table->text('description')->nullable();
 
             // PIPELINE SYSTEM (CORE)
             $table->foreignId('pipeline_id')->constrained()->cascadeOnDelete();
-
             $table->foreignId('stage_id')->nullable()->constrained('pipeline_stages')->nullOnDelete();
+            $table->integer('position')->default(0);
 
             // BUSINESS DATA
             $table->decimal('value', 12, 2)->nullable(); // deal value
-            $table->enum('priority', ['hot', 'warm', 'cold'])->default('cold');
-            $table->string('source')->nullable(); // web, referral, etc.
+            $table->enum('status', ['hot', 'warm', 'cold'])->default('warm');
 
             // ASSIGNMENT
             $table->foreignId('assigned_to')->nullable()->constrained('users')->nullOnDelete();
-
             $table->foreignId('assigned_by')->nullable()->constrained('users')->nullOnDelete();
-
             $table->timestamp('assigned_at')->nullable()->nullOnDelete();
 
             // FLEXIBLE DATA (CUSTOM FIELDS SUPPORT)

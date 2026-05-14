@@ -15,16 +15,19 @@ return new class extends Migration
             $table->id();
         
             $table->foreignId('lead_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('activity_type_id')->constrained('lead_activity_types');
-        
+            
             $table->text('description')->nullable();
+            $table->string('activity_type')->default('followup');
             $table->string('outcome')->nullable();
             $table->string('next_action')->nullable();
         
             $table->timestamp('activity_time')->nullable();
             $table->timestamp('next_followup_at')->nullable();
         
-            $table->foreignId('created_by')->nullable()->constrained('users');
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('deleted_by')->nullable()->constrained('users')->nullOnDelete();
+        
         
             $table->timestamps();
         });

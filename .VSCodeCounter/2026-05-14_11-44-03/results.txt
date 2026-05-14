@@ -1,0 +1,357 @@
+Date : 2026-05-14 11:44:03
+Directory : z:\Projects\mstender
+Total : 252 files,  52068 codes, 2966 comments, 6174 blanks, all 61208 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| JSON           |          9 |     28,907 |          0 |         20 |     28,927 |
+| JavaScript JSX |        113 |     16,390 |      1,409 |      3,918 |     21,717 |
+| PHP            |        100 |      6,086 |      1,533 |      2,004 |      9,623 |
+| JavaScript     |         15 |        253 |         17 |         60 |        330 |
+| Markdown       |          4 |        175 |          0 |        119 |        294 |
+| CSS            |          3 |        107 |          7 |         23 |        137 |
+| YAML           |          5 |         73 |          0 |         25 |         98 |
+| Django HTML    |          1 |         40 |          0 |          4 |         44 |
+| XML            |          2 |         37 |          0 |          1 |         38 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                       | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                          |        252 |     52,068 |      2,966 |      6,174 |     61,208 |
+| . (Files)                                                                                                  |          1 |          2 |          0 |          1 |          3 |
+| backend                                                                                                    |        116 |     16,059 |      1,533 |      2,127 |     19,719 |
+| backend (Files)                                                                                            |          8 |      9,886 |          0 |         92 |      9,978 |
+| backend\.github                                                                                            |          4 |         64 |          0 |         24 |         88 |
+| backend\.github\workflows                                                                                  |          4 |         64 |          0 |         24 |         88 |
+| backend\app                                                                                                |         38 |      3,949 |        619 |      1,410 |      5,978 |
+| backend\app\Exports                                                                                        |          1 |         26 |          0 |         14 |         40 |
+| backend\app\Helpers                                                                                        |          1 |         17 |          0 |          4 |         21 |
+| backend\app\Http                                                                                           |         19 |      3,332 |        584 |      1,246 |      5,162 |
+| backend\app\Http\Controllers                                                                               |         18 |      3,310 |        578 |      1,239 |      5,127 |
+| backend\app\Http\Middlewares                                                                               |          1 |         22 |          6 |          7 |         35 |
+| backend\app\Models                                                                                         |         16 |        562 |         27 |        141 |        730 |
+| backend\app\Providers                                                                                      |          1 |         12 |          8 |          5 |         25 |
+| backend\bootstrap                                                                                          |          2 |         24 |          1 |          6 |         31 |
+| backend\config                                                                                             |         12 |        547 |        624 |        222 |      1,393 |
+| backend\database                                                                                           |         39 |      1,059 |        175 |        273 |      1,507 |
+| backend\database\factories                                                                                 |         19 |        392 |         68 |         95 |        555 |
+| backend\database\migrations                                                                                |         19 |        615 |        101 |        166 |        882 |
+| backend\database\seeders                                                                                   |          1 |         52 |          6 |         12 |         70 |
+| backend\public                                                                                             |          1 |         10 |          4 |          7 |         21 |
+| backend\resources                                                                                          |          4 |        283 |          0 |         14 |        297 |
+| backend\resources\css                                                                                      |          1 |          9 |          0 |          3 |         12 |
+| backend\resources\js                                                                                       |          2 |          4 |          0 |          3 |          7 |
+| backend\resources\views                                                                                    |          1 |        270 |          0 |          8 |        278 |
+| backend\routes                                                                                             |          3 |        176 |        100 |         57 |        333 |
+| backend\tests                                                                                              |          3 |         27 |          8 |         13 |         48 |
+| backend\tests (Files)                                                                                      |          1 |          6 |          1 |          4 |         11 |
+| backend\tests\Feature                                                                                      |          1 |         11 |          4 |          5 |         20 |
+| backend\tests\Unit                                                                                         |          1 |         10 |          3 |          4 |         17 |
+| backend\vendor                                                                                             |          2 |         34 |          2 |          9 |         45 |
+| backend\vendor\brick                                                                                       |          2 |         34 |          2 |          9 |         45 |
+| backend\vendor\brick\math                                                                                  |          2 |         34 |          2 |          9 |         45 |
+| backend\vendor\brick\math\tools                                                                            |          2 |         34 |          2 |          9 |         45 |
+| backend\vendor\brick\math\tools\ecs                                                                        |          2 |         34 |          2 |          9 |         45 |
+| frontend                                                                                                   |        135 |     36,007 |      1,433 |      4,046 |     41,486 |
+| frontend (Files)                                                                                           |          4 |     19,115 |          1 |         45 |     19,161 |
+| frontend\public                                                                                            |          2 |         65 |          0 |          5 |         70 |
+| frontend\src                                                                                               |        129 |     16,827 |      1,432 |      3,996 |     22,255 |
+| frontend\src (Files)                                                                                       |          8 |        244 |         46 |         64 |        354 |
+| frontend\src\assets                                                                                        |          6 |         95 |          0 |          6 |        101 |
+| frontend\src\assets\SVG                                                                                    |          6 |         95 |          0 |          6 |        101 |
+| frontend\src\common                                                                                        |          2 |         27 |          2 |          4 |         33 |
+| frontend\src\common (Files)                                                                                |          1 |         22 |          2 |          3 |         27 |
+| frontend\src\common\UI                                                                                     |          1 |          5 |          0 |          1 |          6 |
+| frontend\src\components                                                                                    |         46 |      2,549 |        247 |        562 |      3,358 |
+| frontend\src\components\elements                                                                           |          8 |        767 |         63 |        163 |        993 |
+| frontend\src\components\layout                                                                             |          4 |        282 |         74 |         63 |        419 |
+| frontend\src\components\notifications                                                                      |          1 |         16 |          1 |          3 |         20 |
+| frontend\src\components\tables                                                                             |         28 |        960 |         77 |        212 |      1,249 |
+| frontend\src\components\widgets                                                                            |          4 |        481 |         13 |        111 |        605 |
+| frontend\src\components\wrappers                                                                           |          1 |         43 |         19 |         10 |         72 |
+| frontend\src\context                                                                                       |          1 |         81 |          0 |         12 |         93 |
+| frontend\src\data                                                                                          |          4 |        229 |          7 |         24 |        260 |
+| frontend\src\database                                                                                      |          3 |         77 |          3 |         18 |         98 |
+| frontend\src\middleware                                                                                    |          1 |          8 |          4 |          4 |         16 |
+| frontend\src\pages                                                                                         |         48 |     12,948 |      1,066 |      3,146 |     17,160 |
+| frontend\src\pages\auth                                                                                    |          5 |        287 |          4 |         41 |        332 |
+| frontend\src\pages\banks                                                                                   |          4 |        958 |         96 |        296 |      1,350 |
+| frontend\src\pages\customers                                                                               |          3 |      1,085 |        127 |        316 |      1,528 |
+| frontend\src\pages\dashboard                                                                               |          3 |        384 |         42 |         88 |        514 |
+| frontend\src\pages\employees                                                                               |          5 |      1,848 |        141 |        455 |      2,444 |
+| frontend\src\pages\forms                                                                                   |          1 |        447 |         37 |         41 |        525 |
+| frontend\src\pages\invoices                                                                                |          4 |      1,469 |        126 |        294 |      1,889 |
+| frontend\src\pages\leads                                                                                   |         12 |      3,787 |        248 |        893 |      4,928 |
+| frontend\src\pages\notifications                                                                           |          1 |        103 |          2 |         10 |        115 |
+| frontend\src\pages\others                                                                                  |          4 |        756 |         55 |        196 |      1,007 |
+| frontend\src\pages\taxes                                                                                   |          3 |        906 |        102 |        271 |      1,279 |
+| frontend\src\pages\transactions                                                                            |          3 |        918 |         86 |        245 |      1,249 |
+| frontend\src\popups                                                                                        |          3 |        479 |         43 |        118 |        640 |
+| frontend\src\popups (Files)                                                                                |          1 |        316 |         41 |        104 |        461 |
+| frontend\src\popups\Delete                                                                                 |          1 |         72 |          2 |          7 |         81 |
+| frontend\src\popups\Edit                                                                                   |          1 |         91 |          0 |          7 |         98 |
+| frontend\src\utils                                                                                         |          7 |         90 |         14 |         38 |        142 |
++------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                                   | language       | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| z:\Projects\mstender\README.md                                                                             | Markdown       |          2 |          0 |          1 |          3 |
+| z:\Projects\mstender\backend\.github\workflows\issues.yml                                                  | YAML           |          9 |          0 |          4 |         13 |
+| z:\Projects\mstender\backend\.github\workflows\pull-requests.yml                                           | YAML           |          9 |          0 |          4 |         13 |
+| z:\Projects\mstender\backend\.github\workflows\tests.yml                                                   | YAML           |         36 |          0 |         12 |         48 |
+| z:\Projects\mstender\backend\.github\workflows\update-changelog.yml                                        | YAML           |         10 |          0 |          4 |         14 |
+| z:\Projects\mstender\backend\.styleci.yml                                                                  | YAML           |          9 |          0 |          1 |         10 |
+| z:\Projects\mstender\backend\CHANGELOG.md                                                                  | Markdown       |         96 |          0 |         64 |        160 |
+| z:\Projects\mstender\backend\README.md                                                                     | Markdown       |         39 |          0 |         21 |         60 |
+| z:\Projects\mstender\backend\app\Exports\InvoicesBulkExport.php                                            | PHP            |         26 |          0 |         14 |         40 |
+| z:\Projects\mstender\backend\app\Helpers\LeadAccess.php                                                    | PHP            |         17 |          0 |          4 |         21 |
+| z:\Projects\mstender\backend\app\Http\Controllers\AuthController.php                                       | PHP            |         95 |         23 |         28 |        146 |
+| z:\Projects\mstender\backend\app\Http\Controllers\BankController.php                                       | PHP            |        254 |         41 |         87 |        382 |
+| z:\Projects\mstender\backend\app\Http\Controllers\Controller.php                                           | PHP            |          5 |          1 |          3 |          9 |
+| z:\Projects\mstender\backend\app\Http\Controllers\CustomerController.php                                   | PHP            |        273 |         26 |        101 |        400 |
+| z:\Projects\mstender\backend\app\Http\Controllers\DashboardController.php                                  | PHP            |        175 |         45 |         63 |        283 |
+| z:\Projects\mstender\backend\app\Http\Controllers\EmployeeController.php                                   | PHP            |        721 |         58 |        268 |      1,047 |
+| z:\Projects\mstender\backend\app\Http\Controllers\InvoiceController.php                                    | PHP            |        486 |         63 |        180 |        729 |
+| z:\Projects\mstender\backend\app\Http\Controllers\InvoiceItemController.php                                | PHP            |          7 |          1 |          4 |         12 |
+| z:\Projects\mstender\backend\app\Http\Controllers\LeadActivityController.php                               | PHP            |         32 |          0 |          6 |         38 |
+| z:\Projects\mstender\backend\app\Http\Controllers\LeadController.php                                       | PHP            |        230 |        155 |        150 |        535 |
+| z:\Projects\mstender\backend\app\Http\Controllers\LeadCustomValueController.php                            | PHP            |         22 |         20 |          8 |         50 |
+| z:\Projects\mstender\backend\app\Http\Controllers\LeadNoteCommentController.php                            | PHP            |         38 |         15 |         12 |         65 |
+| z:\Projects\mstender\backend\app\Http\Controllers\LeadNoteController.php                                   | PHP            |         54 |         20 |         15 |         89 |
+| z:\Projects\mstender\backend\app\Http\Controllers\NotificationController.php                               | PHP            |         43 |          0 |         17 |         60 |
+| z:\Projects\mstender\backend\app\Http\Controllers\PipelineController.php                                   | PHP            |        112 |         25 |         33 |        170 |
+| z:\Projects\mstender\backend\app\Http\Controllers\PipelineStageController.php                              | PHP            |         37 |          0 |          9 |         46 |
+| z:\Projects\mstender\backend\app\Http\Controllers\TaxController.php                                        | PHP            |        208 |         31 |         61 |        300 |
+| z:\Projects\mstender\backend\app\Http\Controllers\TransactionController.php                                | PHP            |        518 |         54 |        194 |        766 |
+| z:\Projects\mstender\backend\app\Http\Middlewares\CheckIfUserIsBanned.php                                  | PHP            |         22 |          6 |          7 |         35 |
+| z:\Projects\mstender\backend\app\Models\Bank.php                                                           | PHP            |         38 |          0 |          9 |         47 |
+| z:\Projects\mstender\backend\app\Models\Customer.php                                                       | PHP            |         66 |         23 |         18 |        107 |
+| z:\Projects\mstender\backend\app\Models\Invoice.php                                                        | PHP            |         46 |          0 |         10 |         56 |
+| z:\Projects\mstender\backend\app\Models\InvoiceItem.php                                                    | PHP            |         20 |          0 |          8 |         28 |
+| z:\Projects\mstender\backend\app\Models\InvoiceTax.php                                                     | PHP            |         21 |          0 |          6 |         27 |
+| z:\Projects\mstender\backend\app\Models\Lead.php                                                           | PHP            |         65 |          0 |         13 |         78 |
+| z:\Projects\mstender\backend\app\Models\LeadActivity.php                                                   | PHP            |         18 |          0 |          4 |         22 |
+| z:\Projects\mstender\backend\app\Models\LeadNote.php                                                       | PHP            |          8 |          1 |          4 |         13 |
+| z:\Projects\mstender\backend\app\Models\LeadNoteComment.php                                                | PHP            |          8 |          1 |          4 |         13 |
+| z:\Projects\mstender\backend\app\Models\Notification.php                                                   | PHP            |         40 |          0 |          9 |         49 |
+| z:\Projects\mstender\backend\app\Models\Pipeline.php                                                       | PHP            |         27 |          0 |          8 |         35 |
+| z:\Projects\mstender\backend\app\Models\PipelineStage.php                                                  | PHP            |         15 |          0 |          4 |         19 |
+| z:\Projects\mstender\backend\app\Models\Setting.php                                                        | PHP            |         35 |          0 |         10 |         45 |
+| z:\Projects\mstender\backend\app\Models\Tax.php                                                            | PHP            |         35 |          0 |          9 |         44 |
+| z:\Projects\mstender\backend\app\Models\Transaction.php                                                    | PHP            |         35 |          0 |          8 |         43 |
+| z:\Projects\mstender\backend\app\Models\User.php                                                           | PHP            |         85 |          2 |         17 |        104 |
+| z:\Projects\mstender\backend\app\Providers\AppServiceProvider.php                                          | PHP            |         12 |          8 |          5 |         25 |
+| z:\Projects\mstender\backend\bootstrap\app.php                                                             | PHP            |         19 |          1 |          3 |         23 |
+| z:\Projects\mstender\backend\bootstrap\providers.php                                                       | PHP            |          5 |          0 |          3 |          8 |
+| z:\Projects\mstender\backend\composer.json                                                                 | JSON           |         89 |          0 |          1 |         90 |
+| z:\Projects\mstender\backend\composer.lock                                                                 | JSON           |      9,583 |          0 |          1 |      9,584 |
+| z:\Projects\mstender\backend\config\app.php                                                                | PHP            |         22 |         82 |         23 |        127 |
+| z:\Projects\mstender\backend\config\auth.php                                                               | PHP            |         29 |         74 |         15 |        118 |
+| z:\Projects\mstender\backend\config\cache.php                                                              | PHP            |         64 |         35 |         19 |        118 |
+| z:\Projects\mstender\backend\config\cors.php                                                               | PHP            |         13 |         12 |         12 |         37 |
+| z:\Projects\mstender\backend\config\database.php                                                           | PHP            |        119 |         43 |         23 |        185 |
+| z:\Projects\mstender\backend\config\filesystems.php                                                        | PHP            |         36 |         32 |         13 |         81 |
+| z:\Projects\mstender\backend\config\logging.php                                                            | PHP            |         79 |         33 |         21 |        133 |
+| z:\Projects\mstender\backend\config\mail.php                                                               | PHP            |         57 |         43 |         19 |        119 |
+| z:\Projects\mstender\backend\config\queue.php                                                              | PHP            |         65 |         45 |         20 |        130 |
+| z:\Projects\mstender\backend\config\sanctum.php                                                            | PHP            |         20 |         54 |         14 |         88 |
+| z:\Projects\mstender\backend\config\services.php                                                           | PHP            |         20 |         11 |          8 |         39 |
+| z:\Projects\mstender\backend\config\session.php                                                            | PHP            |         23 |        160 |         35 |        218 |
+| z:\Projects\mstender\backend\database\factories\BankFactory copy 2.php                                     | PHP            |         24 |          0 |          6 |         30 |
+| z:\Projects\mstender\backend\database\factories\BankFactory copy.php                                       | PHP            |         24 |          0 |          6 |         30 |
+| z:\Projects\mstender\backend\database\factories\BankFactory.php                                            | PHP            |         24 |          0 |          6 |         30 |
+| z:\Projects\mstender\backend\database\factories\CustomerFactory.php                                        | PHP            |         27 |          2 |          7 |         36 |
+| z:\Projects\mstender\backend\database\factories\InvoiceFactory.php                                         | PHP            |         25 |          3 |          5 |         33 |
+| z:\Projects\mstender\backend\database\factories\InvoiceItemFactory copy.php                                | PHP            |         11 |          9 |          4 |         24 |
+| z:\Projects\mstender\backend\database\factories\InvoiceItemFactory.php                                     | PHP            |         11 |          9 |          4 |         24 |
+| z:\Projects\mstender\backend\database\factories\LeadActivityFactory.php                                    | PHP            |         16 |          8 |          4 |         28 |
+| z:\Projects\mstender\backend\database\factories\LeadFactory.php                                            | PHP            |         20 |          0 |          5 |         25 |
+| z:\Projects\mstender\backend\database\factories\LeadNoteCommentFactory.php                                 | PHP            |         12 |          9 |          4 |         25 |
+| z:\Projects\mstender\backend\database\factories\LeadNoteFactory.php                                        | PHP            |         12 |          9 |          4 |         25 |
+| z:\Projects\mstender\backend\database\factories\PipelineFactory.php                                        | PHP            |         15 |          8 |          4 |         27 |
+| z:\Projects\mstender\backend\database\factories\PipelineStageFactory.php                                   | PHP            |         16 |          8 |          4 |         28 |
+| z:\Projects\mstender\backend\database\factories\SettingFactory copy.php                                    | PHP            |         23 |          0 |          5 |         28 |
+| z:\Projects\mstender\backend\database\factories\SettingFactory.php                                         | PHP            |         23 |          0 |          5 |         28 |
+| z:\Projects\mstender\backend\database\factories\TaxFactory copy.php                                        | PHP            |         22 |          0 |          5 |         27 |
+| z:\Projects\mstender\backend\database\factories\TaxFactory.php                                             | PHP            |         22 |          0 |          5 |         27 |
+| z:\Projects\mstender\backend\database\factories\TransactionFactory.php                                     | PHP            |         28 |          0 |          5 |         33 |
+| z:\Projects\mstender\backend\database\factories\UserFactory.php                                            | PHP            |         37 |          3 |          7 |         47 |
+| z:\Projects\mstender\backend\database\migrations\0001_01_01_000000_create_users_table.php                  | PHP            |         58 |          7 |         17 |         82 |
+| z:\Projects\mstender\backend\database\migrations\0001_01_01_000001_create_cache_table.php                  | PHP            |         25 |          6 |          5 |         36 |
+| z:\Projects\mstender\backend\database\migrations\0001_01_01_000002_create_jobs_table.php                   | PHP            |         46 |          6 |          6 |         58 |
+| z:\Projects\mstender\backend\database\migrations\2025_10_07_045950_create_settings_table.php               | PHP            |         23 |          0 |          8 |         31 |
+| z:\Projects\mstender\backend\database\migrations\2025_10_07_050743_create_notifications_table.php          | PHP            |         28 |          0 |          7 |         35 |
+| z:\Projects\mstender\backend\database\migrations\2025_10_07_052156_create_taxes_table.php                  | PHP            |         26 |          0 |          6 |         32 |
+| z:\Projects\mstender\backend\database\migrations\2025_10_07_072930_create_banks_table.php                  | PHP            |         31 |          5 |          8 |         44 |
+| z:\Projects\mstender\backend\database\migrations\2025_11_30_070221_create_customers_table.php              | PHP            |         40 |          5 |         10 |         55 |
+| z:\Projects\mstender\backend\database\migrations\2025_12_05_063158_create_invoices_table.php               | PHP            |         54 |          7 |         12 |         73 |
+| z:\Projects\mstender\backend\database\migrations\2025_12_05_063744_create_invoice_items_table.php          | PHP            |         26 |          3 |          8 |         37 |
+| z:\Projects\mstender\backend\database\migrations\2026_01_29_070235_create_invoice_taxes_table.php          | PHP            |         28 |          6 |         11 |         45 |
+| z:\Projects\mstender\backend\database\migrations\2026_02_11_082657_create_transactions_table.php           | PHP            |         38 |          7 |         13 |         58 |
+| z:\Projects\mstender\backend\database\migrations\2026_05_04_053545_create_pipelines_table.php              | PHP            |         25 |          6 |          7 |         38 |
+| z:\Projects\mstender\backend\database\migrations\2026_05_04_053547_create_pipeline_stages_table.php        | PHP            |         23 |          6 |          7 |         36 |
+| z:\Projects\mstender\backend\database\migrations\2026_05_04_136114_create_leads_table.php                  | PHP            |         41 |         13 |         11 |         65 |
+| z:\Projects\mstender\backend\database\migrations\2026_05_04_153552_create_lead_activities_table.php        | PHP            |         26 |          6 |          9 |         41 |
+| z:\Projects\mstender\backend\database\migrations\2026_05_08_144823_create_personal_access_tokens_table.php | PHP            |         24 |          6 |          4 |         34 |
+| z:\Projects\mstender\backend\database\migrations\2026_05_12_055529_create_lead_notes_table.php             | PHP            |         27 |          6 |          9 |         42 |
+| z:\Projects\mstender\backend\database\migrations\2026_05_12_055535_create_lead_note_comments_table.php     | PHP            |         26 |          6 |          8 |         40 |
+| z:\Projects\mstender\backend\database\seeders\DatabaseSeeder.php                                           | PHP            |         52 |          6 |         12 |         70 |
+| z:\Projects\mstender\backend\package.json                                                                  | JSON           |         17 |          0 |          1 |         18 |
+| z:\Projects\mstender\backend\phpunit.xml                                                                   | XML            |         36 |          0 |          1 |         37 |
+| z:\Projects\mstender\backend\public\index.php                                                              | PHP            |         10 |          4 |          7 |         21 |
+| z:\Projects\mstender\backend\resources\css\app.css                                                         | CSS            |          9 |          0 |          3 |         12 |
+| z:\Projects\mstender\backend\resources\js\app.js                                                           | JavaScript     |          1 |          0 |          1 |          2 |
+| z:\Projects\mstender\backend\resources\js\bootstrap.js                                                     | JavaScript     |          3 |          0 |          2 |          5 |
+| z:\Projects\mstender\backend\resources\views\welcome.blade.php                                             | PHP            |        270 |          0 |          8 |        278 |
+| z:\Projects\mstender\backend\routes\api.php                                                                | PHP            |        165 |        100 |         51 |        316 |
+| z:\Projects\mstender\backend\routes\console.php                                                            | PHP            |          6 |          0 |          3 |          9 |
+| z:\Projects\mstender\backend\routes\web.php                                                                | PHP            |          5 |          0 |          3 |          8 |
+| z:\Projects\mstender\backend\tests\Feature\ExampleTest.php                                                 | PHP            |         11 |          4 |          5 |         20 |
+| z:\Projects\mstender\backend\tests\TestCase.php                                                            | PHP            |          6 |          1 |          4 |         11 |
+| z:\Projects\mstender\backend\tests\Unit\ExampleTest.php                                                    | PHP            |         10 |          3 |          4 |         17 |
+| z:\Projects\mstender\backend\vendor\brick\math\tools\ecs\composer.json                                     | JSON           |         10 |          0 |          1 |         11 |
+| z:\Projects\mstender\backend\vendor\brick\math\tools\ecs\ecs.php                                           | PHP            |         24 |          2 |          8 |         34 |
+| z:\Projects\mstender\backend\vite.config.js                                                                | JavaScript     |         17 |          0 |          2 |         19 |
+| z:\Projects\mstender\frontend\README.md                                                                    | Markdown       |         38 |          0 |         33 |         71 |
+| z:\Projects\mstender\frontend\package-lock.json                                                            | JSON           |     18,919 |          0 |          1 |     18,920 |
+| z:\Projects\mstender\frontend\package.json                                                                 | JSON           |         63 |          0 |          1 |         64 |
+| z:\Projects\mstender\frontend\public\index.html                                                            | Django HTML    |         40 |          0 |          4 |         44 |
+| z:\Projects\mstender\frontend\public\manifest.json                                                         | JSON           |         25 |          0 |          1 |         26 |
+| z:\Projects\mstender\frontend\src\App.css                                                                  | CSS            |         33 |          0 |          6 |         39 |
+| z:\Projects\mstender\frontend\src\App.jsx                                                                  | JavaScript JSX |         92 |         32 |         31 |        155 |
+| z:\Projects\mstender\frontend\src\App.test.js                                                              | JavaScript     |          7 |          0 |          2 |          9 |
+| z:\Projects\mstender\frontend\src\assets\SVG\Delete.jsx                                                    | JavaScript JSX |         14 |          0 |          1 |         15 |
+| z:\Projects\mstender\frontend\src\assets\SVG\DragIcon.jsx                                                  | JavaScript JSX |         18 |          0 |          1 |         19 |
+| z:\Projects\mstender\frontend\src\assets\SVG\Edit.jsx                                                      | JavaScript JSX |         14 |          0 |          1 |         15 |
+| z:\Projects\mstender\frontend\src\assets\SVG\Eye.jsx                                                       | JavaScript JSX |         14 |          0 |          1 |         15 |
+| z:\Projects\mstender\frontend\src\assets\SVG\EyeSlash.jsx                                                  | JavaScript JSX |         15 |          0 |          1 |         16 |
+| z:\Projects\mstender\frontend\src\assets\SVG\Loading.jsx                                                   | JavaScript JSX |         20 |          0 |          1 |         21 |
+| z:\Projects\mstender\frontend\src\common\NotificationToast.jsx                                             | JavaScript JSX |         22 |          2 |          3 |         27 |
+| z:\Projects\mstender\frontend\src\common\UI\CardUI.jsx                                                     | JavaScript JSX |          5 |          0 |          1 |          6 |
+| z:\Projects\mstender\frontend\src\components\elements\Button.jsx                                           | JavaScript JSX |         91 |          4 |          7 |        102 |
+| z:\Projects\mstender\frontend\src\components\elements\Input.jsx                                            | JavaScript JSX |         49 |          0 |          7 |         56 |
+| z:\Projects\mstender\frontend\src\components\elements\Select.jsx                                           | JavaScript JSX |         76 |          5 |         18 |         99 |
+| z:\Projects\mstender\frontend\src\components\elements\SelectSearch.jsx                                     | JavaScript JSX |        246 |         36 |         82 |        364 |
+| z:\Projects\mstender\frontend\src\components\elements\SelectSearchJson.jsx                                 | JavaScript JSX |        102 |         14 |         17 |        133 |
+| z:\Projects\mstender\frontend\src\components\elements\Switch.jsx                                           | JavaScript JSX |         72 |          0 |          6 |         78 |
+| z:\Projects\mstender\frontend\src\components\elements\Textarea.jsx                                         | JavaScript JSX |        121 |          4 |         24 |        149 |
+| z:\Projects\mstender\frontend\src\components\elements\index.jsx                                            | JavaScript JSX |         10 |          0 |          2 |         12 |
+| z:\Projects\mstender\frontend\src\components\layout\AdminLayout.jsx                                        | JavaScript JSX |         20 |          0 |          3 |         23 |
+| z:\Projects\mstender\frontend\src\components\layout\Header.jsx                                             | JavaScript JSX |          0 |          0 |          1 |          1 |
+| z:\Projects\mstender\frontend\src\components\layout\Sidebar.jsx                                            | JavaScript JSX |        222 |         60 |         43 |        325 |
+| z:\Projects\mstender\frontend\src\components\layout\Topbar.jsx                                             | JavaScript JSX |         40 |         14 |         16 |         70 |
+| z:\Projects\mstender\frontend\src\components\notifications\Notification.jsx                                | JavaScript JSX |         16 |          1 |          3 |         20 |
+| z:\Projects\mstender\frontend\src\components\tables\AddButton.jsx                                          | JavaScript JSX |         15 |          0 |          4 |         19 |
+| z:\Projects\mstender\frontend\src\components\tables\AddPaymentButton.jsx                                   | JavaScript JSX |         14 |          0 |          3 |         17 |
+| z:\Projects\mstender\frontend\src\components\tables\BadgeButton.jsx                                        | JavaScript JSX |        116 |         24 |         55 |        195 |
+| z:\Projects\mstender\frontend\src\components\tables\BulkAction.jsx                                         | JavaScript JSX |        114 |         10 |         25 |        149 |
+| z:\Projects\mstender\frontend\src\components\tables\CallButton.jsx                                         | JavaScript JSX |         14 |          0 |          1 |         15 |
+| z:\Projects\mstender\frontend\src\components\tables\CloseButton.jsx                                        | JavaScript JSX |         12 |          0 |          2 |         14 |
+| z:\Projects\mstender\frontend\src\components\tables\ConfirmDialog.jsx                                      | JavaScript JSX |        123 |         21 |         37 |        181 |
+| z:\Projects\mstender\frontend\src\components\tables\CopyButton.jsx                                         | JavaScript JSX |         14 |          1 |          3 |         18 |
+| z:\Projects\mstender\frontend\src\components\tables\CopyLinkButton.jsx                                     | JavaScript JSX |         28 |          2 |          5 |         35 |
+| z:\Projects\mstender\frontend\src\components\tables\CreateGroup.jsx                                        | JavaScript JSX |         14 |          0 |          2 |         16 |
+| z:\Projects\mstender\frontend\src\components\tables\CreateInvoiceButton.jsx                                | JavaScript JSX |         14 |          0 |          2 |         16 |
+| z:\Projects\mstender\frontend\src\components\tables\CustomersButton.jsx                                    | JavaScript JSX |         14 |          0 |          2 |         16 |
+| z:\Projects\mstender\frontend\src\components\tables\CustomersList.jsx                                      | JavaScript JSX |         14 |          0 |          2 |         16 |
+| z:\Projects\mstender\frontend\src\components\tables\DeleteButton.jsx                                       | JavaScript JSX |         12 |          0 |          2 |         14 |
+| z:\Projects\mstender\frontend\src\components\tables\DetailsButton.jsx                                      | JavaScript JSX |         14 |          0 |          3 |         17 |
+| z:\Projects\mstender\frontend\src\components\tables\Dropdown.jsx                                           | JavaScript JSX |         34 |          0 |          4 |         38 |
+| z:\Projects\mstender\frontend\src\components\tables\EditButton.jsx                                         | JavaScript JSX |         14 |          0 |          2 |         16 |
+| z:\Projects\mstender\frontend\src\components\tables\EmailButton.jsx                                        | JavaScript JSX |         14 |          0 |          2 |         16 |
+| z:\Projects\mstender\frontend\src\components\tables\Export.jsx                                             | JavaScript JSX |         35 |          0 |          2 |         37 |
+| z:\Projects\mstender\frontend\src\components\tables\ExportDropdown.jsx                                     | JavaScript JSX |         74 |          2 |         10 |         86 |
+| z:\Projects\mstender\frontend\src\components\tables\FilterButton.jsx                                       | JavaScript JSX |         14 |          2 |          5 |         21 |
+| z:\Projects\mstender\frontend\src\components\tables\IconButton.jsx                                         | JavaScript JSX |         16 |          0 |          1 |         17 |
+| z:\Projects\mstender\frontend\src\components\tables\ImagePreviewButton.jsx                                 | JavaScript JSX |         60 |          4 |          9 |         73 |
+| z:\Projects\mstender\frontend\src\components\tables\Pagination.jsx                                         | JavaScript JSX |         99 |         10 |         21 |        130 |
+| z:\Projects\mstender\frontend\src\components\tables\SeeInvoiceButton.jsx                                   | JavaScript JSX |         14 |          1 |          2 |         17 |
+| z:\Projects\mstender\frontend\src\components\tables\SeePaymentButton.jsx                                   | JavaScript JSX |         14 |          0 |          2 |         16 |
+| z:\Projects\mstender\frontend\src\components\tables\SelectOption.jsx                                       | JavaScript JSX |         26 |          0 |          3 |         29 |
+| z:\Projects\mstender\frontend\src\components\tables\WhatsappButton.jsx                                     | JavaScript JSX |         14 |          0 |          1 |         15 |
+| z:\Projects\mstender\frontend\src\components\widgets\NotificationWidgets.jsx                               | JavaScript JSX |        227 |         12 |         67 |        306 |
+| z:\Projects\mstender\frontend\src\components\widgets\ProfileWidgets.jsx                                    | JavaScript JSX |        115 |          0 |         13 |        128 |
+| z:\Projects\mstender\frontend\src\components\widgets\ThemeWidget.jsx                                       | JavaScript JSX |        114 |          0 |         24 |        138 |
+| z:\Projects\mstender\frontend\src\components\widgets\TimeWidget.jsx                                        | JavaScript JSX |         25 |          1 |          7 |         33 |
+| z:\Projects\mstender\frontend\src\components\wrappers\DeviceWrapper.jsx                                    | JavaScript JSX |         43 |         19 |         10 |         72 |
+| z:\Projects\mstender\frontend\src\context\SettingsContext.jsx                                              | JavaScript JSX |         81 |          0 |         12 |         93 |
+| z:\Projects\mstender\frontend\src\data\SidebarMenu copy.json                                               | JSON           |        111 |          0 |          3 |        114 |
+| z:\Projects\mstender\frontend\src\data\SidebarMenu.json                                                    | JSON           |         90 |          0 |         10 |        100 |
+| z:\Projects\mstender\frontend\src\data\env.js                                                              | JavaScript     |         17 |          7 |          9 |         33 |
+| z:\Projects\mstender\frontend\src\data\toastCfg.jsx                                                        | JavaScript JSX |         11 |          0 |          2 |         13 |
+| z:\Projects\mstender\frontend\src\database\Axios.jsx                                                       | JavaScript JSX |         12 |          1 |          2 |         15 |
+| z:\Projects\mstender\frontend\src\database\Context.jsx                                                     | JavaScript JSX |         31 |          0 |          6 |         37 |
+| z:\Projects\mstender\frontend\src\database\Token.jsx                                                       | JavaScript JSX |         34 |          2 |         10 |         46 |
+| z:\Projects\mstender\frontend\src\index.css                                                                | CSS            |         65 |          7 |         14 |         86 |
+| z:\Projects\mstender\frontend\src\index.js                                                                 | JavaScript     |         33 |          3 |          8 |         44 |
+| z:\Projects\mstender\frontend\src\logo.svg                                                                 | XML            |          1 |          0 |          0 |          1 |
+| z:\Projects\mstender\frontend\src\middleware\ProtectedRoute.jsx                                            | JavaScript JSX |          8 |          4 |          4 |         16 |
+| z:\Projects\mstender\frontend\src\pages\auth\ForgotPassword.jsx                                            | JavaScript JSX |         54 |          0 |          9 |         63 |
+| z:\Projects\mstender\frontend\src\pages\auth\Login.jsx                                                     | JavaScript JSX |        154 |          4 |         17 |        175 |
+| z:\Projects\mstender\frontend\src\pages\auth\OTP.jsx                                                       | JavaScript JSX |          7 |          0 |          1 |          8 |
+| z:\Projects\mstender\frontend\src\pages\auth\ResetPassword.jsx                                             | JavaScript JSX |         65 |          0 |         12 |         77 |
+| z:\Projects\mstender\frontend\src\pages\auth\Signup.jsx                                                    | JavaScript JSX |          7 |          0 |          2 |          9 |
+| z:\Projects\mstender\frontend\src\pages\banks\BanksList.jsx                                                | JavaScript JSX |        527 |         57 |        161 |        745 |
+| z:\Projects\mstender\frontend\src\pages\banks\CreateBank.jsx                                               | JavaScript JSX |        183 |         11 |         51 |        245 |
+| z:\Projects\mstender\frontend\src\pages\banks\UpdateBank.jsx                                               | JavaScript JSX |        239 |         28 |         79 |        346 |
+| z:\Projects\mstender\frontend\src\pages\banks\data.js                                                      | JavaScript     |          9 |          0 |          5 |         14 |
+| z:\Projects\mstender\frontend\src\pages\customers\CreateCustomer.jsx                                       | JavaScript JSX |        263 |         48 |         76 |        387 |
+| z:\Projects\mstender\frontend\src\pages\customers\CustomersList.jsx                                        | JavaScript JSX |        611 |         63 |        196 |        870 |
+| z:\Projects\mstender\frontend\src\pages\customers\UpdateCustomer.jsx                                       | JavaScript JSX |        211 |         16 |         44 |        271 |
+| z:\Projects\mstender\frontend\src\pages\dashboard\Dashboard.jsx                                            | JavaScript JSX |        286 |         42 |         78 |        406 |
+| z:\Projects\mstender\frontend\src\pages\dashboard\DashboardCard.jsx                                        | JavaScript JSX |         35 |          0 |          4 |         39 |
+| z:\Projects\mstender\frontend\src\pages\dashboard\DashboardChart.jsx                                       | JavaScript JSX |         63 |          0 |          6 |         69 |
+| z:\Projects\mstender\frontend\src\pages\employees\CreateEmployee copy.jsx                                  | JavaScript JSX |        349 |         31 |         30 |        410 |
+| z:\Projects\mstender\frontend\src\pages\employees\CreateEmployee.jsx                                       | JavaScript JSX |        364 |         16 |        109 |        489 |
+| z:\Projects\mstender\frontend\src\pages\employees\EmployeeList.jsx                                         | JavaScript JSX |        721 |         66 |        217 |      1,004 |
+| z:\Projects\mstender\frontend\src\pages\employees\InviteEmployee.jsx                                       | JavaScript JSX |        148 |          2 |         22 |        172 |
+| z:\Projects\mstender\frontend\src\pages\employees\UpdateEmployee.jsx                                       | JavaScript JSX |        266 |         26 |         77 |        369 |
+| z:\Projects\mstender\frontend\src\pages\forms\Form1.jsx                                                    | JavaScript JSX |        447 |         37 |         41 |        525 |
+| z:\Projects\mstender\frontend\src\pages\invoices\CreateInvoice.jsx                                         | JavaScript JSX |        646 |         41 |         98 |        785 |
+| z:\Projects\mstender\frontend\src\pages\invoices\InvoicesList.jsx                                          | JavaScript JSX |        517 |         56 |        155 |        728 |
+| z:\Projects\mstender\frontend\src\pages\invoices\UpdateInvoice.jsx                                         | JavaScript JSX |          7 |          0 |          2 |          9 |
+| z:\Projects\mstender\frontend\src\pages\invoices\ViewInvoice.jsx                                           | JavaScript JSX |        299 |         29 |         39 |        367 |
+| z:\Projects\mstender\frontend\src\pages\leads\CreateLead.jsx                                               | JavaScript JSX |        168 |         10 |         28 |        206 |
+| z:\Projects\mstender\frontend\src\pages\leads\LeadCard.jsx                                                 | JavaScript JSX |        113 |          4 |         23 |        140 |
+| z:\Projects\mstender\frontend\src\pages\leads\LeadDetails.jsx                                              | JavaScript JSX |        792 |         15 |        176 |        983 |
+| z:\Projects\mstender\frontend\src\pages\leads\LeadDummyData.jsx                                            | JavaScript JSX |         97 |          0 |         18 |        115 |
+| z:\Projects\mstender\frontend\src\pages\leads\LeadList.jsx                                                 | JavaScript JSX |      1,021 |         82 |        245 |      1,348 |
+| z:\Projects\mstender\frontend\src\pages\leads\PipelineCreate.jsx                                           | JavaScript JSX |        114 |         10 |         35 |        159 |
+| z:\Projects\mstender\frontend\src\pages\leads\PipelineList.jsx                                             | JavaScript JSX |        682 |         61 |        183 |        926 |
+| z:\Projects\mstender\frontend\src\pages\leads\PipelineUpdate.jsx                                           | JavaScript JSX |        192 |         28 |         70 |        290 |
+| z:\Projects\mstender\frontend\src\pages\leads\StageCard.jsx                                                | JavaScript JSX |          6 |          0 |          1 |          7 |
+| z:\Projects\mstender\frontend\src\pages\leads\UpdateLead.jsx                                               | JavaScript JSX |        223 |         22 |         29 |        274 |
+| z:\Projects\mstender\frontend\src\pages\leads\ViewMode.jsx                                                 | JavaScript JSX |         27 |          0 |          3 |         30 |
+| z:\Projects\mstender\frontend\src\pages\leads\tempPipeline.jsx                                             | JavaScript JSX |        352 |         16 |         82 |        450 |
+| z:\Projects\mstender\frontend\src\pages\notifications\Notifications.jsx                                    | JavaScript JSX |        103 |          2 |         10 |        115 |
+| z:\Projects\mstender\frontend\src\pages\others\Maintance.jsx                                               | JavaScript JSX |         95 |         12 |         31 |        138 |
+| z:\Projects\mstender\frontend\src\pages\others\NotFound.jsx                                                | JavaScript JSX |         30 |          0 |          3 |         33 |
+| z:\Projects\mstender\frontend\src\pages\others\Profile.jsx                                                 | JavaScript JSX |        242 |          9 |         77 |        328 |
+| z:\Projects\mstender\frontend\src\pages\others\Setting.jsx                                                 | JavaScript JSX |        389 |         34 |         85 |        508 |
+| z:\Projects\mstender\frontend\src\pages\taxes\CreateTax.jsx                                                | JavaScript JSX |        152 |         10 |         42 |        204 |
+| z:\Projects\mstender\frontend\src\pages\taxes\TaxesList.jsx                                                | JavaScript JSX |        526 |         65 |        154 |        745 |
+| z:\Projects\mstender\frontend\src\pages\taxes\UpdateTax.jsx                                                | JavaScript JSX |        228 |         27 |         75 |        330 |
+| z:\Projects\mstender\frontend\src\pages\transactions\CreateTransaction.jsx                                 | JavaScript JSX |        260 |         29 |         68 |        357 |
+| z:\Projects\mstender\frontend\src\pages\transactions\TransactionsList.jsx                                  | JavaScript JSX |        438 |         48 |        134 |        620 |
+| z:\Projects\mstender\frontend\src\pages\transactions\UpdateTransaction.jsx                                 | JavaScript JSX |        220 |          9 |         43 |        272 |
+| z:\Projects\mstender\frontend\src\popups\Delete\DeletePopUp.jsx                                            | JavaScript JSX |         72 |          2 |          7 |         81 |
+| z:\Projects\mstender\frontend\src\popups\Edit\EditPopUp.jsx                                                | JavaScript JSX |         91 |          0 |          7 |         98 |
+| z:\Projects\mstender\frontend\src\popups\GlobalSearchPopup.jsx                                             | JavaScript JSX |        316 |         41 |        104 |        461 |
+| z:\Projects\mstender\frontend\src\reportWebVitals.js                                                       | JavaScript     |         12 |          0 |          2 |         14 |
+| z:\Projects\mstender\frontend\src\setupTests.js                                                            | JavaScript     |          1 |          4 |          1 |          6 |
+| z:\Projects\mstender\frontend\src\utils\BanManager.js                                                      | JavaScript     |          7 |          0 |          2 |          9 |
+| z:\Projects\mstender\frontend\src\utils\Permission.jsx                                                     | JavaScript JSX |          9 |          5 |          5 |         19 |
+| z:\Projects\mstender\frontend\src\utils\currencyFormatter.js                                               | JavaScript     |         17 |          1 |          2 |         20 |
+| z:\Projects\mstender\frontend\src\utils\errors.js                                                          | JavaScript     |         14 |          0 |          3 |         17 |
+| z:\Projects\mstender\frontend\src\utils\hasPermission.jsx                                                  | JavaScript JSX |         23 |          7 |         15 |         45 |
+| z:\Projects\mstender\frontend\src\utils\money.js                                                           | JavaScript     |         13 |          1 |          9 |         23 |
+| z:\Projects\mstender\frontend\src\utils\numberFormatter.js                                                 | JavaScript     |          7 |          0 |          2 |          9 |
+| z:\Projects\mstender\frontend\tailwind.config.js                                                           | JavaScript     |         95 |          1 |         10 |        106 |
+| Total                                                                                                      |                |     52,068 |      2,966 |      6,174 |     61,208 |
++------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

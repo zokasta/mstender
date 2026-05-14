@@ -191,10 +191,10 @@ export default function CreateEmployee() {
     <div className="space-y-6">
       <ToastContainer {...toastCfg} />
 
-      <h1 className="text-2xl font-bold text-gray-800">Create Employee</h1>
+      <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Create Employee</h1>
 
       {/* Normal Employee Creation Card */}
-      <div className="bg-white shadow-md rounded-lg p-6 border">
+      <div className="bg-white dark:bg-surface-darkCard shadow-md rounded-lg p-6 border">
         <h2 className="text-lg font-semibold mb-4">Employee Details</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-3 sm:grid-cols-1 md:grid-cols-3 gap-6">
@@ -305,8 +305,8 @@ export default function CreateEmployee() {
               disabled={loading.employee}
               className={`px-4 py-2 rounded-md text-white ${
                 !loading
-                  ? "bg-orange-300 cursor-not-allowed"
-                  : "bg-orange-500 hover:bg-orange-600"
+                  ? "bg-primary-300 cursor-not-allowed"
+                  : "bg-primary-500 hover:bg-primary-600"
               }`}
             >
               {loading.employee ? "Creating..." : "Create Employee"}
@@ -318,23 +318,23 @@ export default function CreateEmployee() {
       {inviteLink && (
         <CardUI>
           <div className="p-3 border rounded-md bg-gray-50">
-            <p className="text-sm text-gray-800 font-medium">
+            <p className="text-sm text-gray-800 dark:text-white font-medium">
               Invite Link Generated:
             </p>
             <a
               href={inviteLink}
               target="_blank"
               rel="noreferrer"
-              className="text-orange-600 underline text-sm break-all"
+              className="text-primary-600 underline text-sm break-all"
             >
               {inviteLink}
             </a>
-            <p className="text-xs text-gray-500 mt-2">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
               (This link will also be sent to the employee&apos;s email)
             </p>
           </div>
           <div className="grid grid-cols-2 w-fit gap-2 mt-4">
-            <CopyLinkButton url={inviteLink} color="bg-orange-500" />
+            <CopyLinkButton url={inviteLink} color="bg-primary-500" />
             <CloseButton
               onClick={() => {
                 setForm2({ email: "", username: "", type_id: "" });
@@ -345,7 +345,7 @@ export default function CreateEmployee() {
         </CardUI>
       )}
       {/* Quick Create (Invite Link) Card */}
-      <div className="bg-white shadow-md rounded-lg p-6 border">
+      <div className="bg-white dark:bg-surface-darkCard shadow-md rounded-lg p-6 border">
         <h2 className="text-lg font-semibold mb-4">Quick Create Employee</h2>
         <p className="text-sm text-gray-600 mb-4">
           Generate an invite link for an employee to fill their own details.
@@ -377,7 +377,7 @@ export default function CreateEmployee() {
         </div>
         <div>
           <Button
-            theme="orange"
+            theme="primary"
             onClick={handleGenerateInvite}
             title={loading.quick ? "Loading..." : "Generate Invite Link"}
             className="mt-4 py-1"
@@ -387,18 +387,18 @@ export default function CreateEmployee() {
 
         {/* {inviteLink && (
           <div className="mt-4 p-3 border rounded-md bg-gray-50">
-            <p className="text-sm text-gray-800 font-medium">
+            <p className="text-sm text-gray-800 dark:text-white font-medium">
               Invite Link Generated:
             </p>
             <a
               href={inviteLink}
               target="_blank"
               rel="noreferrer"
-              className="text-orange-600 underline text-sm break-all"
+              className="text-primary-600 underline text-sm break-all"
             >
               {inviteLink}
             </a>
-            <p className="text-xs text-gray-500 mt-2">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
               (This link will also be sent to the employee&apos;s email)
             </p>
           </div>

@@ -58,14 +58,14 @@ export default function BulkExportDropdown({ selected }) {
       <button
         onClick={() => setOpen((prev) => !prev)}
         disabled={loading}
-        className="px-3 py-2 border rounded text-sm hover:bg-gray-100 disabled:opacity-50 bg-white"
+        className="px-3 py-2 border rounded text-sm hover:bg-gray-100 disabled:opacity-50 bg-white dark:bg-surface-darkCard"
       >
         Export 
         {/* ({selected.size}) */}
       </button>
 
       {open && (
-        <div className="absolute left-0 mt-2 w-44 bg-white border rounded shadow-lg z-50">
+        <div className="absolute left-0 mt-2 w-44 bg-white dark:bg-surface-darkCard border rounded shadow-lg z-50">
           <button
             onClick={() => handleExport("pdf")}
             className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"

@@ -1,4 +1,3 @@
-// src/Components/elements/Input.jsx
 import { useState } from "react";
 
 export default function Input({
@@ -9,23 +8,28 @@ export default function Input({
   type = "text",
   className = "",
   placeholder = "",
-  error = "", // 🔴 new prop for showing error
+  error = "",
   required = false,
-  country = 'in',
+  country = "in",
 }) {
-  const [internalValue, setInternalValue] = useState(defaultValue);
+  const [internalValue, setInternalValue] =
+    useState(defaultValue);
 
   const handleChange = (e) => {
     setInternalValue(e.target.value);
+
     if (onChange) onChange(e.target.value);
   };
 
   return (
     <div className="w-full">
       {label && (
-        <label className="block text-sm text-gray-700 mb-1">
+        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+
+          {required && (
+            <span className="text-danger-500 ml-1">*</span>
+          )}
         </label>
       )}
 
@@ -35,13 +39,17 @@ export default function Input({
         value={value !== undefined ? value : internalValue}
         onChange={handleChange}
         placeholder={placeholder}
-        className={`w-full h-10 bg-[#f4f6f8] border rounded-sm outline-none px-3
-          ${error ? "border-primary-500 focus:border-primary-500" : "border-gray-300 focus:border-primary-500"}
-          ${className}`}
+        className={`w-full h-12 rounded-2xl border bg-surface-light dark:bg-surface-darkMuted px-4 outline-none transition-all text-gray-800 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 ${
+          error
+            ? "border-danger-500 focus:border-danger-500"
+            : "border-surface-border dark:border-surface-darkBorder focus:border-primary-500 dark:focus:border-primary-500"
+        } ${className}`}
       />
 
       {error && (
-        <p className="text-xs text-red-500 mt-1">{error}</p>
+        <p className="text-xs text-danger-500 mt-2">
+          {error}
+        </p>
       )}
     </div>
   );
