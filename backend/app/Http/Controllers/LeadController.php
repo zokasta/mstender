@@ -144,31 +144,175 @@ class LeadController extends Controller
     | LEAD DETAILS
     |--------------------------------------------------------------------------
     */
-
     public function show(Request $request, $id)
     {
         $user = $request->user();
 
-        $lead = $this->leadQuery($user)
-
+        $query = Lead::query()
             ->with([
-                'pipeline',
-                'stage',
-                'assignedUser',
-                'activities.user',
-                'notes.comments.user',
-            ])
+                'pipeline:id,name',
+                'stage:id,name,color',
 
-            ->findOrFail($id);
+                'assignedUser:id,name',
+                'createdBy:id,name',
+
+                'activities' => function ($q) {
+                    $q->with('createdBy:id,name')
+                        ->latest();
+                },
+
+                'notes' => function ($q) {
+                    $q->with([
+                        'createdBy:id,name',
+
+                        'comments' => function ($commentQuery) {
+                            $commentQuery
+                                ->with('createdBy:id,name')
+                                ->latest();
+                        }
+                    ])
+                        ->latest();
+                }
+            ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | AUTHORITY
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            $user->type !== "superadmin"
+        ) {
+
+            if (
+                in_array(
+                    $user->type,
+                    ['sales', 'intern']
+                )
+            ) {
+
+                $query->where(
+                    'created_by',
+                    $user->id
+                );
+            }
+        }
+
+        $lead = $query->findOrFail($id);
 
         return response()->json([
+            "success" => true,
 
-            'success' => true,
+            "data" => [
 
-            'data' => $lead,
+                "id" => $lead->id,
+
+                "name" => $lead->name,
+                "email" => $lead->email,
+                "phone" => $lead->phone,
+                "company" => $lead->company,
+                "gstin" => $lead->gstin,
+                "website" => $lead->website,
+                "source" => $lead->source,
+                "address" => $lead->address,
+                "description" => $lead->description,
+
+                "value" => $lead->value,
+
+                "status" => $lead->status,
+
+                "pipeline" => [
+                    "id" => $lead->pipeline?->id,
+                    "name" => $lead->pipeline?->name,
+                ],
+
+                "stage" => [
+                    "id" => $lead->stage?->id,
+                    "name" => $lead->stage?->name,
+                    "color" => $lead->stage?->color,
+                ],
+
+                "assigned_to" => [
+                    "id" => $lead->assignedUser?->id,
+                    "name" => $lead->assignedUser?->name,
+                ],
+
+                "created_by" => [
+                    "id" => $lead->createdBy?->id,
+                    "name" => $lead->createdBy?->name,
+                ],
+
+                "created_at" => $lead->created_at,
+
+                "activities" => $lead
+                    ->activities
+                    ->map(function ($item) {
+
+                        return [
+
+                            "id" => $item->id,
+
+                            "type" => $item->activity_type,
+
+                            "title" => $item->outcome
+                                ?: ucfirst(
+                                    $item->activity_type
+                                ),
+
+                            "desc" => $item->description,
+
+                            "next_action" => $item->next_action,
+
+                            "next_followup_at" => $item->next_followup_at,
+
+                            "time" => $item
+                                ->created_at
+                                ->diffForHumans(),
+
+                            "user" => $item
+                                ->createdBy?->name
+                        ];
+                    }),
+
+                "notes" => $lead
+                    ->notes
+                    ->map(function ($note) {
+
+                        return [
+
+                            "id" => $note->id,
+
+                            "title" => $note->title,
+
+                            "desc" => $note->description,
+
+                            "time" => $note
+                                ->created_at
+                                ->diffForHumans(),
+
+                            "by" => $note
+                                ->createdBy?->name,
+
+                            "comments" => $note
+                                ->comments
+                                ->map(function ($comment) {
+
+                                    return [
+
+                                        "id" => $comment->id,
+
+                                        "user" => $comment
+                                            ->createdBy?->name,
+
+                                        "message" => $comment->message
+                                    ];
+                                })
+                        ];
+                    })
+            ]
         ]);
     }
-
     /*
     |--------------------------------------------------------------------------
     | CREATE LEAD
@@ -188,15 +332,10 @@ class LeadController extends Controller
         $request->validate([
 
             'name' => 'required|string|max:255',
-
             'pipeline_id' => 'required|exists:pipelines,id',
-
             'stage_id' => 'nullable|exists:pipeline_stages,id',
-
             'email' => 'nullable|email',
-
             'phone' => 'nullable|string|max:20',
-
             'value' => 'nullable|numeric',
         ]);
 
@@ -209,30 +348,18 @@ class LeadController extends Controller
         $lead = Lead::create([
 
             'name' => $request->name,
-
             'email' => $request->email,
-
             'phone' => $request->phone,
-
-            'company' => $request->company,
-
+            'company' => $request->company ?? 'unknown',
             'gstin' => $request->gstin,
-
             'website' => $request->website,
-
-            'source' => $request->source,
-
+            'source' => $request->source ?? "unknown",
             'address' => $request->address,
-
             'description' => $request->description,
-
             'pipeline_id' => $request->pipeline_id,
-
             'stage_id' => $request->stage_id,
-
             'value' => $request->value,
-
-            'status' => $request->status ?? 'worm',
+            'status' => $request->status ?? 'warm',
 
             /*
             |--------------------------------------------------------------------------
@@ -266,10 +393,8 @@ class LeadController extends Controller
         return response()->json([
 
             'success' => true,
-
             'message' =>
             'Lead created successfully',
-
             'data' => $lead->load([
                 'pipeline',
                 'stage',
@@ -309,33 +434,16 @@ class LeadController extends Controller
         $lead->update([
 
             'name' => $request->name,
-
             'email' => $request->email,
-
             'phone' => $request->phone,
-
             'company' => $request->company,
-
             'gstin' => $request->gstin,
-
             'website' => $request->website,
-
             'source' => $request->source,
-
             'address' => $request->address,
-
             'description' => $request->description,
-
-            'pipeline_id' =>
-            $request->pipeline_id,
-
-            'stage_id' =>
-            $request->stage_id,
-
             'value' => $request->value,
-
-            'status' =>
-            $request->status,
+            'status' => $request->status,
 
             /*
             |--------------------------------------------------------------------------

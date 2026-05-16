@@ -1,25 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-import AddButton from "../../components/tables/AddButton";
 import Token from "../../database/Token";
 
 import Select from "../../components/elements/Select";
 import Input from "../../components/elements/Input";
 import Textarea from "../../components/elements/Textarea";
+import { Plus } from "lucide-react";
+import { toast, ToastContainer } from "react-toastify";
+import { toastCfg } from "../../data/toastCfg";
 
 export default function AddLeadButton({
   setLeads = () => {},
   pipelines = [],
   onSuccess = () => {},
   pipeline_id,
+
+  showAddLead,
+  setShowAddLead,
+
+  editingLead,
+  setEditingLead,
 }) {
-  const [showAddLead, setShowAddLead] = useState(false);
-
-  const [activePipelineId, setActivePipelineId] = useState("");
-
-  const [editingLead, setEditingLead] = useState(null);
-
   const [loading, setLoading] = useState(false);
 
   /*
@@ -27,11 +29,29 @@ export default function AddLeadButton({
   | ACTIVE PIPELINE
   |--------------------------------------------------------------------------
   */
+  useEffect(() => {
+    if (editingLead) {
+      setNewLeadData({
+        name: editingLead.name || "",
+        email: editingLead.email || "",
+        phone: editingLead.phone || "",
+        company: editingLead.company || "",
+        gstin: editingLead.gstin || "",
+        website: editingLead.website || "",
+        source: editingLead.source || "",
+        address: editingLead.address || "",
+        description: editingLead.description || "",
+        value: editingLead.value || "",
+        status: editingLead.status || "cold",
+      });
+  
+      setShowAddLead(true);
+    }
+  }, [editingLead]);
 
   const activePipeline =
-    pipelines.find(
-      (item) => item.id.toString() === activePipelineId.toString()
-    ) || null;
+    pipelines.find((item) => String(item.id) === String(pipeline_id || "")) ||
+    null;
 
   /*
   |--------------------------------------------------------------------------
@@ -50,7 +70,7 @@ export default function AddLeadButton({
     address: "",
     description: "",
     value: "",
-    priority: "cold",
+    status: "cold",
   });
 
   /*
@@ -61,13 +81,8 @@ export default function AddLeadButton({
 
   const resetLeadModal = () => {
     setEditingLead(null);
-
     setShowAddLead(false);
-
-    setActivePipelineId("");
-
-    setLoading(false);
-
+  
     setNewLeadData({
       name: "",
       email: "",
@@ -79,8 +94,9 @@ export default function AddLeadButton({
       address: "",
       description: "",
       value: "",
-      priority: "cold",
+      status: "warm",
     });
+    setLoading(false)
   };
 
   /*
@@ -91,7 +107,7 @@ export default function AddLeadButton({
 
   const addNewLead = async () => {
     try {
-      if (!activePipelineId) {
+      if (!pipeline_id) {
         alert("Please select pipeline");
         return;
       }
@@ -105,9 +121,7 @@ export default function AddLeadButton({
 
       const res = await Token.post("/leads", {
         ...newLeadData,
-
-        pipeline_id: activePipelineId,
-
+        pipeline_id: pipeline_id,
         stage_id: activePipeline?.stages?.[0]?.id,
       });
 
@@ -119,9 +133,7 @@ export default function AddLeadButton({
     } catch (err) {
       console.log(err);
 
-      alert(
-        err?.response?.data?.message || "Failed to create lead"
-      );
+      alert(err?.response?.data?.message || "Failed to create lead");
     } finally {
       setLoading(false);
     }
@@ -138,15 +150,12 @@ export default function AddLeadButton({
       setLoading(true);
 
       const res = await Token.put(`/leads/${editingLead.id}`, {
+        pipeline_id:pipeline_id,
         ...newLeadData,
       });
 
       setLeads((prev) =>
-        prev.map((lead) =>
-          lead.id === editingLead.id
-            ? res.data.data
-            : lead
-        )
+        prev.map((lead) => (lead.id === editingLead.id ? res.data.data : lead))
       );
 
       onSuccess(res.data.data);
@@ -155,9 +164,7 @@ export default function AddLeadButton({
     } catch (err) {
       console.log(err);
 
-      alert(
-        err?.response?.data?.message || "Failed to update lead"
-      );
+      alert(err?.response?.data?.message || "Failed to update lead");
     } finally {
       setLoading(false);
     }
@@ -165,6 +172,7 @@ export default function AddLeadButton({
 
   return (
     <>
+      <ToastContainer {...toastCfg} />
       {/* =====================================================
           FULLSCREEN MODAL USING PORTAL
       ===================================================== */}
@@ -173,7 +181,7 @@ export default function AddLeadButton({
         createPortal(
           <div className="fixed inset-0 z-[999999] bg-black/70 backdrop-blur-md">
             <div className="absolute inset-0 flex items-center justify-center p-4">
-              <div className="w-[98vw] h-[96vh] rounded-[32px] overflow-hidden border border-surface-border dark:border-surface-darkBorder bg-white dark:bg-surface-darkCard shadow-2xl flex flex-col">
+              <div className="w-[50vw] h-[80vh] rounded-[32px] overflow-hidden border border-surface-border dark:border-surface-darkBorder bg-white dark:bg-surface-darkCard shadow-2xl flex flex-col">
                 {/* =====================================================
                     HEADER
                 ===================================================== */}
@@ -181,9 +189,7 @@ export default function AddLeadButton({
                 <div className="shrink-0 px-8 py-6 border-b border-surface-border dark:border-surface-darkBorder flex items-center justify-between">
                   <div>
                     <h2 className="text-3xl font-black text-gray-800 dark:text-white">
-                      {editingLead
-                        ? "Update Lead"
-                        : "Create New Lead"}
+                      {editingLead ? "Update Lead" : "Create New Lead"}
                     </h2>
 
                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
@@ -193,7 +199,7 @@ export default function AddLeadButton({
 
                   <button
                     onClick={resetLeadModal}
-                    className="w-12 h-12 rounded-2xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 flex items-center justify-center transition-all text-xl"
+                    className="w-12 h-12 rounded-2xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 flex items-center justify-center transition-all text-xl dark:text-gray-300"
                   >
                     ✕
                   </button>
@@ -204,34 +210,6 @@ export default function AddLeadButton({
                 ===================================================== */}
 
                 <div className="flex-1 overflow-y-auto scroll-bar p-8">
-                  {/* PIPELINE */}
-
-                  <div className="mb-8">
-                    <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 block">
-                      Pipeline
-                    </label>
-
-                    <Select
-                      value={activePipelineId}
-                      onChange={(e) =>
-                        setActivePipelineId(e)
-                      }
-                    >
-                      <option value="">
-                        Select Pipeline
-                      </option>
-
-                      {pipelines.map((pipeline) => (
-                        <option
-                          key={pipeline.id}
-                          value={pipeline.id}
-                        >
-                          {pipeline.name}
-                        </option>
-                      ))}
-                    </Select>
-                  </div>
-
                   {/* BASIC INFO */}
 
                   <div className="mb-8">
@@ -249,7 +227,8 @@ export default function AddLeadButton({
                             name: e,
                           }))
                         }
-                        placeholder="Enter lead name"
+                        placeholder="Enter Name"
+                        required
                       />
 
                       <Input
@@ -274,6 +253,7 @@ export default function AddLeadButton({
                           }))
                         }
                         placeholder="Enter email"
+                        required
                       />
 
                       <Input
@@ -286,6 +266,7 @@ export default function AddLeadButton({
                           }))
                         }
                         placeholder="Enter phone number"
+                        required
                       />
                     </div>
                   </div>
@@ -337,15 +318,15 @@ export default function AddLeadButton({
 
                       <div>
                         <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 block">
-                          Lead Priority
+                          Lead Status
                         </label>
 
                         <Select
-                          value={newLeadData.priority}
+                          value={newLeadData.status}
                           onChange={(e) =>
                             setNewLeadData((prev) => ({
                               ...prev,
-                              priority: e.target.value,
+                              status: e,
                             }))
                           }
                         >
@@ -367,37 +348,17 @@ export default function AddLeadButton({
                           onChange={(e) =>
                             setNewLeadData((prev) => ({
                               ...prev,
-                              source: e.target.value,
+                              source: e,
                             }))
                           }
                         >
-                          <option value="">
-                            Select Source
-                          </option>
-
-                          <option value="Website">
-                            Website
-                          </option>
-
-                          <option value="Facebook">
-                            Facebook
-                          </option>
-
-                          <option value="Instagram">
-                            Instagram
-                          </option>
-
-                          <option value="LinkedIn">
-                            LinkedIn
-                          </option>
-
-                          <option value="Referral">
-                            Referral
-                          </option>
-
-                          <option value="WhatsApp">
-                            WhatsApp
-                          </option>
+                          <option value="unknown"> Select Source</option>
+                          <option value="Website">Website</option>
+                          <option value="Facebook">Facebook</option>
+                          <option value="Instagram">Instagram</option>
+                          <option value="LinkedIn">LinkedIn</option>
+                          <option value="Referral">Referral</option>
+                          <option value="WhatsApp">WhatsApp</option>
                         </Select>
                       </div>
                     </div>
@@ -416,17 +377,16 @@ export default function AddLeadButton({
                           Address
                         </label>
 
-                        <textarea
+                        <Textarea
                           value={newLeadData.address}
                           onChange={(e) =>
                             setNewLeadData((prev) => ({
                               ...prev,
-                              address: e.target.value,
+                              address: e,
                             }))
                           }
                           rows={3}
                           placeholder="Enter address"
-                          className="w-full rounded-3xl border border-surface-border dark:border-surface-darkBorder bg-surface-soft dark:bg-surface-darkMuted px-5 py-4 outline-none resize-none"
                         />
                       </div>
 
@@ -459,7 +419,7 @@ export default function AddLeadButton({
                   <button
                     onClick={resetLeadModal}
                     disabled={loading}
-                    className="h-14 px-8 rounded-2xl border border-surface-border dark:border-surface-darkBorder hover:bg-surface-soft dark:hover:bg-surface-darkMuted font-semibold"
+                    className="h-14 px-8 rounded-2xl border dark:text-gray-300 border-surface-border dark:border-surface-darkBorder hover:bg-surface-soft dark:hover:bg-surface-darkMuted font-semibold"
                   >
                     Cancel
                   </button>
@@ -492,10 +452,20 @@ export default function AddLeadButton({
           OPEN BUTTON
       ===================================================== */}
 
-      <AddButton
-        onClick={() => setShowAddLead(true)}
-        title="New Lead"
-      />
+      <button
+        onClick={() => {
+          if (!pipeline_id) {
+            toast.warn("Please Select Lead Set first", toastCfg);
+            return;
+          }
+          setShowAddLead(true);
+        }}
+        className="h-12 px-5 rounded-2xl bg-primary-500 hover:bg-primary-600 text-white shadow-lg shadow-primary-500/20 transition-all flex items-center gap-3 font-semibold"
+      >
+        <Plus size={17} />
+
+        <span className="text-sm">Add New Lead</span>
+      </button>
     </>
   );
 }

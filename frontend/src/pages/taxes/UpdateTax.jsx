@@ -174,7 +174,7 @@ export default function UpdateTax() {
 
       {/* SELECT TAX */}
 
-      <div className="bg-white dark:bg-surface-darkCard border border-surface-border dark:border-surface-darkBorder rounded-[28px] shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-surface-darkCard border border-surface-border dark:border-surface-darkBorder rounded-[28px] shadow-sm">
         {/* TOP */}
 
         <div className="px-6 py-5 border-b border-surface-border dark:border-surface-darkBorder bg-surface-soft dark:bg-surface-darkMuted">

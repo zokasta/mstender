@@ -66,7 +66,6 @@ Route::middleware(['auth:sanctum', 'not.banned'])->group(function () {
         Route::post('/{id}/duplicate', [PipelineController::class, 'duplicate']);
         Route::post('/bulk-delete', [PipelineController::class, 'bulkDelete']);
         Route::post('/bulk-status', [PipelineController::class, 'bulkStatus']);
-        
     });
 
     /*
@@ -83,6 +82,14 @@ Route::middleware(['auth:sanctum', 'not.banned'])->group(function () {
         Route::post('/reorder', [PipelineStageController::class, 'reorder']);
     });
 
+    Route::prefix('lead-activities')->group(function () {
+        Route::get('/', [LeadActivityController::class, 'index']);
+        Route::get('/{id}', [LeadActivityController::class, 'show']);
+        Route::post('/', [LeadActivityController::class, 'store']);
+        Route::put('/{id}', [LeadActivityController::class, 'update']);
+        Route::delete('/{id}', [LeadActivityController::class, 'destroy']);
+        Route::post('/bulk-delete', [LeadActivityController::class, 'bulkDelete']);
+    });
     /*
     |--------------------------------------------------------------------------
     | Leads

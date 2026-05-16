@@ -12,7 +12,7 @@ export default function AdminLayout() {
       <div className="flex-1 flex flex-col h-full overflow-hidden">
         <Topbar />
 
-        <main className="flex-1 overflow-auto scroll-bar p-5 bg-surface-light dark:bg-surface-dark">
+        <main className="flex-1 overflow-auto scroll-bar p-5 bg-[#eef2f7] dark:bg-surface-dark">
           <div className="w-full max-w-full overflow-x-auto">
             <Outlet />
           </div>

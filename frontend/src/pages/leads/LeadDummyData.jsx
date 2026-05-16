@@ -106,9 +106,9 @@ export const initialLeads = [
 ];
 
 export const temperatureColors = {
-  Hot: "bg-red-100 text-red-600 border-red-200",
+  hot: "bg-red-100 text-red-600 border-red-200",
 
-  Warm: "bg-yellow-100 text-yellow-700 border-yellow-200",
+  warm: "bg-yellow-100 text-yellow-700 border-yellow-200",
 
-  Cold: "bg-cyan-100 text-cyan-700 border-cyan-200",
+  cold: "bg-cyan-100 text-cyan-700 border-cyan-200",
 };

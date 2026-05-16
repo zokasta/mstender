@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
-
 import { FaPlus } from "react-icons/fa";
-
 import Token from "../../database/Token";
-
 import Input from "../../components/elements/Input";
+import { toast, ToastContainer } from "react-toastify";
+import { toastCfg } from "../../data/toastCfg";
 
 export default function AddNewStageButton({
   activePipelineId,
@@ -58,7 +57,7 @@ export default function AddNewStageButton({
       }
 
       if (!activePipelineId) {
-        alert("Please select pipeline");
+        alert("Please select Lead Set");
         return;
       }
 
@@ -71,14 +70,11 @@ export default function AddNewStageButton({
       */
 
       if (editingStage) {
-        const res = await Token.put(
-          `/pipeline-stages/${editingStage.id}`,
-          {
-            name: newStageData.name,
-            color: newStageData.color,
-            is_default: newStageData.is_default,
-          }
-        );
+        const res = await Token.put(`/pipeline-stages/${editingStage.id}`, {
+          name: newStageData.name,
+          color: newStageData.color,
+          is_default: newStageData.is_default,
+        });
 
         setPipelines((prev) =>
           prev.map((pipeline) =>
@@ -87,9 +83,7 @@ export default function AddNewStageButton({
                   ...pipeline,
 
                   stages: pipeline.stages.map((stage) =>
-                    stage.id === editingStage.id
-                      ? res.data.data
-                      : stage
+                    stage.id === editingStage.id ? res.data.data : stage
                   ),
                 }
               : pipeline
@@ -102,23 +96,17 @@ export default function AddNewStageButton({
         |--------------------------------------------------------------------------
         */
 
-        const res = await Token.post(
-          "/pipeline-stages",
-          {
-            pipeline_id: activePipelineId,
+        const res = await Token.post("/pipeline-stages", {
+          pipeline_id: activePipelineId,
 
-            name: newStageData.name,
+          name: newStageData.name,
 
-            color: newStageData.color,
+          color: newStageData.color,
 
-            is_default:
-              newStageData.is_default,
+          is_default: newStageData.is_default,
 
-            position:
-              (activePipeline?.stages?.length || 0) +
-              1,
-          }
-        );
+          position: (activePipeline?.stages?.length || 0) + 1,
+        });
 
         setPipelines((prev) =>
           prev.map((pipeline) =>
@@ -126,10 +114,7 @@ export default function AddNewStageButton({
               ? {
                   ...pipeline,
 
-                  stages: [
-                    ...pipeline.stages,
-                    res.data.data,
-                  ],
+                  stages: [...pipeline.stages, res.data.data],
                 }
               : pipeline
           )
@@ -140,10 +125,7 @@ export default function AddNewStageButton({
     } catch (err) {
       console.log(err);
 
-      alert(
-        err?.response?.data?.message ||
-          "Failed to save stage"
-      );
+      alert(err?.response?.data?.message || "Failed to save stage");
     } finally {
       setLoading(false);
     }
@@ -151,21 +133,26 @@ export default function AddNewStageButton({
 
   return (
     <>
+      <ToastContainer {...toastCfg} />
       {/* =====================================================
           BUTTON
       ===================================================== */}
 
       <button
-        onClick={() => setShowPopup(true)}
+        onClick={() => {
+          if (!activePipelineId) {
+            toast.warn("Please Select Lead Set", toastCfg);
+            return;
+          }
+          setShowPopup(true);
+        }}
         className="h-12 px-5 rounded-2xl border border-surface-border dark:border-surface-darkBorder bg-white dark:bg-surface-darkCard hover:bg-primary-50 dark:hover:bg-surface-darkMuted text-gray-700 dark:text-gray-300 font-medium transition-all flex items-center gap-3"
       >
         <div className="w-7 h-7 rounded-xl bg-primary-50 dark:bg-primary-900/20 text-primary-500 flex items-center justify-center">
           <FaPlus size={11} />
         </div>
 
-        <span className="text-sm">
-          Stages
-        </span>
+        <span className="text-sm">Stages</span>
       </button>
 
       {/* =====================================================
@@ -182,9 +169,7 @@ export default function AddNewStageButton({
                 <div className="px-7 py-6 border-b border-surface-border dark:border-surface-darkBorder flex items-center justify-between">
                   <div>
                     <h2 className="text-2xl font-black text-gray-800 dark:text-white">
-                      {editingStage
-                        ? "Update Stage"
-                        : "Create Stage"}
+                      {editingStage ? "Update Stage" : "Create Stage"}
                     </h2>
 
                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
@@ -194,7 +179,7 @@ export default function AddNewStageButton({
 
                   <button
                     onClick={resetModal}
-                    className="w-11 h-11 rounded-2xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 flex items-center justify-center"
+                    className="w-11 h-11 dark:text-gray-300 rounded-2xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 flex items-center justify-center"
                   >
                     ✕
                   </button>
@@ -238,16 +223,13 @@ export default function AddNewStageButton({
                         <button
                           key={color}
                           onClick={() =>
-                            setNewStageData(
-                              (prev) => ({
-                                ...prev,
-                                color,
-                              })
-                            )
+                            setNewStageData((prev) => ({
+                              ...prev,
+                              color,
+                            }))
                           }
                           className={`h-14 rounded-2xl border-4 transition-all ${
-                            newStageData.color ===
-                            color
+                            newStageData.color === color
                               ? "border-black dark:border-white scale-95"
                               : "border-transparent"
                           }`}
@@ -264,17 +246,12 @@ export default function AddNewStageButton({
                   <label className="flex items-center gap-3 p-5 rounded-2xl border border-surface-border dark:border-surface-darkBorder bg-surface-soft dark:bg-surface-darkMuted cursor-pointer">
                     <input
                       type="checkbox"
-                      checked={
-                        newStageData.is_default
-                      }
+                      checked={newStageData.is_default}
                       onChange={(e) =>
-                        setNewStageData(
-                          (prev) => ({
-                            ...prev,
-                            is_default:
-                              e.target.checked,
-                          })
-                        )
+                        setNewStageData((prev) => ({
+                          ...prev,
+                          is_default: e.target.checked,
+                        }))
                       }
                       className="w-5 h-5 rounded"
                     />
@@ -285,15 +262,35 @@ export default function AddNewStageButton({
                       </h4>
 
                       <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                        New leads will
-                        automatically move here
+                        New leads will automatically move here
                       </p>
                     </div>
                   </label>
 
                   {/* FOOTER */}
+                  <div className="shrink-0 px-8 py-5 border-t border-surface-border dark:border-surface-darkBorder flex items-center justify-end gap-4">
+                    <button
+                      onClick={resetModal}
+                      disabled={loading}
+                      className="h-14 px-8 rounded-2xl border dark:text-gray-300 border-surface-border dark:border-surface-darkBorder hover:bg-surface-soft dark:hover:bg-surface-darkMuted font-semibold"
+                    >
+                      Cancel
+                    </button>
 
-                  <div className="flex items-center justify-end gap-4 pt-5 border-t border-surface-border dark:border-surface-darkBorder">
+                    <button
+                      onClick={saveStage}
+                      disabled={loading}
+                      className="h-14 min-w-[180px] px-8 rounded-2xl bg-primary-500 hover:bg-primary-600 text-white font-bold shadow-lg shadow-primary-500/20 disabled:opacity-50"
+                    >
+                      {loading
+                        ? "Saving..."
+                        : editingStage
+                        ? "Update Stage"
+                        : "Create Stage"}
+                    </button>
+                  </div>
+
+                  {/* <div className="flex items-center justify-end gap-4 pt-5 border-t border-surface-border dark:border-surface-darkBorder">
                     <button
                       onClick={resetModal}
                       disabled={loading}
@@ -313,7 +310,7 @@ export default function AddNewStageButton({
                         ? "Update Stage"
                         : "Create Stage"}
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

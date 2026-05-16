@@ -22,6 +22,7 @@ export default function SelectSearch({
   required = false,
   error = "",
   className = "",
+  dropMenuClassName = "",
 
   debounceTime = 500,
   minSearchLength = 1,
@@ -29,21 +30,13 @@ export default function SelectSearch({
   isDefault = true,
 }) {
   const [open, setOpen] = useState(false);
-
   const [items, setItems] = useState([]);
-
   const [defaultItem, setDefaultItem] = useState(null);
-
   const [hasValidDefault, setHasValidDefault] = useState(false);
-
   const [search, setSearch] = useState("");
-
   const [debouncedSearch, setDebouncedSearch] = useState("");
-
   const [loading, setLoading] = useState(false);
-
   const wrapperRef = useRef(null);
-
   const searchInputRef = useRef(null);
 
   /* =========================================
@@ -58,7 +51,6 @@ export default function SelectSearch({
     };
 
     document.addEventListener("mousedown", handler);
-
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
@@ -192,7 +184,10 @@ export default function SelectSearch({
     (hasValidDefault ? defaultItem : null);
 
   return (
-    <div className="w-full relative" ref={wrapperRef}>
+    <div
+      className={`w-full relative ${open ? "z-[999]" : "z-0"}`}
+      ref={wrapperRef}
+    >
       {/* LABEL */}
 
       {label && (
@@ -251,7 +246,12 @@ export default function SelectSearch({
       {/* DROPDOWN */}
 
       {open && (
-        <div className="absolute z-50 mt-2 w-full overflow-hidden rounded-[24px] border border-surface-border dark:border-surface-darkBorder bg-white dark:bg-surface-darkCard shadow-2xl">
+        <div
+          className={`absolute left-0 top-[calc(100%+8px)] z-[999999] w-full overflow-hidden rounded-[24px] border border-surface-border dark:border-surface-darkBorder bg-white dark:bg-surface-darkCard shadow-2xl ${dropMenuClassName}`}
+          style={{
+            isolation: "isolate",
+          }}
+        >
           {/* SEARCH */}
 
           <div className="p-3 border-b border-surface-border dark:border-surface-darkBorder">

@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import {
   Phone,
   Mail,
   Building2,
-  Calendar,
   Clock3,
   Activity,
   ChevronRight,
@@ -13,16 +13,17 @@ import {
   MapPin,
   Globe,
   Briefcase,
-  Pencil,
-  Trash2,
   Edit2,
   X,
   MessageSquare,
   User2,
   Eye,
+  Trash2,
 } from "lucide-react";
 
 import { FaWhatsapp } from "react-icons/fa";
+import Input from "../../components/elements/Input";
+import Token from "../../database/Token";
 
 export default function LeadDetails() {
   const [showNoteModal, setShowNoteModal] = useState(false);
@@ -33,109 +34,117 @@ export default function LeadDetails() {
 
   const [showAllActivities, setShowAllActivities] = useState(false);
 
+  const [loading, setLoading] = useState(true);
+
+  const [lead, setLead] = useState(null);
+
+  const [activities, setActivities] = useState([]);
+
+  const [notes, setNotes] = useState([]);
   const [editingNote, setEditingNote] = useState(null);
 
   const [activityType, setActivityType] = useState("");
-
   const [activityData, setActivityData] = useState({
     title: "",
     desc: "",
   });
 
   const [commentData, setCommentData] = useState({});
+  const [params] = useSearchParams();
+  const leadId = params.get("id");
 
-  const [lead, setLead] = useState({
-    id: 1042,
-    name: "Rahul Sharma",
-    company: "TechVision Pvt Ltd",
-    temperature: "Hot",
-    source: "Website",
-    email: "rahul@techvision.in",
-    phone: "+91 98765 43210",
-    website: "www.techvision.in",
-    city: "Ahmedabad",
-    state: "Gujarat",
-    country: "India",
-    pincode: "380051",
-    address: "SG Highway, Ahmedabad",
-    value: 450000,
-    pipeline: "Sales Pipeline",
-    stage: "Proposal",
-    assigned_to: "Faiz Rajput",
-    created_at: "12 May 2026",
-    followup_date: "15 May 2026",
-    description:
-      "Interested in enterprise ERP and CRM solution with inventory management and HR module.",
-  });
+  // const [lead, setLead] = useState({
+  //   id: 1042,
+  //   name: "Rahul Sharma",
+  //   company: "TechVision Pvt Ltd",
+  //   temperature: "Hot",
+  //   source: "Website",
+  //   email: "rahul@techvision.in",
+  //   phone: "+91 98765 43210",
+  //   website: "www.techvision.in",
+  //   city: "Ahmedabad",
+  //   state: "Gujarat",
+  //   country: "India",
+  //   pincode: "380051",
+  //   address: "SG Highway, Ahmedabad",
+  //   value: 450000,
+  //   pipeline: "Sales Pipeline",
+  //   stage: "Proposal",
+  //   assigned_to: "Faiz Rajput",
+  //   created_at: "12 May 2026",
+  //   followup_date: "15 May 2026",
+  //   description:
+  //     "Interested in enterprise ERP and CRM solution with inventory management and HR module.",
+  // });
 
-  const [leadForm, setLeadForm] = useState(lead);
+  const [leadForm, setLeadForm] = useState({});
 
   const [noteData, setNoteData] = useState({
     title: "",
     desc: "",
   });
 
-  const [notes, setNotes] = useState([
-    {
-      id: 1,
-      title: "Inventory Module",
-      desc: "Client wants barcode inventory system with QR integration and warehouse tracking system.",
-      time: "2 days ago",
-      by: "Faiz",
-      comments: [
-        {
-          id: 1,
-          user: "Manager",
-          message: "Need pricing approval first.",
-        },
-      ],
-    },
+  // const [notes, setNotes] = useState([
+  //   {
+  //     id: 1,
+  //     title: "Inventory Module",
+  //     desc: "Client wants barcode inventory system with QR integration and warehouse tracking system.",
+  //     time: "2 days ago",
+  //     by: "Faiz",
+  //     comments: [
+  //       {
+  //         id: 1,
+  //         user: "Manager",
+  //         message: "Need pricing approval first.",
+  //       },
+  //     ],
+  //   },
 
-    {
-      id: 2,
-      title: "Budget Approved",
-      desc: "Client approved estimated ERP implementation budget.",
-      time: "5 days ago",
-      by: "Admin",
-      comments: [
-        {
-          id: 1,
-          user: "Sales Head",
-          message: "Prepare proposal ASAP.",
-        },
-      ],
-    },
-  ]);
+  //   {
+  //     id: 2,
+  //     title: "Budget Approved",
+  //     desc: "Client approved estimated ERP implementation budget.",
+  //     time: "5 days ago",
+  //     by: "Admin",
+  //     comments: [
+  //       {
+  //         id: 1,
+  //         user: "Sales Head",
+  //         message: "Prepare proposal ASAP.",
+  //       },
+  //     ],
+  //   },
+  // ]);
 
-  const [activities, setActivities] = useState([
-    {
-      type: "call",
-      title: "Call Completed",
-      desc: "Discussed ERP modules and pricing",
-      time: "Yesterday",
-    },
+  // const [activities, setActivities] = useState([
+  //   {
+  //     type: "call",
+  //     title: "Call Completed",
+  //     desc: "Discussed ERP modules and pricing",
+  //     time: "Yesterday",
+  //   },
 
-    {
-      type: "whatsapp",
-      title: "WhatsApp Followup",
-      desc: "Shared quotation PDF",
-      time: "2 hours ago",
-    },
+  //   {
+  //     type: "whatsapp",
+  //     title: "WhatsApp Followup",
+  //     desc: "Shared quotation PDF",
+  //     time: "2 hours ago",
+  //   },
 
-    {
-      type: "meeting",
-      title: "Office Visit",
-      desc: "Visited client office for demo",
-      time: "2 days ago",
-    },
+  //   {
+  //     type: "meeting",
+  //     title: "Office Visit",
+  //     desc: "Visited client office for demo",
+  //     time: "2 days ago",
+  //   },
 
-    {
-      type: "email",
-      title: "Proposal Sent",
-      desc: "Enterprise proposal shared",
-      time: "3 days ago",
-    },
-  ]);
+  //   {
+  //     type: "email",
+  //     title: "Proposal Sent",
+  //     desc: "Enterprise proposal shared",
+  //     time: "3 days ago",
+  //   },
+  // ]);
 
   const calls = [
     {
@@ -152,6 +161,24 @@ export default function LeadDetails() {
       time: "Yesterday",
     },
   ];
+  useEffect(() => {
+    fetchLead();
+  }, [leadId]);
+
+  const fetchLead = async () => {
+    try {
+      setLoading(true);
+      const res = await Token.get(`/leads/${leadId}`);
+      const data = res.data.data;
+      setLead(data);
+      setActivities(data.activities || []);
+      setNotes(data.notes || []);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const getActivityIcon = (type) => {
     switch (type) {
@@ -299,8 +326,22 @@ export default function LeadDetails() {
     setShowLeadModal(false);
   };
 
+  if (loading || !lead) {
+    return (
+      <div className="min-h-[calc(100dvh-120px)] bg-surface-main dark:bg-surface-dark flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin mx-auto" />
+
+          <p className="mt-4 text-gray-500 dark:text-gray-400">
+            Loading lead...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-surface-main dark:bg-surface-dark">
       {/* HEADER */}
 
       <div className="flex items-center justify-between mb-4">
@@ -317,21 +358,25 @@ export default function LeadDetails() {
             <span className="text-primary-500 font-medium">Lead Details</span>
           </div>
 
-          <h1 className="text-xl font-bold text-gray-800 dark:text-white">Lead Details</h1>
+          <h1 className="text-xl font-bold text-gray-800 dark:text-white">
+            Lead Details
+          </h1>
         </div>
       </div>
 
       {/* TOP */}
 
-      <div className="bg-white dark:bg-surface-darkCard border border-gray-200 dark:border-surface-darkBorder rounded-xl p-4">
+      <div className="bg-white dark:bg-surface-darkCard border border-surface-border dark:border-surface-darkBorder shadow-sm rounded-xl p-4">
         <div className="flex items-start justify-between gap-6">
           <div className="flex gap-4">
             <div className="w-20 h-20 rounded-xl bg-primary-100 text-primary-600 flex items-center justify-center text-3xl font-black shrink-0">
-              {lead.name[0]}
+              {lead?.name?.[0] || "?"}
             </div>
 
             <div>
-              <h2 className="text-2xl font-black text-gray-800 dark:text-white">{lead.name}</h2>
+              <h2 className="text-2xl font-black text-gray-800 dark:text-white">
+                {lead.name}
+              </h2>
 
               <div className="flex items-center gap-2 mt-1 text-sm text-gray-500 dark:text-gray-400">
                 <Building2 size={14} />
@@ -341,19 +386,19 @@ export default function LeadDetails() {
 
               <div className="flex flex-wrap gap-2 mt-3">
                 <span className="px-3 py-1 rounded-full bg-primary-100 text-primary-600 text-xs font-semibold">
-                  {lead.stage}
+                  {lead.stage?.name}
                 </span>
 
                 <span
                   className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                    lead.temperature === "Hot"
+                    lead.status === "hot"
                       ? "bg-red-100 text-red-600"
-                      : lead.temperature === "Warm"
+                      : lead.status === "warm"
                       ? "bg-yellow-100 text-yellow-700"
                       : "bg-cyan-100 text-cyan-700"
                   }`}
                 >
-                  {lead.temperature}
+                  {lead.status}
                 </span>
               </div>
 
@@ -375,34 +420,42 @@ export default function LeadDetails() {
 
           <div className="grid grid-cols-2 gap-3 min-w-[360px]">
             <div className="bg-primary-50 rounded-xl p-3">
-              <p className="text-[11px] text-gray-500 dark:text-gray-400">Deal Value</p>
+              <p className="text-[11px] text-gray-500 dark:text-gray-400">
+                Deal Value
+              </p>
 
               <h3 className="text-lg font-bold text-primary-600 mt-1">
-                ₹{lead.value.toLocaleString("en-IN")}
+                ₹{Number(lead?.value || 0).toLocaleString("en-IN")}
               </h3>
             </div>
 
-            <div className="bg-surface-soft dark:bg-surface-darkSoft rounded-xl p-3">
-              <p className="text-[11px] text-gray-500 dark:text-gray-400">Pipeline</p>
+            <div className="bg-surface-soft dark:bg-surface-darkMuted rounded-xl p-3">
+              <p className="text-[11px] text-gray-500 dark:text-gray-400">
+                Pipeline
+              </p>
 
               <h3 className="text-sm font-bold text-gray-800 dark:text-white mt-1">
-                {lead.pipeline}
+                {lead.pipeline?.name}
               </h3>
             </div>
 
-            <div className="bg-surface-soft dark:bg-surface-darkSoft rounded-xl p-3">
-              <p className="text-[11px] text-gray-500 dark:text-gray-400">Assigned To</p>
+            <div className="bg-surface-soft dark:bg-surface-darkMuted rounded-xl p-3">
+              <p className="text-[11px] text-gray-500 dark:text-gray-400">
+                Assigned To
+              </p>
 
               <h3 className="text-sm font-bold text-gray-800 dark:text-white mt-1">
-                {lead.assigned_to}
+                {lead.assigned_to?.name}
               </h3>
             </div>
 
-            <div className="bg-surface-soft dark:bg-surface-darkSoft rounded-xl p-3">
-              <p className="text-[11px] text-gray-500 dark:text-gray-400">Follow Up</p>
+            <div className="bg-surface-soft dark:bg-surface-darkMuted rounded-xl p-3">
+              <p className="text-[11px] text-gray-500 dark:text-gray-400">
+                Follow Up
+              </p>
 
               <h3 className="text-sm font-bold text-gray-800 dark:text-white mt-1">
-                {lead.followup_date}
+                {lead.followup_date || "-"}
               </h3>
             </div>
           </div>
@@ -417,8 +470,8 @@ export default function LeadDetails() {
         <div className="col-span-8 space-y-4">
           {/* LEAD INFO */}
 
-          <div className="bg-white dark:bg-surface-darkCard border border-gray-200 dark:border-surface-darkBorder rounded-xl">
-            <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
+          <div className="bg-white dark:bg-surface-darkCard border border-surface-border dark:border-surface-darkBorder shadow-sm rounded-xl">
+            <div className="px-4 py-3 border-b border-surface-border dark:border-surface-darkBorder flex items-center justify-between">
               <h3 className="text-lg font-bold text-gray-800 dark:text-white">
                 Lead Information
               </h3>
@@ -490,7 +543,7 @@ export default function LeadDetails() {
                 ].map((item, index) => (
                   <div
                     key={index}
-                    className="bg-surface-soft dark:bg-surface-darkSoft rounded-xl p-4 border border-gray-100"
+                    className="bg-surface-soft dark:bg-surface-darkMuted rounded-xl p-4 border dark:border-surface-darkBorder border-gray-100"
                   >
                     <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-xs">
                       {item.icon}
@@ -499,17 +552,19 @@ export default function LeadDetails() {
                     </div>
 
                     <h3 className="text-sm font-semibold text-gray-800 dark:text-white mt-2 break-all">
-                      {item.value}
+                    {item.value || "-"}
                     </h3>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-4 bg-surface-soft dark:bg-surface-darkSoft rounded-xl p-4 border border-gray-100">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Description</p>
+              <div className="mt-4 bg-surface-soft dark:bg-surface-darkMuted rounded-xl p-4 border dark:border-surface-darkBorder border-gray-100">
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                  Description
+                </p>
 
-                <p className="text-sm text-gray-700 leading-7">
-                  {lead.description}
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-7">
+                  {lead.description || "-"}
                 </p>
               </div>
             </div>
@@ -517,9 +572,11 @@ export default function LeadDetails() {
 
           {/* ACTIVITIES */}
 
-          <div className="bg-white dark:bg-surface-darkCard border border-gray-200 dark:border-surface-darkBorder rounded-xl">
-            <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
-              <h3 className="text-lg font-bold text-gray-800 dark:text-white">Activities</h3>
+          <div className="bg-white dark:bg-surface-darkCard border border-surface-border dark:border-surface-darkBorder shadow-sm rounded-xl">
+            <div className="px-4 py-3 border-b border-surface-border dark:border-surface-darkBorder flex items-center justify-between">
+              <h3 className="text-lg font-bold text-gray-800 dark:text-white">
+                Activities
+              </h3>
 
               <button
                 onClick={() => setShowAllActivities(!showAllActivities)}
@@ -533,17 +590,17 @@ export default function LeadDetails() {
 
             <div className="p-4">
               <div className="relative pl-7">
-                <div className="absolute left-3 top-0 bottom-0 w-[2px] bg-gray-200" />
+                <div className="absolute left-3 top-0 bottom-0 w-[2px] bg-surface-border dark:bg-surface-darkBorder" />
 
                 {(showAllActivities ? activities : activities.slice(0, 3)).map(
                   (item, index) => (
                     <div key={index} className="relative mb-5">
                       <div className="absolute -left-[24px] top-1 w-4 h-4 rounded-full bg-primary-500 border-4 border-white" />
 
-                      <div className="bg-surface-soft dark:bg-surface-darkSoft rounded-xl p-3 border border-gray-100">
+                      <div className="bg-surface-soft dark:bg-surface-darkMuted rounded-xl p-3 border border-gray-100 dark:border-surface-darkBorder">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <div className="w-7 h-7 rounded-lg bg-white dark:bg-surface-darkCard border border-gray-200 dark:border-surface-darkBorder flex items-center justify-center">
+                            <div className="w-7 h-7 rounded-lg bg-white dark:bg-surface-darkCard border border-surface-border dark:border-surface-darkBorder shadow-sm flex items-center justify-center">
                               {getActivityIcon(item.type)}
                             </div>
 
@@ -570,9 +627,11 @@ export default function LeadDetails() {
 
           {/* NOTES */}
 
-          <div className="bg-white dark:bg-surface-darkCard border border-gray-200 dark:border-surface-darkBorder rounded-xl">
-            <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
-              <h3 className="text-lg font-bold text-gray-800 dark:text-white">Notes</h3>
+          <div className="bg-white dark:bg-surface-darkCard border border-surface-border dark:border-surface-darkBorder shadow-sm rounded-xl">
+            <div className="px-4 py-3 border-b border-surface-border dark:border-surface-darkBorder flex items-center justify-between">
+              <h3 className="text-lg font-bold text-gray-800 dark:text-white">
+                Notes
+              </h3>
 
               <button
                 onClick={() => setShowNoteModal(true)}
@@ -588,7 +647,7 @@ export default function LeadDetails() {
                   key={note.id}
                   className="border border-gray-200 dark:border-surface-darkBorder rounded-xl overflow-hidden"
                 >
-                  <div className="bg-surface-soft dark:bg-surface-darkSoft p-4 border-b border-gray-100">
+                  <div className="bg-surface-soft dark:bg-surface-darkMuted p-4 border-b border-surface-border dark:border-surface-darkBorder">
                     <div className="flex items-start justify-between">
                       <div>
                         <h4 className="font-bold text-sm text-gray-800 dark:text-white">
@@ -621,7 +680,7 @@ export default function LeadDetails() {
                       </div>
                     </div>
 
-                    <p className="text-sm text-gray-600 mt-4 leading-7">
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-4 leading-7">
                       {note.desc}
                     </p>
                   </div>
@@ -633,7 +692,7 @@ export default function LeadDetails() {
                       {note.comments.map((comment) => (
                         <div
                           key={comment.id}
-                          className="bg-surface-soft dark:bg-surface-darkSoft rounded-xl p-3 border border-gray-100"
+                          className="bg-surface-soft dark:bg-surface-darkMuted rounded-xl p-3 border border-gray-100 dark:border-surface-darkBorder"
                         >
                           <div className="flex items-center gap-2 text-xs font-semibold text-primary-500">
                             <User2 size={13} />
@@ -641,7 +700,7 @@ export default function LeadDetails() {
                             {comment.user}
                           </div>
 
-                          <p className="text-xs text-gray-600 mt-2 leading-6">
+                          <p className="text-xs text-gray-600 dark:text-gray-300 mt-2 leading-6">
                             {comment.message}
                           </p>
                         </div>
@@ -651,21 +710,20 @@ export default function LeadDetails() {
                     {/* COMMENT INPUT */}
 
                     <div className="flex gap-2 mt-4">
-                      <input
+                      <Input
                         placeholder="Write comment..."
                         value={commentData[note.id] || ""}
                         onChange={(e) =>
                           setCommentData({
                             ...commentData,
-                            [note.id]: e.target.value,
+                            [note.id]: e,
                           })
                         }
-                        className="flex-1 h-10 rounded-xl border border-gray-200 dark:border-surface-darkBorder px-4 text-sm outline-none focus:border-primary-300"
                       />
 
                       <button
                         onClick={() => addComment(note.id)}
-                        className="h-10 px-4 rounded-xl bg-primary-500 hover:bg-primary-600 text-white text-sm flex items-center gap-2"
+                        className="h-12 px-5 rounded-xl bg-primary-500 hover:bg-primary-600 text-white text-sm flex items-center gap-2"
                       >
                         <MessageSquare size={14} />
                         Add
@@ -684,7 +742,7 @@ export default function LeadDetails() {
           <div className="sticky top-5 space-y-4">
             {/* QUICK ACTIONS */}
 
-            <div className="bg-white dark:bg-surface-darkCard border border-gray-200 dark:border-surface-darkBorder rounded-xl p-4">
+            <div className="bg-white dark:bg-surface-darkCard border border-surface-border dark:border-surface-darkBorder shadow-sm rounded-xl p-4">
               <h3 className="text-base font-bold text-gray-800 dark:text-white mb-4">
                 Quick Actions
               </h3>
@@ -726,9 +784,11 @@ export default function LeadDetails() {
 
             {/* CALLS */}
 
-            <div className="bg-white dark:bg-surface-darkCard border border-gray-200 dark:border-surface-darkBorder rounded-xl">
-              <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
-                <h3 className="text-base font-bold text-gray-800 dark:text-white">Calls</h3>
+            <div className="bg-white dark:bg-surface-darkCard border border-surface-border dark:border-surface-darkBorder shadow-sm rounded-xl">
+              <div className="px-4 py-3 border-b border-surface-border dark:border-surface-darkBorder flex items-center justify-between">
+                <h3 className="text-base font-bold text-gray-800 dark:text-white">
+                  Calls
+                </h3>
 
                 <button className="text-primary-500 text-xs font-semibold">
                   View All
@@ -739,7 +799,7 @@ export default function LeadDetails() {
                 {calls.map((call, index) => (
                   <div
                     key={index}
-                    className="flex items-start justify-between p-3 rounded-xl bg-surface-soft dark:bg-surface-darkSoft border border-gray-100"
+                    className="flex items-start justify-between p-3 rounded-xl bg-surface-soft dark:bg-surface-darkMuted border border-gray-100 dark:border-surface-darkBorder"
                   >
                     <div className="flex gap-3">
                       <div className="w-10 h-10 rounded-xl bg-primary-100 text-primary-600 flex items-center justify-center">
@@ -773,14 +833,16 @@ export default function LeadDetails() {
 
             {/* SUMMARY */}
 
-            <div className="bg-white dark:bg-surface-darkCard border border-gray-200 dark:border-surface-darkBorder rounded-xl p-4">
+            <div className="bg-white dark:bg-surface-darkCard border border-surface-border dark:border-surface-darkBorder shadow-sm rounded-xl p-4">
               <h3 className="text-base font-bold text-gray-800 dark:text-white mb-4">
                 Summary
               </h3>
 
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400">Lead ID</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    Lead ID
+                  </span>
 
                   <span className="font-semibold text-sm text-gray-800 dark:text-white">
                     #{lead.id}
@@ -788,7 +850,9 @@ export default function LeadDetails() {
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400">Created</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    Created
+                  </span>
 
                   <span className="font-semibold text-sm text-gray-800 dark:text-white">
                     {lead.created_at}
@@ -796,15 +860,19 @@ export default function LeadDetails() {
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400">Stage</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    Stage
+                  </span>
 
                   <span className="px-3 py-1 rounded-full bg-primary-100 text-primary-600 text-xs font-semibold">
-                  {lead.stage}
-                </span>
+                    {lead.stage?.name}
+                  </span>
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400">Temperature</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    Temperature
+                  </span>
 
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-semibold ${
@@ -820,7 +888,9 @@ export default function LeadDetails() {
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400">Source</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    Source
+                  </span>
 
                   <span className="font-semibold text-sm text-gray-800 dark:text-white">
                     {lead.source}
@@ -828,10 +898,12 @@ export default function LeadDetails() {
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400">Assigned To</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    Assigned To
+                  </span>
 
                   <span className="font-semibold text-sm text-gray-800 dark:text-white">
-                    {lead.assigned_to}
+                    {lead.assigned_to?.name}
                   </span>
                 </div>
               </div>
@@ -852,7 +924,7 @@ export default function LeadDetails() {
 
               <button
                 onClick={() => setShowActivityModal(false)}
-                className="w-9 h-9 rounded-xl hover:bg-gray-100 flex items-center justify-center"
+                className="w-9 h-9 rounded-xl hover:bg-surface-soft dark:hover:bg-surface-darkMuted dark:text-gray-300 flex items-center justify-center"
               >
                 <X size={18} />
               </button>
@@ -868,7 +940,7 @@ export default function LeadDetails() {
                     title: e.target.value,
                   })
                 }
-                className="w-full h-11 rounded-xl border border-gray-200 dark:border-surface-darkBorder px-4 outline-none focus:border-primary-300"
+                className="w-full h-11 rounded-xl border border-surface-border dark:border-surface-darkBorder bg-white dark:bg-surface-darkMuted text-gray-800 dark:text-white px-4 outline-none focus:border-primary-400"
               />
 
               <textarea
@@ -880,11 +952,13 @@ export default function LeadDetails() {
                     desc: e.target.value,
                   })
                 }
-                className="w-full h-32 rounded-xl border border-gray-200 dark:border-surface-darkBorder px-4 py-3 outline-none resize-none focus:border-primary-300"
+                className="w-full h-32 rounded-xl border border-surface-border dark:border-surface-darkBorder bg-white dark:bg-surface-darkMuted text-gray-800 dark:text-white px-4 py-3 outline-none resize-none focus:border-primary-400"
               />
 
-              <div className="bg-surface-soft dark:bg-surface-darkSoft border border-gray-100 rounded-xl p-4">
-                <p className="text-xs text-gray-500 dark:text-gray-400">Timestamp</p>
+              <div className="bg-surface-soft dark:bg-surface-darkMuted border border-gray-100 rounded-xl p-4 dark:border-surface-darkBorder">
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  Timestamp
+                </p>
 
                 <h4 className="text-sm font-semibold text-gray-800 dark:text-white mt-2">
                   {new Date().toLocaleString()}
@@ -927,7 +1001,7 @@ export default function LeadDetails() {
 
                   setEditingNote(null);
                 }}
-                className="w-9 h-9 rounded-xl hover:bg-gray-100 flex items-center justify-center"
+                className="w-9 h-9 rounded-xl hover:bg-surface-soft dark:hover:bg-surface-darkMuted dark:text-gray-300 flex items-center justify-center"
               >
                 <X size={18} />
               </button>
@@ -943,7 +1017,7 @@ export default function LeadDetails() {
                     title: e.target.value,
                   })
                 }
-                className="w-full h-11 rounded-xl border border-gray-200 dark:border-surface-darkBorder px-4 outline-none focus:border-primary-300"
+                className="w-full h-11 rounded-xl border border-surface-border dark:border-surface-darkBorder bg-white dark:bg-surface-darkMuted text-gray-800 dark:text-white px-4 outline-none focus:border-primary-400"
               />
 
               <textarea
@@ -955,14 +1029,14 @@ export default function LeadDetails() {
                     desc: e.target.value,
                   })
                 }
-                className="w-full h-32 rounded-xl border border-gray-200 dark:border-surface-darkBorder px-4 py-3 outline-none resize-none focus:border-primary-300"
+                className="w-full h-32 rounded-xl border border-surface-border dark:border-surface-darkBorder bg-white dark:bg-surface-darkMuted text-gray-800 dark:text-white px-4 py-3 outline-none resize-none focus:border-primary-400"
               />
             </div>
 
             <div className="flex gap-3 mt-5">
               <button
                 onClick={() => setShowNoteModal(false)}
-                className="flex-1 h-11 rounded-xl border border-gray-200 dark:border-surface-darkBorder hover:bg-gray-50 text-sm"
+                className="flex-1 h-11 rounded-xl border border-gray-200 dark:border-surface-darkBorder hover:bg-gray-50 text-sm "
               >
                 Cancel
               </button>

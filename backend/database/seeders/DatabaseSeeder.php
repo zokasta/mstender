@@ -51,6 +51,32 @@ class DatabaseSeeder extends Seeder
                     'profile_image' => "https://picsum.photos/200",
                 ]
             );
+            User::updateOrCreate(
+                ['email' => 'sales@example.com'],
+                [
+                    'name' => 'Sales',
+                    'username' => 'sales',
+                    'phone' => '9999999999',
+                    'password' => Hash::make('password'), // default password
+                    'status' => 'active',
+                    'type' => 'sales',
+                    'is_banned' => false,
+                    'profile_image' => "https://picsum.photos/200",
+                ]
+            );
+            User::updateOrCreate(
+                ['email' => 'intern@example.com'],
+                [
+                    'name' => 'Intern',
+                    'username' => 'intern',
+                    'phone' => '9999999999',
+                    'password' => Hash::make('password'), // default password
+                    'status' => 'active',
+                    'type' => 'intern',
+                    'is_banned' => false,
+                    'profile_image' => "https://picsum.photos/200",
+                ]
+            );
 
             DB::commit();
 

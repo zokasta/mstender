@@ -15,6 +15,7 @@ class Lead extends Model
         'stage_id',
         'name',
         'email',
+        'company',
         'phone',
         'details',
         'status',
@@ -73,5 +74,10 @@ class Lead extends Model
     public function assignedUser()
     {
         return $this->belongsTo(User::class, 'assigned_to');
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

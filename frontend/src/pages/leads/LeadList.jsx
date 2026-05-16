@@ -1,5 +1,5 @@
 import { useMemo, useState, useEffect, useRef } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
@@ -12,9 +12,6 @@ import {
   ChevronLeft,
 } from "lucide-react";
 
-import { FaPlus } from "react-icons/fa";
-
-import Select from "../../components/elements/Select";
 import LeadCard from "./LeadCard";
 import { temperatureColors } from "./LeadDummyData";
 import ViewMode from "./ViewMode";
@@ -22,37 +19,41 @@ import Token from "../../database/Token";
 import Input from "../../components/elements/Input";
 import AddLeadButton from "./AddLeadButton";
 import AddNewStageButton from "./AddNewStageButton";
+import SelectSearch from "../../components/elements/SelectSearch";
+import { FaWhatsapp } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import Textarea from "../../components/elements/Textarea";
+import { createPortal } from "react-dom";
+import Select from "../../components/elements/Select";
 
-export default function LeadsBoard() {
+export default function LeadList() {
   const navigate = useNavigate();
   const stageMenuRefs = useRef({});
   const [pipelines, setPipelines] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState({
+    lead: { delete: false, edit: false },
+  });
   const [params] = useSearchParams();
 
   const [leads, setLeads] = useState([]);
-
-  const [activePipelineId, setActivePipelineId] = useState("");
-
   const [search, setSearch] = useState("");
-
   const [viewMode, setViewMode] = useState("kanban");
-
-  const [showAddLead, setShowAddLead] = useState(false);
-
   const [showStatusPopup, setShowStatusPopup] = useState(false);
-
   const [showFollowupModal, setShowFollowupModal] = useState(false);
-
-  const [editingLead, setEditingLead] = useState(null);
-
   const [selectedLead, setSelectedLead] = useState(null);
   const pipeline_id = params.get("pipeline_id");
+  const [showAddLead, setShowAddLead] = useState(false);
 
+  const [editingLead, setEditingLead] = useState(null);
   const [followupData, setFollowupData] = useState({
-    status: "",
+    activity_type: "followup",
     description: "",
+    outcome: "",
+    next_action: "",
+    next_followup_at: "",
   });
+
+  const [followupLoading, setFollowupLoading] = useState(false);
 
   const [newStageData, setNewStageData] = useState({
     name: "",
@@ -64,14 +65,12 @@ export default function LeadsBoard() {
 
   const [openStageMenu, setOpenStageMenu] = useState(null);
   const activePipeline =
-    pipelines.find(
-      (item) => item.id.toString() === activePipelineId.toString()
-    ) || null;
+    pipelines.find((item) => String(item.id) === String(pipeline_id || "")) ||
+    null;
 
   const pipelineLeads = useMemo(() => {
     return leads.filter((lead) => {
-      const matchesPipeline =
-        Number(lead.pipeline_id) === Number(activePipelineId);
+      const matchesPipeline = Number(lead.pipeline_id) === Number(pipeline_id);
 
       const q = search.toLowerCase();
 
@@ -81,29 +80,27 @@ export default function LeadsBoard() {
 
       return matchesPipeline && matchesSearch;
     });
-  }, [leads, activePipelineId, search]);
+  }, [leads, pipeline_id, search]);
 
   useEffect(() => {
     fetchPipelines();
   }, []);
 
   useEffect(() => {
-    if (activePipelineId) {
+    if (pipeline_id) {
       fetchLeads();
     }
-  }, [activePipelineId]);
+  }, [pipeline_id]);
 
   const fetchPipelines = async () => {
+    if (pipeline_id) {
+    }
     try {
       const res = await Token.get("/pipelines?status=active");
 
       const pipelinesData = res.data.data.data || [];
 
       setPipelines(pipelinesData);
-
-      if (pipelinesData.length > 0) {
-        setActivePipelineId(pipelinesData[0].id);
-      }
     } catch (err) {
       console.log(err);
     }
@@ -112,8 +109,11 @@ export default function LeadsBoard() {
   const fetchLeads = async () => {
     try {
       setLoading(true);
+      if (!pipeline_id) {
+        return;
+      }
 
-      const res = await Token.get(`/leads?pipeline_id=${activePipelineId}`);
+      const res = await Token.get(`/leads?pipeline_id=${pipeline_id}`);
 
       setLeads(res.data.data || []);
     } catch (err) {
@@ -185,35 +185,10 @@ export default function LeadsBoard() {
     }
   };
 
-  const resetLeadModal = () => {
-    setEditingLead(null);
-
-    setShowAddLead(false);
-
-    // setNewLeadData({
-    //   name: "",
-    //   company: "",
-    //   email: "",
-    //   phone: "",
-    //   value: "",
-    //   source: "",
-    // });
-  };
-
   const openEditModal = (lead) => {
     setEditingLead(lead);
-
-    // setNewLeadData({
-    //   name: lead.name,
-    //   company: lead.company,
-    //   email: lead.email,
-    //   phone: lead.phone,
-    //   value: lead.value,
-    //   source: lead.source,
-    // });
-
     setShowAddLead(true);
-  };
+ };
 
   const deleteLead = async (id) => {
     try {
@@ -226,12 +201,15 @@ export default function LeadsBoard() {
   };
 
   const addQuickFollowup = async () => {
+    setFollowupLoading(true);
     try {
       await Token.post("/lead-activities", {
         lead_id: selectedLead.id,
 
-        activity_type: followupData.status,
-
+        activity_type: followupData.activity_type,
+        outcome: followupData.outcome,
+        next_action: followupData.next_action,
+        next_followup_at: followupData.next_followup_at,
         description: followupData.description,
       });
 
@@ -245,6 +223,8 @@ export default function LeadsBoard() {
       });
     } catch (err) {
       console.log(err);
+    } finally {
+      setFollowupLoading(false);
     }
   };
 
@@ -269,35 +249,6 @@ export default function LeadsBoard() {
     } catch (err) {
       console.log(err);
     }
-  };
-
-  const addNewStage = () => {
-    if (!newStageData.name) return;
-
-    setPipelines((prev) => ({
-      ...prev,
-
-      [activePipelineId]: {
-        ...prev[activePipelineId],
-
-        stages: [
-          ...prev[activePipelineId].stages,
-
-          {
-            id: newStageData.name.toLowerCase().replace(/\s+/g, "-"),
-
-            name: newStageData.name,
-
-            color: newStageData.color,
-          },
-        ],
-      },
-    }));
-
-    setNewStageData({
-      name: "",
-      color: "bg-blue-500",
-    });
   };
 
   const saveStage = async () => {
@@ -337,7 +288,7 @@ export default function LeadsBoard() {
       |--------------------------------------------------------------------------
       */
         const res = await Token.post("/pipeline-stages", {
-          pipeline_id: activePipelineId,
+          pipeline_id: pipeline_id,
           is_default: newStageData.is_default,
           name: newStageData.name,
 
@@ -360,9 +311,7 @@ export default function LeadsBoard() {
       }
 
       setShowStatusPopup(false);
-
       setEditingStage(null);
-
       setNewStageData({
         name: "",
         color: "bg-blue-500",
@@ -465,16 +414,18 @@ export default function LeadsBoard() {
        TOP HEADER
     ========================================= */}
 
-      <nav className="h-20 px-6 border-b border-surface-border dark:border-surface-darkBorder bg-white/80 dark:bg-surface-darkCard/80 backdrop-blur-xl flex items-center justify-between shrink-0">
+      <nav className="relative z-[20] h-20 px-6 border-b border-surface-border dark:border-surface-darkBorder bg-white/80 dark:bg-surface-darkCard/80 backdrop-blur-xl flex items-center justify-between shrink-0">
         {/* LEFT */}
 
         <div className="flex items-center gap-4">
           {/* PIPELINE */}
 
           <div className="min-w-[250px]">
-            <Select
-              value={activePipelineId}
-              onChange={(e) => setActivePipelineId(e)}
+            {/* <Select
+              value={pipeline_id}
+              onChange={(e) => {
+                navigate(`/leads?pipeline_id=${e}`);
+              }}
             >
               <option value="none" key="none">
                 Select Pipeline
@@ -484,7 +435,16 @@ export default function LeadsBoard() {
                   {pipeline.name}
                 </option>
               ))}
-            </Select>
+            </Select> */}
+            <SelectSearch
+              api="/pipelines?status=active"
+              method="get"
+              value={pipeline_id}
+              searchKey="name"
+              placeholder="Select Lead Set"
+              onChange={(e) => navigate(`/leads?pipeline_id=${e}`)}
+              labelKey="name"
+            />
           </div>
 
           {/* SEARCH */}
@@ -513,13 +473,16 @@ export default function LeadsBoard() {
 
           {/* STATUS */}
 
-        <AddNewStageButton activePipelineId={pipeline_id}/>
+          <AddNewStageButton activePipelineId={pipeline_id} />
           {/* NEW LEAD */}
           <AddLeadButton
-            leads={leads}
             setLeads={setLeads}
             pipelines={pipelines}
             pipeline_id={pipeline_id}
+            showAddLead={showAddLead}
+            setShowAddLead={setShowAddLead}
+            editingLead={editingLead}
+            setEditingLead={setEditingLead}
           />
         </div>
       </nav>
@@ -527,6 +490,172 @@ export default function LeadsBoard() {
       {/* =========================================
        BODY
     ========================================= */}
+
+      {showFollowupModal &&
+        createPortal(
+          <div className="fixed inset-0 z-[999999] bg-black/70 backdrop-blur-md">
+            <div className="absolute inset-0 flex items-center justify-center p-4">
+              <div className="w-[50vw] h-[80vh] rounded-[32px] overflow-hidden border border-surface-border dark:border-surface-darkBorder bg-white dark:bg-surface-darkCard shadow-2xl flex flex-col">
+                {/* =====================================================
+              HEADER
+          ===================================================== */}
+
+                <div className="shrink-0 px-8 py-6 border-b border-surface-border dark:border-surface-darkBorder flex items-center justify-between">
+                  <div>
+                    <h2 className="text-3xl font-black text-gray-800 dark:text-white">
+                      Quick Followup
+                    </h2>
+
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                      Create activity for {selectedLead?.name}
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={() => setShowFollowupModal(false)}
+                    className="w-12 h-12 rounded-2xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 flex items-center justify-center transition-all text-xl dark:text-gray-300"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                {/* =====================================================
+              BODY
+          ===================================================== */}
+
+                <div className="flex-1 overflow-y-auto scroll-bar p-8">
+                  {/* ACTIVITY */}
+
+                  <div className="mb-8">
+                    <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-5">
+                      Activity Information
+                    </h3>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      <div>
+                        <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 block">
+                          Activity Type
+                        </label>
+
+                        <Select
+                          value={followupData.activity_type}
+                          onChange={(e) =>
+                            setFollowupData((prev) => ({
+                              ...prev,
+                              activity_type: e,
+                            }))
+                          }
+                        >
+                          <option value="followup">Followup</option>
+                          <option value="call">Call</option>
+                          <option value="email">Email</option>
+                          <option value="whatsapp">WhatsApp</option>
+                          <option value="meeting">Meeting</option>
+                          <option value="task">Task</option>
+                          <option value="note">Note</option>
+                        </Select>
+                      </div>
+
+                      <Input
+                        label="Outcome"
+                        value={followupData.outcome}
+                        onChange={(v) =>
+                          setFollowupData((prev) => ({
+                            ...prev,
+                            outcome: v,
+                          }))
+                        }
+                        placeholder="Connected / Interested"
+                      />
+                    </div>
+                  </div>
+
+                  {/* FOLLOWUP */}
+
+                  <div className="mb-8">
+                    <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-5">
+                      Schedule
+                    </h3>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      <Input
+                        label="Next Action"
+                        value={followupData.next_action}
+                        onChange={(v) =>
+                          setFollowupData((prev) => ({
+                            ...prev,
+                            next_action: v,
+                          }))
+                        }
+                        placeholder="Call tomorrow"
+                      />
+
+                      <div>
+                        <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 block">
+                          Next Followup Time
+                        </label>
+
+                        <input
+                          type="datetime-local"
+                          value={followupData.next_followup_at}
+                          onChange={(e) =>
+                            setFollowupData((prev) => ({
+                              ...prev,
+                              next_followup_at: e.target.value,
+                            }))
+                          }
+                          className="w-full rounded-3xl border border-surface-border dark:border-surface-darkBorder bg-surface-soft dark:bg-surface-darkMuted px-5 py-3 outline-none dark:text-white"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* NOTES */}
+
+                  <div className="mb-8">
+                    <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-5">
+                      Notes
+                    </h3>
+
+                    <Textarea
+                      value={followupData.description}
+                      onChange={(v) =>
+                        setFollowupData((prev) => ({
+                          ...prev,
+                          description: v,
+                        }))
+                      }
+                      rows={8}
+                      placeholder="Write followup details..."
+                    />
+                  </div>
+                </div>
+
+                {/* =====================================================
+              FOOTER
+          ===================================================== */}
+
+                <div className="shrink-0 px-8 py-5 border-t border-surface-border dark:border-surface-darkBorder flex items-center justify-end gap-4">
+                  <button
+                    onClick={() => setShowFollowupModal(false)}
+                    className="h-14 px-8 rounded-2xl border dark:text-gray-300 border-surface-border dark:border-surface-darkBorder hover:bg-surface-soft dark:hover:bg-surface-darkMuted font-semibold"
+                  >
+                    Cancel
+                  </button>
+
+                  <button
+                    onClick={addQuickFollowup}
+                    disabled={followupLoading}
+                    className="h-14 min-w-[180px] px-8 rounded-2xl bg-primary-500 hover:bg-primary-600 text-white font-bold shadow-lg shadow-primary-500/20 disabled:opacity-50"
+                  >
+                    {followupLoading ? "Saving..." : "Save Followup"}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>,
+          document.body
+        )}
 
       <div className="flex-1 overflow-auto p-6 scroll-bar">
         {showStatusPopup && (
@@ -668,7 +797,7 @@ export default function LeadsBoard() {
           <div className="bg-white dark:bg-surface-darkCard border border-surface-border dark:border-surface-darkBorder rounded-[30px] overflow-hidden shadow-sm">
             {/* TABLE HEADER */}
 
-            <div className="grid grid-cols-[70px_260px_200px_130px_150px_130px_140px] bg-surface-soft dark:bg-surface-darkMuted border-b border-surface-border dark:border-surface-darkBorder px-5 py-4 text-[11px] uppercase tracking-wider font-bold text-gray-500 dark:text-gray-400">
+            <div className="grid grid-cols-[70px_260px_200px_130px_150px_130px_200px] bg-surface-soft dark:bg-surface-darkMuted border-b border-surface-border dark:border-surface-darkBorder px-5 py-4 text-[11px] uppercase tracking-wider font-bold text-gray-500 dark:text-gray-400">
               <div>ID</div>
               <div>Lead</div>
               <div>Contact</div>
@@ -689,7 +818,7 @@ export default function LeadsBoard() {
                 return (
                   <div
                     key={lead.id}
-                    className="grid grid-cols-[70px_260px_200px_130px_150px_130px_140px] items-center px-5 py-4 hover:bg-primary-50/60 dark:hover:bg-surface-darkMuted transition-all"
+                    className="grid overflow-y-auto grid-cols-[70px_260px_200px_130px_150px_130px_200px] items-center px-5 py-4 hover:bg-primary-50/60 dark:hover:bg-surface-darkMuted transition-all"
                   >
                     {/* ID */}
 
@@ -755,30 +884,42 @@ export default function LeadsBoard() {
                     <div>
                       <span
                         className={`text-[10px] px-3 py-1.5 rounded-full border font-semibold ${
-                          temperatureColors[lead.lead_temperature]
+                          temperatureColors[lead.status]
                         }`}
                       >
-                        {lead.lead_temperature}
+                        {lead.status}
                       </span>
                     </div>
 
                     {/* ACTIONS */}
 
                     <div className="flex items-center gap-2">
-                      <button className="w-9 h-9 rounded-xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-500 flex items-center justify-center transition-all">
-                        <Phone size={14} />
-                      </button>
+                      <Link to={`tel:${lead.phone}`}>
+                        <button className="w-9 dark:text-gray-300 h-9 rounded-xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-500 flex items-center justify-center transition-all">
+                          <Phone size={14} />
+                        </button>
+                      </Link>
+                      <Link to={`tel:${lead.phone}`}>
+                        <button className="w-9 dark:text-gray-300 h-9 rounded-xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-500 flex items-center justify-center transition-all">
+                          <FaWhatsapp size={14} />
+                        </button>
+                      </Link>
+                      <Link to={`tel:${lead.phone}`}>
+                        <button className="w-9 dark:text-gray-300 h-9 rounded-xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-500 flex items-center justify-center transition-all">
+                          <MdEmail size={14} />
+                        </button>
+                      </Link>
 
                       <button
                         onClick={() => openEditModal(lead)}
-                        className="w-9 h-9 rounded-xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-yellow-50 dark:hover:bg-yellow-900/20 hover:text-yellow-500 flex items-center justify-center transition-all"
+                        className="w-9 dark:text-gray-300 h-9 rounded-xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-yellow-50 dark:hover:bg-yellow-900/20 hover:text-yellow-500 flex items-center justify-center transition-all"
                       >
                         <Edit2 size={14} />
                       </button>
 
                       <button
                         onClick={() => deleteLead(lead.id)}
-                        className="w-9 h-9 rounded-xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 flex items-center justify-center transition-all"
+                        className="w-9 dark:text-gray-300 h-9 rounded-xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 flex items-center justify-center transition-all"
                       >
                         <Trash2 size={14} />
                       </button>
@@ -810,139 +951,176 @@ export default function LeadsBoard() {
                   return (
                     <div
                       key={stage.id}
-                      className="min-w-[340px] max-w-[340px] h-full bg-white dark:bg-surface-darkCard border border-surface-border dark:border-surface-darkBorder rounded-[30px] flex flex-col shadow-sm"
+                      className="min-w-[340px] max-w-[340px] h-full bg-white dark:bg-surface-darkCard border border-surface-border dark:border-surface-darkBorder rounded-[30px] flex flex-col shadow-sm overflow-visible"
                     >
                       {/* HEADER */}
+                      <div
+                        className="relative px-5 pt-5 pb-10 min-h-[160px] rounded-t-[30px] overflow-visible border-b border-surface-border dark:border-surface-darkBorder bg-white dark:bg-surface-darkMuted"
+                        style={{
+                          background: `
+      linear-gradient(
+        135deg,
+        ${stage.color}08 0%,
+        transparent 45%
+      )
+    `,
+                        }}
+                      >
+                        {/* top color line */}
+                        {/* <div
+                          className="absolute top-0 left-0 right-0 h-[5px] rounded-t-[30px]"
+                          style={{
+                            background: stage.color,
+                          }}
+                        /> */}
 
-                      <div className="p-4 border-b border-surface-border dark:border-surface-darkBorder bg-surface-soft dark:bg-surface-darkMuted rounded-t-[30px]">
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="flex items-center gap-3 min-w-0">
+                        <div className="relative z-10 h-full flex flex-col justify-between">
+                          {/* TOP */}
+                          <div className="flex items-start justify-between">
+                            <div className="flex items-center gap-4 min-w-0">
+                              <div
+                                className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0"
+                                style={{
+                                  background: `${stage.color}18`,
+                                  border: `1px solid ${stage.color}35`,
+                                }}
+                              >
+                                <div
+                                  className="w-4 h-4 rounded-full"
+                                  style={{
+                                    background: stage.color,
+                                    boxShadow: `0 0 12px ${stage.color}`,
+                                  }}
+                                />
+                              </div>
+
+                              <div className="min-w-0">
+                                <h3 className="font-extrabold text-[16px] text-gray-800 dark:text-white truncate">
+                                  {stage.name}
+                                </h3>
+
+                                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                  {stageLeads.length} Leads in this stage
+                                </p>
+                              </div>
+                            </div>
+
                             <div
-                              className={`w-3 h-3 rounded-full ${stage.color}`}
-                            />
+                              className="relative"
+                              ref={(el) => {
+                                stageMenuRefs.current[stage.id] = el;
+                              }}
+                            >
+                              <button
+                                onClick={() =>
+                                  setOpenStageMenu(
+                                    openStageMenu === stage.id ? null : stage.id
+                                  )
+                                }
+                                className="w-10 h-10 rounded-2xl flex items-center justify-center transition-all hover:scale-105 dark:text-white"
+                                style={{
+                                  background: `${stage.color}15`,
+                                  color: stage.color,
+                                }}
+                              >
+                                <MoreHorizontal size={18} />
+                              </button>
 
-                            <div className="min-w-0">
-                              <h3 className="font-bold text-sm text-gray-800 dark:text-white truncate">
-                                {stage.name}
-                              </h3>
+                              {openStageMenu === stage.id && (
+                                <div className="absolute top-11 right-0 z-[99999] w-52 rounded-2xl border border-surface-border dark:border-surface-darkBorder bg-white dark:bg-surface-darkCard shadow-2xl overflow-hidden">
+                                  {/* MOVE LEFT */}
 
-                              <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1">
-                                {stageLeads.length} Leads
-                              </p>
+                                  <button
+                                    onClick={() => {
+                                      moveStageLeft(stage);
+
+                                      setOpenStageMenu(null);
+                                    }}
+                                    className="w-full dark:text-gray-300 h-11 px-4 flex items-center gap-3 hover:bg-surface-soft dark:hover:bg-surface-darkMuted text-sm"
+                                  >
+                                    <ChevronLeft size={16} />
+                                    Move Left
+                                  </button>
+
+                                  {/* MOVE RIGHT */}
+
+                                  <button
+                                    onClick={() => {
+                                      moveStageRight(stage);
+
+                                      setOpenStageMenu(null);
+                                    }}
+                                    className="w-full dark:text-gray-300 h-11 px-4 flex items-center gap-3 hover:bg-surface-soft dark:hover:bg-surface-darkMuted text-sm"
+                                  >
+                                    <ChevronRight size={16} />
+                                    Move Right
+                                  </button>
+
+                                  {/* EDIT */}
+
+                                  <button
+                                    onClick={() => {
+                                      setEditingStage(stage);
+
+                                      setNewStageData({
+                                        name: stage.name,
+
+                                        color: stage.color,
+                                      });
+
+                                      setShowStatusPopup(true);
+
+                                      setOpenStageMenu(null);
+                                    }}
+                                    className="w-full dark:text-gray-300 h-11 px-4 flex items-center gap-3 hover:bg-yellow-300/15 dark:hover:bg-yellow-300/15 text-sm"
+                                  >
+                                    <Edit2 size={15} />
+                                    Edit Stage
+                                  </button>
+
+                                  {/* DELETE */}
+
+                                  <button
+                                    onClick={() => {
+                                      deleteStage(stage);
+
+                                      setOpenStageMenu(null);
+                                    }}
+                                    className="w-full h-11 px-4 flex items-center gap-3 hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 text-sm"
+                                  >
+                                    <Trash2 size={15} />
+                                    Delete Stage
+                                  </button>
+                                </div>
+                              )}
                             </div>
                           </div>
 
-                          {/* MENU */}
-                          <div
-                            className="relative"
-                            ref={(el) => {
-                              stageMenuRefs.current[stage.id] = el;
-                            }}
-                          >
-                            {/* MENU BUTTON */}
+                          {/* BOTTOM */}
+                          <div className="mt-6 flex items-end justify-between">
+                            <div>
+                              <p className="text-[10px] uppercase tracking-widest text-gray-400 dark:text-gray-500">
+                                Revenue
+                              </p>
 
-                            <button
-                              onClick={() =>
-                                setOpenStageMenu(
-                                  openStageMenu === stage.id ? null : stage.id
-                                )
-                              }
-                              className="w-9 h-9 rounded-xl hover:bg-white dark:hover:bg-surface-darkCard flex items-center justify-center transition-all"
+                              <h4 className="text-2xl font-black text-gray-900 dark:text-white mt-1">
+                                ₹{total.toLocaleString("en-IN")}
+                              </h4>
+                            </div>
+
+                            <div
+                              className="h-11 px-4 rounded-2xl flex items-center justify-center text-sm font-bold"
+                              style={{
+                                background: `${stage.color}18`,
+                                color: stage.color,
+                                border: `1px solid ${stage.color}35`,
+                              }}
                             >
-                              <MoreHorizontal size={16} />
-                            </button>
-
-                            {/* DROPDOWN */}
-
-                            {openStageMenu === stage.id && (
-                              <div className="absolute top-11 right-0 w-52 rounded-2xl border border-surface-border dark:border-surface-darkBorder bg-white dark:bg-surface-darkCard shadow-2xl z-50 overflow-hidden">
-                                {/* MOVE LEFT */}
-
-                                <button
-                                  onClick={() => {
-                                    moveStageLeft(stage);
-
-                                    setOpenStageMenu(null);
-                                  }}
-                                  className="w-full h-11 px-4 flex items-center gap-3 hover:bg-surface-soft dark:hover:bg-surface-darkMuted text-sm"
-                                >
-                                  <ChevronLeft size={16} />
-                                  Move Left
-                                </button>
-
-                                {/* MOVE RIGHT */}
-
-                                <button
-                                  onClick={() => {
-                                    moveStageRight(stage);
-
-                                    setOpenStageMenu(null);
-                                  }}
-                                  className="w-full h-11 px-4 flex items-center gap-3 hover:bg-surface-soft dark:hover:bg-surface-darkMuted text-sm"
-                                >
-                                  <ChevronRight size={16} />
-                                  Move Right
-                                </button>
-
-                                {/* EDIT */}
-
-                                <button
-                                  onClick={() => {
-                                    setEditingStage(stage);
-
-                                    setNewStageData({
-                                      name: stage.name,
-
-                                      color: stage.color,
-                                    });
-
-                                    setShowStatusPopup(true);
-
-                                    setOpenStageMenu(null);
-                                  }}
-                                  className="w-full h-11 px-4 flex items-center gap-3 hover:bg-surface-soft dark:hover:bg-surface-darkMuted text-sm"
-                                >
-                                  <Edit2 size={15} />
-                                  Edit Stage
-                                </button>
-
-                                {/* DELETE */}
-
-                                <button
-                                  onClick={() => {
-                                    deleteStage(stage);
-
-                                    setOpenStageMenu(null);
-                                  }}
-                                  className="w-full h-11 px-4 flex items-center gap-3 hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 text-sm"
-                                >
-                                  <Trash2 size={15} />
-                                  Delete Stage
-                                </button>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-
-                        {/* TOTAL */}
-
-                        <div className="mt-4 flex items-center justify-between">
-                          <div>
-                            <p className="text-[10px] uppercase tracking-wide text-gray-400 dark:text-gray-500">
-                              Revenue
-                            </p>
-
-                            <h4 className="text-xl font-black text-gray-800 dark:text-white mt-1">
-                              ₹{total.toLocaleString("en-IN")}
-                            </h4>
-                          </div>
-
-                          <div className="h-9 min-w-[38px] px-3 rounded-xl bg-primary-50 dark:bg-primary-900/20 text-primary-500 flex items-center justify-center text-xs font-bold">
-                            {stageLeads.length}
+                              {stageLeads.length} Cards
+                            </div>
                           </div>
                         </div>
                       </div>
-
                       {/* BODY */}
 
                       <Droppable droppableId={stage.id}>

@@ -74,6 +74,7 @@ class PipelineController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
         ]);
+
         DB::beginTransaction();
 
         try {
@@ -83,14 +84,49 @@ class PipelineController extends Controller
                 'created_by' => $request->user()->id,
             ]);
 
-            PipelineStage::create([
-                'pipeline_id' => $pipeline->id,
-                'name' => 'New Leads',
-                'color' => '#3b82f6',
-                'position' => 1,
-                'is_default' => true,
-                'created_by' => $request->user()->id,
-            ]);
+            $defaultStages = [
+                [
+                    'name' => 'New Leads',
+                    'color' => '#3b82f6', // Blue
+                    'position' => 1,
+                    'is_default' => true,
+                ],
+                [
+                    'name' => 'Contacted',
+                    'color' => '#f59e0b', // Amber
+                    'position' => 2,
+                    'is_default' => false,
+                ],
+                [
+                    'name' => 'Qualified',
+                    'color' => '#8b5cf6', // Purple
+                    'position' => 3,
+                    'is_default' => false,
+                ],
+                [
+                    'name' => 'Won',
+                    'color' => '#22c55e', // Green
+                    'position' => 6,
+                    'is_default' => false,
+                ],
+                [
+                    'name' => 'Lost',
+                    'color' => '#ef4444', // Red
+                    'position' => 7,
+                    'is_default' => false,
+                ],
+            ];
+
+            foreach ($defaultStages as $stage) {
+                PipelineStage::create([
+                    'pipeline_id' => $pipeline->id,
+                    'name' => $stage['name'],
+                    'color' => $stage['color'],
+                    'position' => $stage['position'],
+                    'is_default' => $stage['is_default'],
+                    'created_by' => $request->user()->id,
+                ]);
+            }
 
             DB::commit();
 
@@ -98,16 +134,15 @@ class PipelineController extends Controller
 
             return response()->json([
                 'success' => true,
-
                 'message' => 'Pipeline created successfully',
-
                 'data' => $pipeline,
             ]);
         } catch (\Exception $e) {
+
             DB::rollBack();
+
             return response()->json([
                 'success' => false,
-
                 'message' => $e->getMessage(),
             ], 500);
         }

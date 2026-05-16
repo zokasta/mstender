@@ -1,12 +1,13 @@
 import {
   Edit2,
-  GripVertical,
-  MessageCircle,
+  Mail,
   Phone,
   Plus,
   Trash2,
-  Video,
 } from "lucide-react";
+import { useEffect } from "react";
+import { FaWhatsapp } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function LeadCard({
   snapshot = { isDragging: true },
@@ -18,12 +19,15 @@ export default function LeadCard({
   setShowFollowupModal = () => {},
 }) {
   const temperatureColors = {
-    Hot: "bg-red-100 text-red-600 border-red-200",
-
-    Warm: "bg-yellow-100 text-yellow-700 border-yellow-200",
-
-    Cold: "bg-cyan-100 text-cyan-700 border-cyan-200",
+    hot: "bg-red-100 text-red-600 border-red-200",
+    warm: "bg-yellow-100 text-yellow-700 border-yellow-200",
+    cold: "bg-cyan-100 text-cyan-700 border-cyan-200",
   };
+
+  useEffect(()=>{
+    console.log(lead)
+  },[])
+
   return (
     <div
       className={`bg-white dark:bg-surface-darkCard border border-surface-border dark:border-surface-darkBorder rounded-[26px] p-4 mb-3 transition-all duration-200 ${
@@ -32,6 +36,7 @@ export default function LeadCard({
           : "hover:shadow-xl hover:border-primary-200 dark:hover:border-primary-700"
       }`}
     >
+      
       <div className="flex items-start justify-between gap-3">
         <div className="flex gap-3 min-w-0">
           <div
@@ -58,11 +63,12 @@ export default function LeadCard({
         {/* ACTIONS */}
 
         <div className="flex items-center gap-1 shrink-0">
-          <div className="w-8 h-8 rounded-xl bg-surface-soft dark:bg-surface-darkMuted text-gray-400 flex items-center justify-center cursor-grab active:cursor-grabbing">
+          {/* <div className="w-8 h-8 rounded-xl bg-surface-soft dark:bg-surface-darkMuted text-gray-400 flex items-center justify-center cursor-grab active:cursor-grabbing">
             <GripVertical size={15} />
-          </div>
+          </div> */}
 
           <button
+            // onClick={() => openEditModal(lead)}
             onClick={() => openEditModal(lead)}
             className="w-8 h-8 rounded-xl dark:text-gray-400 bg-surface-soft dark:bg-surface-darkMuted hover:bg-yellow-50 dark:hover:bg-yellow-900/20 hover:text-yellow-500 flex items-center justify-center transition-all"
           >
@@ -101,27 +107,33 @@ export default function LeadCard({
 
         <span
           className={`text-[10px] px-3 py-1.5 rounded-full border font-semibold ${
-            temperatureColors[lead.lead_temperature]
+            temperatureColors[lead.status]
           }`}
         >
-          {lead.lead_temperature}
+          {lead.status}
         </span>
       </div>
 
       {/* ACTIONS */}
 
       <div className="grid grid-cols-4 gap-2 mt-4">
-        <button className="h-10 rounded-2xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-500 transition-all flex items-center justify-center">
-          <Phone size={14} />
-        </button>
+        <Link to={`tel:${lead.phone}`}>
+          <button className="h-10 w-full dark:text-gray-300 rounded-2xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-500 transition-all flex items-center justify-center">
+            <Phone size={14} />
+          </button>
+        </Link>
 
-        <button className="h-10 rounded-2xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-500 transition-all flex items-center justify-center">
-          <MessageCircle size={14} />
-        </button>
+        <Link to={`wa.me/${lead.mail}`}>
+          <button className="h-10 w-full dark:text-gray-300 rounded-2xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-500 transition-all flex items-center justify-center">
+            <FaWhatsapp size={16} />
+          </button>
+        </Link>
 
-        <button className="h-10 rounded-2xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-500 transition-all flex items-center justify-center">
-          <Video size={14} />
-        </button>
+        <Link to={`mailto:${lead.mail}`}>
+          <button className="h-10 w-full dark:text-gray-300 rounded-2xl bg-surface-soft dark:bg-surface-darkMuted hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-500 transition-all flex items-center justify-center">
+            <Mail size={14} />
+          </button>
+        </Link>
 
         <button
           onClick={() => {
@@ -136,4 +148,5 @@ export default function LeadCard({
       </div>
     </div>
   );
+
 }
