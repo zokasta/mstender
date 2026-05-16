@@ -3,18 +3,20 @@ const env = {
   APP_NAME: "Junoon Travel Portal",
 
   // 🧭 API Base URLs
-  BASE_URL: "http://localhost:3000",
-  API_URL: "http://localhost:8000/api",
+  BASE_URL: "https://adminpage.mstender.com",
+  // BASE_URL: "http://localhost:3000",
+  API_URL: "https://backend.mstender.com/api",
+  // API_URL: "http://localhost:8000/api",
 
   // 🪪 Authentication & Tokens
   TOKEN_KEY: "junoon_auth_token",
 
   // 🌍 Frontend URL
-  FRONTEND_URL: "http://localhost:3000",
+  FRONTEND_URL: "https://adminpage.mstender.com",
 
   // 🧱 Common Paths
-  IMAGE_PATH: "http://localhost:8000",
-  DEFAULT_PROFILE: "http://localhost:8000/storage/profiles/NEJvNH11gn0O9KaqbEaG0vgRmplVqAOgpoMvkJQM.png",
+  IMAGE_PATH: "https://backend.mstender.com",
+  DEFAULT_PROFILE: "https://backend.mstender.com/storage/profiles/NEJvNH11gn0O9KaqbEaG0vgRmplVqAOgpoMvkJQM.png",
 
   // ⚙️ App Settings
   DATE_FORMAT: "YYYY-MM-DD",
